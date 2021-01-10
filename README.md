@@ -2,6 +2,8 @@
 
 Приложение для составления списка дел. С авторизацией, фильтрами, несколькими папками и редактором.
 
+[Репозиторий с сервером](https://github.com/websega/todor-server.git)
+
 ---
 #### Scripts client
 - Install packages    ```npm i```
