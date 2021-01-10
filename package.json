@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
+    "@commitlint/cli": "^11.0.0",
     "@types/classnames": "^2.2.11",
     "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
     "@types/node": "^14.14.19",
@@ -39,6 +40,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
     "css-minimizer-webpack-plugin": "^1.1.5",
+    "cz-customizable": "^6.3.0",
     "eslint": "^7.17.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.1.0",
@@ -51,7 +53,7 @@
     "eslint-plugin-sonarjs": "^0.5.0",
     "eslint-webpack-plugin": "^2.4.1",
     "html-webpack-plugin": "^4.5.1",
-    "husky": "^4.3.6",
+    "husky": "^4.3.7",
     "lint-staged": "^10.5.3",
     "mini-css-extract-plugin": "^1.3.3",
     "postcss-loader": "^4.1.0",
@@ -88,9 +90,18 @@
     "redux-thunk": "^2.3.0",
     "sass-resources-loader": "^2.1.1"
   },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "config/git/commitizen.js"
+    }
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS -g './config/git/commitlint.js'"
     }
   },
   "lint-staged": {
