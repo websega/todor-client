@@ -1,0 +1,19 @@
+.Account {
+  @include display(flex, space-between, center);
+
+  width: 100%;
+  max-width: rem(215);
+  height: 100%;
+
+  border-left: 1px solid $border-color;
+
+  padding-left: rem(17);
+}
+
+.Rotate {
+  transform: rotate(180deg);
+}
+
+.User {
+  @include display(flex, space-between, center);
+}

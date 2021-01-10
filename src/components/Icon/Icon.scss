@@ -1,0 +1,57 @@
+.Icon {
+  @include display(flex, center, center);
+
+  color: $main-text-color;
+
+  transition: $transition-hover-color;
+}
+
+.MainIcon {
+  & svg {
+    min-width: rem($main-icon-sz);
+    min-height: rem($main-icon-sz);
+  }
+}
+
+.SortIcon {
+  & svg {
+    min-width: rem(25);
+    min-height: rem(20);
+  }
+}
+
+.DotsIcon {
+  & svg {
+    min-width: rem($dots-icon-sz);
+    min-height: rem($dots-icon-sz);
+  }
+}
+
+.Important {
+  color: $hover-color;
+}
+
+.Close {
+  & svg {
+    min-width: rem(15);
+    min-height: rem(15);
+  }
+}
+
+.SignIcon {
+  & svg {
+    width: rem($menu-icon-sz-18);
+    height: rem($menu-icon-sz-18);
+  }
+}
+
+.RegIcon {
+  & svg {
+    width: rem(21);
+    height: rem(22);
+
+    & > path{
+      transform: translateX(-3px);
+    }
+  }
+}

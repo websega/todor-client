@@ -1,0 +1,8 @@
+.Name {
+  @include font-sans(rem(14), $main-text-color, bold, normal, 1.2);
+  @include crop-text();
+
+  letter-spacing: 0.15px;
+
+  max-width: rem(90);
+}

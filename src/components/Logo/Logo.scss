@@ -1,0 +1,20 @@
+.Logo {
+  @include display(flex, flex-start, center);
+  margin-right: rem(205);
+
+  & h1 {
+    @include font-sans(rem(22), $main-text-color, normal, normal, 1);
+    text-transform: uppercase;
+
+    letter-spacing: 0.15px;
+  }
+
+  & svg {
+    width: rem($main-icon-sz);
+    height: rem($main-icon-sz);
+
+    color: #2684ff;
+
+    margin-right: rem(16);
+  }
+}

@@ -1,0 +1,36 @@
+.Menu {
+  position: absolute;
+  top: 75px;
+  right: 0px;
+  width: 238px;
+  min-height: 50px;
+
+  background: $main-bg-color;
+
+  border-left: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.MenuItem {
+  @include display(flex, flex-start, center);
+  width: 100%;
+  height: 50px;
+
+  padding-left: 6px;
+  padding-right: 6px;
+
+  transition: $transition-hover-color;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-menu-color;
+  }
+}
+
+.Text {
+  @include font-sans(rem(16), $main-text-color, normal, normal, rem(24));
+  letter-spacing: 0.15px;
+}

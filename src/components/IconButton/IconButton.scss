@@ -1,0 +1,24 @@
+.Button {
+  position: relative;
+  width: auto;
+  height: auto;
+  @include reset-btn();
+
+  &:hover {
+    cursor: pointer;
+
+    & svg {
+      color: $hover-color;
+    }
+  }
+
+  & svg {
+    transition: $transition-hover-color, transform 0.2s linear;
+  }
+}
+
+.Inverted {
+  & svg {
+    transform: rotate(180deg);
+  }
+}

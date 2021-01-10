@@ -1,0 +1,19 @@
+.Button {
+  @include font-sans(rem(14), #ffffff, normal, normal, rem(24));
+  letter-spacing: 0.15px;
+
+  min-width: rem(140);
+  height: rem(42);
+
+  background-color: #2684ff;
+  border: none;
+  border-radius: rem(4);
+  padding: 0 rem(36);
+
+  transition: background-color 0.2s linear;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #238fe8;
+  }
+}
