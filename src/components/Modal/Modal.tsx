@@ -14,6 +14,8 @@ import classes from './Modal.scss';
 
 type StateType = { modal: InitialModalStateType };
 
+const DURATION = 690;
+
 const Modal = (): JSX.Element => {
   const overlayElement = useRef<HTMLDivElement | null>(null);
 
@@ -68,7 +70,7 @@ const Modal = (): JSX.Element => {
     <Transition
       in={isOpen}
       appear
-      timeout={690}
+      timeout={DURATION}
       mountOnEnter
       unmountOnExit
       onExited={exetedModal}
