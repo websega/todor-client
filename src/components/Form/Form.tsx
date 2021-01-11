@@ -9,7 +9,7 @@ import ButtonModal from '../ButtonModal';
 
 import classes from './Form.scss';
 
-type FormProps = { type: string | null };
+type FormProps = { type: string };
 
 const Form = ({ type }: FormProps): JSX.Element => {
   const [name, setName] = useState<string>('');
