@@ -78,7 +78,7 @@ const Modal = (): JSX.Element => {
       {(state) => (
         <div
           ref={overlayElement}
-          className={[classes.Overlay, classes[`o-${state}`]].join(' ')}
+          className={classNames(classes.Overlay, classes[`o-${state}`])}
           role="presentation"
           onClick={onOverlayClick}
         >

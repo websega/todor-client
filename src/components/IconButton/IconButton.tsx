@@ -1,5 +1,7 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import Icon from '../Icon';
 
 import classes from './IconButton.scss';
@@ -18,9 +20,10 @@ const IconButton = ({
   inverted = false,
 }: IconButtonProps): JSX.Element => (
   <button
-    className={
-      inverted ? [classes.Button, classes.Inverted].join(' ') : classes.Button
-    }
+    className={classNames({
+      [classes.Button]: true,
+      [classes.Inverted]: inverted,
+    })}
     type="button"
     onClick={onClick}
   >
