@@ -1,12 +1,12 @@
 import { CurrentUserType } from '../reducers/userReducer';
 
-type setUserType = { type: string; payload?: CurrentUserType };
+type ActionSetUserType = { type: string; payload?: CurrentUserType };
 
-export const setUser = (data: CurrentUserType): setUserType => ({
+export const setUser = (data: CurrentUserType): ActionSetUserType => ({
   type: 'SET_USER',
   payload: data,
 });
 
-export const logout = (): setUserType => ({
+export const logout = (): ActionSetUserType => ({
   type: 'LOGOUT',
 });

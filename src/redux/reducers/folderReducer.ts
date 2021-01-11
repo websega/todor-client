@@ -1,19 +1,16 @@
-type FolderStateType = {
-  name: string;
-  color: string;
-};
-
-type Action = { type: string };
-
-const intitialState = {
+const initialState = {
   name: '',
   color: 'default',
 };
 
+export type InitialFolderStateType = typeof initialState;
+
+type Action = { type: string };
+
 const folderReducer = (
-  state: FolderStateType = intitialState,
+  state: InitialFolderStateType = initialState,
   action: Action
-): FolderStateType => {
+): InitialFolderStateType => {
   // eslint-disable-next-line sonarjs/no-small-switch
   switch (action.type) {
     default:

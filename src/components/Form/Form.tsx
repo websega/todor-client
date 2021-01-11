@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-
 import { useDispatch } from 'react-redux';
+
+import { closeModal } from '../../redux/actions/modal';
+import { registration, login } from '../../redux/actions/async';
 
 import InputModal from '../InputModal';
 import ButtonModal from '../ButtonModal';
 
 import classes from './Form.scss';
-import { registration, login } from '../../redux/actions/async';
 
-type FormProps = { type: string; onClose: () => void };
+type FormProps = { type: string | null };
 
-const Form = ({ type, onClose }: FormProps): JSX.Element => {
+const Form = ({ type }: FormProps): JSX.Element => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -18,15 +19,14 @@ const Form = ({ type, onClose }: FormProps): JSX.Element => {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    // eslint-disable-next-line sonarjs/no-all-duplicated-branches
     switch (type) {
       case 'registration':
         registration(name, email, password);
-        onClose();
+        dispatch(closeModal());
         break;
       case 'login':
         dispatch(login(email, password));
-        onClose();
+        dispatch(closeModal());
         break;
 
       default:

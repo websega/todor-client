@@ -1,14 +1,4 @@
-export type CurrentUserType = {
-  id: string;
-  email: string;
-  name: string;
-};
-
-export type IntitialStateType = typeof intitialState;
-
-type Action = { type: string; payload: CurrentUserType };
-
-const intitialState = {
+const initialState = {
   currentUser: {
     id: '_id_guest',
     email: 'guest@mail.com',
@@ -17,11 +7,20 @@ const intitialState = {
   isAuth: false,
 };
 
-const userReducer = (
-  state: IntitialStateType = intitialState,
+export type CurrentUserType = {
+  id: string;
+  email: string;
+  name: string;
+};
+
+export type InitialUserStateType = typeof initialState;
+
+type Action = { type: string; payload: CurrentUserType };
+
+export const userReducer = (
+  state: InitialUserStateType = initialState,
   action: Action
-): IntitialStateType => {
-  // eslint-disable-next-line sonarjs/no-small-switch
+): InitialUserStateType => {
   switch (action.type) {
     case 'SET_USER':
       return { ...state, currentUser: action.payload, isAuth: true };
@@ -29,7 +28,7 @@ const userReducer = (
       localStorage.removeItem('token');
       return {
         ...state,
-        currentUser: intitialState.currentUser,
+        currentUser: initialState.currentUser,
         isAuth: false,
       };
 
@@ -37,5 +36,3 @@ const userReducer = (
       return state;
   }
 };
-
-export default userReducer;

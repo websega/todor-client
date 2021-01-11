@@ -1,28 +1,24 @@
 import React from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IntitialStateType } from '../../redux/reducers/userReducer';
+import { InitialUserStateType } from '../../redux/reducers/userReducer';
+import { logout } from '../../redux/actions/user';
+import { openModal } from '../../redux/actions/modal';
+
+import Icon from '../Icon';
 
 import SignInIcon from '../../assets/images/icons/sign_in.svg';
 import SignOutIcon from '../../assets/images/icons/sign_out.svg';
 import RegIcon from '../../assets/images/icons/assignment.svg';
 
-import Icon from '../Icon';
-
 import classes from './DropdownMenu.scss';
-import { logout } from '../../redux/actions/user';
 
-type DropdownMenuProps = {
-  onModal: (type: string) => void;
+type StateType = {
+  user: InitialUserStateType;
 };
 
-interface IState {
-  user: IntitialStateType;
-}
-
-const DropdownMenu = ({ onModal }: DropdownMenuProps): JSX.Element => {
-  const isAuth = useSelector((state: IState) => state.user.isAuth);
+const DropdownMenu = (): JSX.Element => {
+  const isAuth = useSelector((state: StateType) => state.user.isAuth);
   const dispatch = useDispatch();
 
   return (
@@ -45,7 +41,7 @@ const DropdownMenu = ({ onModal }: DropdownMenuProps): JSX.Element => {
           <li
             className={classes.MenuItem}
             onClick={() => {
-              onModal('registration');
+              dispatch(openModal('registration'));
             }}
             role="menuitem"
             aria-hidden="true"
@@ -56,7 +52,7 @@ const DropdownMenu = ({ onModal }: DropdownMenuProps): JSX.Element => {
           <li
             className={classes.MenuItem}
             onClick={() => {
-              onModal('login');
+              dispatch(openModal('login'));
             }}
             role="menuitem"
             aria-hidden="true"

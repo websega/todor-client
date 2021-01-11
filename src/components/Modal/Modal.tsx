@@ -1,28 +1,40 @@
 import React, { useCallback, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import classNames from 'classnames';
-
 import { Transition } from 'react-transition-group';
+
+import { InitialModalStateType } from '../../redux/reducers/modalReducer';
+import { closeModal, setDefaultType } from '../../redux/actions/modal';
 
 import HeaderModal from '../HeaderModal';
 import Form from '../Form';
 
 import classes from './Modal.scss';
 
-type ModalProps = {
-  onClose: () => void;
-  onVisible: () => void;
-  isOpen: boolean;
-  type: string;
-};
+type StateType = { modal: InitialModalStateType };
 
-const Modal = ({
-  onClose,
-  onVisible,
-  isOpen,
-  type,
-}: ModalProps): JSX.Element => {
+const Modal = (): JSX.Element => {
   const overlayElement = useRef<HTMLDivElement | null>(null);
+
+  const isOpen = useSelector((state: StateType) => state.modal.isOpen);
+  const modalType = useSelector((state: StateType) => state.modal.modalType);
+  const dispatch = useDispatch();
+
+  const onClose = useCallback(() => {
+    dispatch(closeModal());
+  }, [dispatch]);
+
+  /**
+   * Changes the type of the modal to the default.
+   *
+   * Without this function and the onExited parameter in the transition,
+   * the type will change and the window title will display the wrong title and
+   * also the wrong form will be displayed.
+   */
+  const exetedModal = useCallback(() => {
+    dispatch(setDefaultType());
+  }, [dispatch]);
 
   const onEscapeKey = useCallback(
     (e: KeyboardEvent) => {
@@ -49,10 +61,8 @@ const Modal = ({
     };
   }, [onEscapeKey]);
 
-  const getHeaderTitle = useCallback(
-    (): string => (type === 'registration' ? 'Регистрация' : 'Вход'),
-    [type]
-  );
+  const getHeaderTitle = (): string =>
+    modalType === 'registration' ? 'Регистрация' : 'Вход';
 
   return (
     <Transition
@@ -61,7 +71,7 @@ const Modal = ({
       timeout={690}
       mountOnEnter
       unmountOnExit
-      onExited={onVisible}
+      onExited={exetedModal}
     >
       {(state) => (
         <div
@@ -72,13 +82,13 @@ const Modal = ({
         >
           <div
             className={classNames({
-              [classes.Auth]: type === 'registration' || 'login',
+              [classes.Auth]: modalType === 'registration' || 'login',
               [classes.Modal]: true,
               [classes[`m-${state}`]]: true,
             })}
           >
             <HeaderModal title={getHeaderTitle()} onClose={onClose} />
-            <Form type={type} onClose={onClose}/>
+            <Form type={modalType} />
           </div>
         </div>
       )}
