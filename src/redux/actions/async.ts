@@ -2,7 +2,8 @@ import axios from 'axios';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { IUserState } from '../reducers/userReducer';
+import { CurrentUserType } from '../reducers/userReducer';
+
 import { setUser } from './user';
 
 export const registration = async (
@@ -31,7 +32,7 @@ export const registration = async (
 export const login = (
   email: string,
   password: string
-): ThunkAction<void, IUserState, unknown, Action<string>> => async (
+): ThunkAction<void, CurrentUserType, unknown, Action<string>> => async (
   dispatch
 ) => {
   try {
@@ -52,7 +53,7 @@ export const login = (
 
 export const auth = (): ThunkAction<
   void,
-  IUserState,
+  CurrentUserType,
   unknown,
   Action<string>
 > => async (dispatch) => {

@@ -1,13 +1,12 @@
-interface ICurrentUser {
+export type CurrentUserType = {
   id: string;
   email: string;
   name: string;
-}
+};
 
-export interface IUserState {
-  currentUser: ICurrentUser;
-  isAuth: boolean;
-}
+export type IntitialStateType = typeof intitialState;
+
+type Action = { type: string; payload: CurrentUserType };
 
 const intitialState = {
   currentUser: {
@@ -18,12 +17,10 @@ const intitialState = {
   isAuth: false,
 };
 
-type Action = { type: string; payload: ICurrentUser };
-
 const userReducer = (
-  state: IUserState = intitialState,
+  state: IntitialStateType = intitialState,
   action: Action
-): IUserState => {
+): IntitialStateType => {
   // eslint-disable-next-line sonarjs/no-small-switch
   switch (action.type) {
     case 'SET_USER':

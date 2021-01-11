@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IUserState } from '../../redux/reducers/userReducer';
+import { IntitialStateType } from '../../redux/reducers/userReducer';
 
 import SignInIcon from '../../assets/images/icons/sign_in.svg';
 import SignOutIcon from '../../assets/images/icons/sign_out.svg';
@@ -18,7 +18,7 @@ type DropdownMenuProps = {
 };
 
 interface IState {
-  user: IUserState;
+  user: IntitialStateType;
 }
 
 const DropdownMenu = ({ onModal }: DropdownMenuProps): JSX.Element => {

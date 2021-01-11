@@ -1,13 +1,8 @@
-/* eslint-disable import/prefer-default-export */
-interface ILogin {
-  id: string;
-  name: string;
-  email: string;
-}
+import { CurrentUserType } from '../reducers/userReducer';
 
-type setUserType = { type: string; payload?: ILogin };
+type setUserType = { type: string; payload?: CurrentUserType };
 
-export const setUser = (data: ILogin): setUserType => ({
+export const setUser = (data: CurrentUserType): setUserType => ({
   type: 'SET_USER',
   payload: data,
 });
