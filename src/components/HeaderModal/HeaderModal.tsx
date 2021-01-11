@@ -8,7 +8,7 @@ import classes from './HeaderModal.scss';
 
 type HeaderModalProps = {
   title: string;
-  onClose: (e: React.MouseEvent<HTMLElement>) => void;
+  onClose: () => void;
 };
 
 const HeaderModal = ({ title, onClose }: HeaderModalProps): JSX.Element => (
