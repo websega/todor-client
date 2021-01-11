@@ -9,6 +9,7 @@ import { InitialUserStateType } from '../../redux/reducers/userReducer';
 import { InitialDropdownStateType } from '../../redux/reducers/dropdownMenuReducer';
 import { logout } from '../../redux/actions/user';
 import { openModal } from '../../redux/actions/modal';
+import { toggleMenu } from '../../redux/actions/dropdownMenu';
 
 import Icon from '../Icon';
 
@@ -45,6 +46,7 @@ const DropdownMenu = (): JSX.Element => {
               className={classes.MenuItem}
               onClick={() => {
                 dispatch(logout());
+                dispatch(toggleMenu());
               }}
               role="menuitem"
               aria-hidden="true"
@@ -59,6 +61,7 @@ const DropdownMenu = (): JSX.Element => {
                 className={classes.MenuItem}
                 onClick={() => {
                   dispatch(openModal('registration'));
+                  dispatch(toggleMenu());
                 }}
                 role="menuitem"
                 aria-hidden="true"
@@ -70,6 +73,7 @@ const DropdownMenu = (): JSX.Element => {
                 className={classes.MenuItem}
                 onClick={() => {
                   dispatch(openModal('login'));
+                  dispatch(toggleMenu());
                 }}
                 role="menuitem"
                 aria-hidden="true"

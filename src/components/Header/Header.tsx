@@ -12,7 +12,7 @@ const Header = (): JSX.Element => (
       <Logo />
       <SearchForm />
     </div>
-    <Account username="Sergey Vakhramov" />
+    <Account />
   </div>
 );
 
