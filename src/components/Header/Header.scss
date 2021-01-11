@@ -8,6 +8,8 @@
   border-bottom: 1px solid #e4e5e7;
 
   grid-area: header;
+
+  z-index: z('header')
 }
 
 .Left {

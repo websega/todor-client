@@ -6,10 +6,12 @@ import { auth } from '../../redux/actions/async';
 
 import Header from '../Header';
 import Modal from '../Modal';
+import DropdownMenu from '../DropdownMenu';
 
 import classes from './App.scss';
 
 const modalRoot = document.getElementById('modal-root') as HTMLElement;
+const dropdownRoot = document.getElementById('dropdown-root') as HTMLElement;
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const App = (): JSX.Element => {
     <div className={classes.App}>
       <Header />
       {ReactDOM.createPortal(<Modal />, modalRoot)}
+      {ReactDOM.createPortal(<DropdownMenu />, dropdownRoot)}
     </div>
   );
 };
