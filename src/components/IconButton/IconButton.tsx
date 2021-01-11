@@ -7,7 +7,7 @@ import classes from './IconButton.scss';
 type IconButtonProps = {
   icon: JSX.Element;
   iconType?: string;
-  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+  onClick: () => void;
   inverted?: boolean;
 };
 

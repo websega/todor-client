@@ -10,10 +10,6 @@
   padding-left: rem(17);
 }
 
-.Rotate {
-  transform: rotate(180deg);
-}
-
 .User {
   @include display(flex, space-between, center);
 }
