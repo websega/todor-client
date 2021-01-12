@@ -6,11 +6,11 @@ import { modalReducer } from './modalReducer';
 import { dropdownMenuReducer } from './dropdownMenuReducer';
 
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   user: userReducer,
   folder: folderReducer,
   modal: modalReducer,
   dropdownMenu: dropdownMenuReducer,
 });
 
-export default rootReducer;
+export type RootStateType = ReturnType<typeof rootReducer>

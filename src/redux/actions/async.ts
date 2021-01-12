@@ -2,9 +2,15 @@ import axios from 'axios';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { CurrentUserType } from '../reducers/userReducer';
+import { ActionUserType, setUser } from './user';
+import { RootStateType } from '../reducers';
 
-import { setUser } from './user';
+type ThunkType = ThunkAction<
+  Promise<void>,
+  RootStateType,
+  unknown,
+  Action<ActionUserType['type']>
+>;
 
 export const registration = async (
   name: string,
@@ -29,10 +35,7 @@ export const registration = async (
   }
 };
 
-export const login = (
-  email: string,
-  password: string
-): ThunkAction<void, CurrentUserType, unknown, Action<string>> => async (
+export const login = (email: string, password: string): ThunkType => async (
   dispatch
 ) => {
   try {
@@ -51,12 +54,7 @@ export const login = (
   }
 };
 
-export const auth = (): ThunkAction<
-  void,
-  CurrentUserType,
-  unknown,
-  Action<string>
-> => async (dispatch) => {
+export const auth = (): ThunkType => async (dispatch) => {
   try {
     const response = await axios.get('http://localhost:5000/api/auth/auth', {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
