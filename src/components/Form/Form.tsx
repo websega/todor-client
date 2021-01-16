@@ -13,26 +13,36 @@ import FormErrorMessage from '../FormErrorMessage';
 
 import classes from './Form.scss';
 
-const requiredMsg = 'Обязательное поле';
-
 const registerationSchema = Yup.object({
   username: Yup.string()
-    .min(4, 'Имя должно быть больше 4 символов')
-    .max(15, 'Имя должно быть меньше 15 символов')
-    .required(requiredMsg),
+    .min(4, 'Имя должно быть больше 4 символов!')
+    .max(15, 'Имя должно быть меньше 15 символов!')
+    .matches(
+      /^[\S\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{3,}$/,
+      'Нельзя использовать никакие символы, кроме букв, цифр и подчеркивания!'
+    )
+    .required('Имя обязательно!'),
   password: Yup.string()
-    .min(4, 'Пароль дожен быть больше 4 символов')
-    .max(15, 'Пароль дожен быть меньше 15 символов')
-    .required(requiredMsg),
-  email: Yup.string().email('Не подходящий формат email').required(requiredMsg),
+    .min(4, 'Пароль дожен быть больше 4 символов!')
+    .max(15, 'Пароль дожен быть меньше 15 символов!')
+    .matches(
+      /^[a-zA-Z-0-9]\w{3,}$/,
+      'Нельзя использовать никакие символы, кроме букв, цифр и подчеркивания!'
+    )
+    .required('Пароль обязателен!'),
+  email: Yup.string()
+    .email('Не подходящий формат email!')
+    .required('Email обязателен!'),
 });
 
 const loginSchema = Yup.object({
   password: Yup.string()
-    .min(4, 'Пароль дожен быть больше 4 символов')
-    .max(15, 'Пароль дожен быть меньше 15 символов')
-    .required(requiredMsg),
-  email: Yup.string().email('Не подходящий формат email').required(requiredMsg),
+    .min(4, 'Пароль дожен быть больше 4 символов!')
+    .max(15, 'Пароль дожен быть меньше 15 символов!')
+    .required('Введите пароль!'),
+  email: Yup.string()
+    .email('Не подходящий формат email')
+    .required('Введите email!'),
 });
 
 type FormProps = { type: string };
