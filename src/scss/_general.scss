@@ -5,7 +5,8 @@
 }
 
 :focus {
-  outline: 1px solid $current-color;
+  // outline: 1px solid $current-color;
+  outline: none;
 }
 
 ul,

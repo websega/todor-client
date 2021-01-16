@@ -16,4 +16,9 @@
     cursor: pointer;
     background-color: #238fe8;
   }
+
+  &:disabled {
+    background-color: #a5a5a5;
+    pointer-events: all !important;
+  }
 }

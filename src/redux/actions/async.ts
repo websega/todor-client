@@ -13,7 +13,7 @@ type ThunkType = ThunkAction<
 >;
 
 export const registration = async (
-  name: string,
+  username: string,
   email: string,
   password: string
 ): Promise<void> => {
@@ -21,7 +21,7 @@ export const registration = async (
     const response = await axios.post(
       'http://localhost:5000/api/auth/registration',
       {
-        name,
+        username,
         email,
         password,
       }

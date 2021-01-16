@@ -1,0 +1,56 @@
+.Warning {
+  @include display(flex, flex-start, center);
+  @include font-sans(rem(12), $warning-color, normal, normal, rem(18));
+
+  margin-bottom: rem(25);
+
+  & svg {
+    width: rem(14);
+    height: rem(14);
+    color: $warning-color;
+    margin-right: rem(10);
+  }
+}
+
+.error-entering {
+  animation-name: lightSpeedInRight;
+  animation-timing-function: ease-out;
+  animation-duration: 0.7s;
+}
+
+.error-exiting {
+  animation-name: lightSpeedOutRight;
+  animation-timing-function: ease-in;
+  animation-duration: 0.7s;
+}
+
+@keyframes lightSpeedInRight {
+  0% {
+    transform: translate3d(100%, 0, 0) skewX(-30deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: skewX(20deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: skewX(-5deg);
+  }
+
+  to {
+    transform: translateZ(0);
+  }
+}
+
+@keyframes lightSpeedOutRight {
+  0% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translate3d(100%, 0, 0) skewX(30deg);
+    opacity: 0;
+  }
+}
