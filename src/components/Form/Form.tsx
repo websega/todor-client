@@ -4,16 +4,14 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { closeModal } from '../../redux/actions/modal';
-import { registration, login } from '../../redux/actions/async';
+import { closeModal } from '../../redux/actions/modal/modal';
+import { registration, login } from '../../redux/actions/user/async';
 
 import InputBox from '../InputBox';
 import ButtonModal from '../ButtonModal';
 import FormErrorMessage from '../FormErrorMessage';
 
 import classes from './Form.scss';
-
-type FormProps = { type: string };
 
 const requiredMsg = 'Обязательное поле';
 
@@ -36,6 +34,8 @@ const loginSchema = Yup.object({
     .required(requiredMsg),
   email: Yup.string().email('Не подходящий формат email').required(requiredMsg),
 });
+
+type FormProps = { type: string };
 
 const Form = ({ type }: FormProps): JSX.Element => {
   const dispatch = useDispatch();

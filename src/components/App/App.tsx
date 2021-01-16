@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ReactDOM from 'react-dom';
 
-import { auth } from '../../redux/actions/async';
+import { auth } from '../../redux/actions/user/async';
 
 import Header from '../Header';
 import Modal from '../Modal';

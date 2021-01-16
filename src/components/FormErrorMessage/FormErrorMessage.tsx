@@ -26,10 +26,6 @@ const FormErrorMessage = React.memo(
     useEffect(() => {
       if (isIn) {
         setErrorMsg(msg);
-      } else {
-        setTimeout(() => {
-          setErrorMsg(msg);
-        }, DURATION);
       }
     }, [errorMsg, isIn, msg]);
 

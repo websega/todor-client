@@ -1,3 +1,10 @@
+import {
+  ActionUserTypes,
+  LOGIN_ERROR,
+  LOGOUT,
+  SET_USER,
+} from '../actions/user/types';
+
 const initialState = {
   currentUser: {
     id: '_id_guest',
@@ -5,31 +12,31 @@ const initialState = {
     name: 'Гость',
   },
   isAuth: false,
-};
-
-export type CurrentUserType = {
-  id: string;
-  email: string;
-  name: string;
+  errorMsg: '',
+  hasError: false,
 };
 
 export type InitialUserStateType = typeof initialState;
 
-type Action = { type: string; payload: CurrentUserType };
-
 export const userReducer = (
   state: InitialUserStateType = initialState,
-  action: Action
+  action: ActionUserTypes
 ): InitialUserStateType => {
   switch (action.type) {
-    case 'SET_USER':
+    case SET_USER:
       return { ...state, currentUser: action.payload, isAuth: true };
-    case 'LOGOUT':
+    case LOGOUT:
       localStorage.removeItem('token');
       return {
         ...state,
         currentUser: initialState.currentUser,
         isAuth: false,
+      };
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        errorMsg: action.payload,
+        hasError: true,
       };
 
     default:

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-// eslint-disable-next-line max-len
-import { InitialDropdownStateType } from '../../redux/reducers/dropdownMenuReducer';
+import { InitialModalStateType } from '../../redux/reducers/modalReducer';
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
-import { toggleMenu } from '../../redux/actions/dropdownMenu';
+
+import { toggleMenu } from '../../redux/actions/modal/modal';
 
 import AccountImg from './AccountImg';
 import AccountName from './AccountName';
@@ -15,13 +15,13 @@ import ArrowIcon from '../../assets/images/icons/arrow_down.svg';
 import classes from './Account.scss';
 
 type StateType = {
-  dropdownMenu: InitialDropdownStateType;
+  modal: InitialModalStateType;
   user: InitialUserStateType;
 };
 
 const Account = React.memo(
   (): JSX.Element => {
-    const isOpen = useSelector((state: StateType) => state.dropdownMenu.isOpen);
+    const isOpen = useSelector((state: StateType) => state.modal.isMenuOpen);
     const username = useSelector(
       (state: StateType) => state.user.currentUser.name
     );

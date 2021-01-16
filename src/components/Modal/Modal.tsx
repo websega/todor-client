@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Transition } from 'react-transition-group';
 
 import { InitialModalStateType } from '../../redux/reducers/modalReducer';
-import { closeModal, setDefaultType } from '../../redux/actions/modal';
+import { closeModal, setDefaultType } from '../../redux/actions/modal/modal';
 
 import HeaderModal from '../HeaderModal';
 import Form from '../Form';

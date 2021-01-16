@@ -5,11 +5,10 @@ import classNames from 'classnames';
 import { Transition } from 'react-transition-group';
 
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
-// eslint-disable-next-line max-len
-import { InitialDropdownStateType } from '../../redux/reducers/dropdownMenuReducer';
-import { logout } from '../../redux/actions/user';
-import { openModal } from '../../redux/actions/modal';
-import { toggleMenu } from '../../redux/actions/dropdownMenu';
+import { InitialModalStateType } from '../../redux/reducers/modalReducer';
+
+import { logout } from '../../redux/actions/user/user';
+import { openModal, toggleMenu } from '../../redux/actions/modal/modal';
 
 import Icon from '../Icon';
 
@@ -21,14 +20,14 @@ import classes from './DropdownMenu.scss';
 
 type StateType = {
   user: InitialUserStateType;
-  dropdownMenu: InitialDropdownStateType;
+  modal: InitialModalStateType;
 };
 
 const DURATION = 490;
 
 const DropdownMenu = (): JSX.Element => {
   const isAuth = useSelector((state: StateType) => state.user.isAuth);
-  const isOpen = useSelector((state: StateType) => state.dropdownMenu.isOpen);
+  const isOpen = useSelector((state: StateType) => state.modal.isMenuOpen);
   const dispatch = useDispatch();
 
   return (

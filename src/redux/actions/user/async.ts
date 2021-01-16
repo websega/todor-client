@@ -2,14 +2,16 @@ import axios from 'axios';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { ActionUserType, setUser } from './user';
-import { RootStateType } from '../reducers';
+import { ActionUserTypes } from './types';
+import { setUser } from './user';
+
+import { RootStateType } from '../../reducers';
 
 type ThunkType = ThunkAction<
   Promise<void>,
   RootStateType,
   unknown,
-  Action<ActionUserType['type']>
+  Action<ActionUserTypes['type']>
 >;
 
 export const registration = async (
@@ -50,7 +52,7 @@ export const login = (email: string, password: string): ThunkType => async (
   } catch (error) {
     // eslint-disable-next-line no-console
     // eslint-disable-next-line no-alert
-    alert(error.response.data.message);
+    console.log(error.response.data);
   }
 };
 

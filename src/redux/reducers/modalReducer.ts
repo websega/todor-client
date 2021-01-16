@@ -1,31 +1,44 @@
+import {
+  ActionModalTypes,
+  CLOSE_MODAL,
+  OPEN_MODAL,
+  SET_TYPE,
+  TOGGLE_MENU,
+} from '../actions/modal/types';
+
 const initialState = {
   isOpen: false,
+  isMenuOpen: false,
   modalType: '',
 };
 
 export type InitialModalStateType = typeof initialState;
 
-type Action = { type: string; payload: string };
-
 export const modalReducer = (
   state: InitialModalStateType = initialState,
-  action: Action
+  action: ActionModalTypes
 ): InitialModalStateType => {
   switch (action.type) {
-    case 'OPEN_MODAL':
+    case OPEN_MODAL:
       return {
+        ...state,
         isOpen: true,
         modalType: action.payload,
       };
-    case 'SET_TYPE':
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        isOpen: false,
+      };
+    case SET_TYPE:
       return {
         ...state,
         modalType: '',
       };
-    case 'CLOSE_MODAL':
+    case TOGGLE_MENU:
       return {
         ...state,
-        isOpen: false,
+        isMenuOpen: !state.isMenuOpen,
       };
 
     default:
