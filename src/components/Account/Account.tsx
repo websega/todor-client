@@ -23,7 +23,7 @@ const Account = React.memo(
   (): JSX.Element => {
     const isOpen = useSelector((state: StateType) => state.modal.isMenuOpen);
     const username = useSelector(
-      (state: StateType) => state.user.currentUser.name
+      (state: StateType) => state.user.currentUser.username
     );
     const dispatch = useDispatch();
 

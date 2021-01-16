@@ -2,7 +2,7 @@ export const SET_USER = 'SET_USER';
 export const LOGOUT = 'LOGOUT';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
-export type DataType = { id: string; email: string; name: string };
+export type DataType = { id: string; email: string; username: string };
 
 type ActionUserType = { type: typeof SET_USER; payload: DataType };
 type ActionLogoutType = { type: typeof LOGOUT };

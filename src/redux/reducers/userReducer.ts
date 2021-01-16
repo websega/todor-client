@@ -9,7 +9,7 @@ const initialState = {
   currentUser: {
     id: '_id_guest',
     email: 'guest@mail.com',
-    name: 'Гость',
+    username: 'Гость',
   },
   isAuth: false,
   errorMsg: '',
