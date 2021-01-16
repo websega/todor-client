@@ -18,6 +18,11 @@ const FormErrorMessage = React.memo(
   ({ msg, isIn }: ErrorTextPropsType): JSX.Element => {
     const [errorMsg, setErrorMsg] = useState<string | undefined>('');
 
+    /**
+     * Add a check to useEffect to make
+     * the animation end when isIn changes to false
+     */
+
     useEffect(() => {
       if (isIn) {
         setErrorMsg(msg);
