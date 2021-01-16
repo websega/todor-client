@@ -17,11 +17,19 @@ type FormProps = { type: string };
 
 const requiredMsg = 'Обязательное поле';
 
-const authSchema = Yup.object({
+const registerationSchema = Yup.object({
   username: Yup.string()
     .min(4, 'Имя должно быть больше 4 символов')
     .max(15, 'Имя должно быть меньше 15 символов')
     .required(requiredMsg),
+  password: Yup.string()
+    .min(4, 'Пароль дожен быть больше 4 символов')
+    .max(15, 'Пароль дожен быть меньше 15 символов')
+    .required(requiredMsg),
+  email: Yup.string().email('Не подходящий формат email').required(requiredMsg),
+});
+
+const loginSchema = Yup.object({
   password: Yup.string()
     .min(4, 'Пароль дожен быть больше 4 символов')
     .max(15, 'Пароль дожен быть меньше 15 символов')
@@ -39,7 +47,8 @@ const Form = ({ type }: FormProps): JSX.Element => {
       email: '',
     },
 
-    validationSchema: authSchema,
+    validationSchema:
+      type === 'registration' ? registerationSchema : loginSchema,
 
     onSubmit: (values) => {
       switch (type) {
