@@ -1,6 +1,6 @@
 import {
   ActionUserTypes,
-  LOGIN_ERROR,
+  AUTH_ERROR,
   LOGOUT,
   SET_USER,
 } from '../actions/user/types';
@@ -24,7 +24,13 @@ export const userReducer = (
 ): InitialUserStateType => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, currentUser: action.payload, isAuth: true };
+      return {
+        ...state,
+        currentUser: action.payload,
+        isAuth: true,
+        errorMsg: '',
+        hasError: false,
+      };
     case LOGOUT:
       localStorage.removeItem('token');
       return {
@@ -32,7 +38,7 @@ export const userReducer = (
         currentUser: initialState.currentUser,
         isAuth: false,
       };
-    case LOGIN_ERROR:
+    case AUTH_ERROR:
       return {
         ...state,
         errorMsg: action.payload,

@@ -1,6 +1,6 @@
 import {
   ActionUserTypes,
-  LOGIN_ERROR,
+  AUTH_ERROR,
   LOGOUT,
   SET_USER,
   DataType,
@@ -15,7 +15,7 @@ export const logout = (): ActionUserTypes => ({
   type: LOGOUT,
 });
 
-export const loginError = (error: string): ActionUserTypes => ({
-  type: LOGIN_ERROR,
+export const setAuthError = (error: string): ActionUserTypes => ({
+  type: AUTH_ERROR,
   payload: error,
 });

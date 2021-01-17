@@ -1,10 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { closeModal } from '../../redux/actions/modal/modal';
 import { registration, login } from '../../redux/actions/user/async';
 
 import InputBox from '../InputBox';
@@ -12,6 +11,8 @@ import ButtonModal from '../ButtonModal';
 import FormErrorMessage from '../FormErrorMessage';
 
 import classes from './Form.scss';
+import { InitialUserStateType } from '../../redux/reducers/userReducer';
+import { setAuthError } from '../../redux/actions/user/user';
 
 const registerationSchema = Yup.object({
   username: Yup.string()
@@ -46,8 +47,12 @@ const loginSchema = Yup.object({
 });
 
 type FormProps = { type: string };
+type StateType = {
+  user: InitialUserStateType;
+};
 
 const Form = ({ type }: FormProps): JSX.Element => {
+  const serverError = useSelector((state: StateType) => state.user.errorMsg);
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -60,15 +65,13 @@ const Form = ({ type }: FormProps): JSX.Element => {
     validationSchema:
       type === 'registration' ? registerationSchema : loginSchema,
 
-    onSubmit: (values) => {
+    onSubmit: ({ username, email, password }) => {
       switch (type) {
         case 'registration':
-          registration(values.username, values.email, values.password);
-          dispatch(closeModal());
+          dispatch(registration(username, email, password));
           break;
         case 'login':
-          dispatch(login(values.email, values.password));
-          dispatch(closeModal());
+          dispatch(login(email, password));
           break;
 
         default:
@@ -76,6 +79,13 @@ const Form = ({ type }: FormProps): JSX.Element => {
       }
     },
   });
+
+  if (
+    serverError &&
+    (formik.errors.username || formik.errors.password || formik.errors.email)
+  ) {
+    dispatch(setAuthError(''));
+  }
 
   const getButtonName = (): string =>
     type === 'registration' ? 'Зарегистрироваться' : 'Войти';
@@ -91,12 +101,12 @@ const Form = ({ type }: FormProps): JSX.Element => {
             type="text"
             onChange={formik.handleChange}
             placeholder="Имя"
-            hasError={!!formik.errors.username}
+            hasError={!!formik.errors.username || !!serverError}
           />
 
           <FormErrorMessage
-            msg={formik.errors.username}
-            isIn={!!formik.errors.username}
+            msg={formik.errors.username || serverError}
+            isIn={!!formik.errors.username || !!serverError}
           />
         </>
       )}
@@ -108,12 +118,12 @@ const Form = ({ type }: FormProps): JSX.Element => {
         type="email"
         onChange={formik.handleChange}
         placeholder="Электронная почта"
-        hasError={!!formik.errors.email}
+        hasError={!!formik.errors.email || !!serverError}
       />
 
       <FormErrorMessage
-        msg={formik.errors.email}
-        isIn={!!formik.errors.email}
+        msg={formik.errors.email || serverError}
+        isIn={!!formik.errors.email || !!serverError}
       />
 
       <InputBox
@@ -123,12 +133,12 @@ const Form = ({ type }: FormProps): JSX.Element => {
         type="password"
         onChange={formik.handleChange}
         placeholder="Пароль"
-        hasError={!!formik.errors.password}
+        hasError={!!formik.errors.password || !!serverError}
       />
 
       <FormErrorMessage
-        msg={formik.errors.password}
-        isIn={!!formik.errors.password}
+        msg={formik.errors.password || serverError}
+        isIn={!!formik.errors.password || !!serverError}
       />
 
       <ButtonModal name={getButtonName()} disabled={!formik.isValid} />
