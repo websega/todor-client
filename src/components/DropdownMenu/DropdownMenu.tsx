@@ -27,12 +27,12 @@ const DURATION = 490;
 
 const DropdownMenu = (): JSX.Element => {
   const isAuth = useSelector((state: StateType) => state.user.isAuth);
-  const isOpen = useSelector((state: StateType) => state.modal.isMenuOpen);
+  const isOpenMenu = useSelector((state: StateType) => state.modal.isMenuOpen);
   const dispatch = useDispatch();
 
   return (
     <Transition
-      in={isOpen}
+      in={isOpenMenu}
       appear
       timeout={DURATION}
       mountOnEnter

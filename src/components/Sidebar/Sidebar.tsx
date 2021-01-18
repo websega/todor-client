@@ -13,44 +13,42 @@ import CategoriesList from '../CategoriesList';
 
 import classes from './Sidebar.scss';
 
-const Sidebar = (): JSX.Element => {
-  const categories = [
-    {
-      id: 'today',
-      name: 'Сегодня',
-      icon: <TodayIcon />,
-    },
-    {
-      id: 'inbox',
-      name: 'Предстоящие',
-      icon: <InboxIcon />,
-    },
-    {
-      id: 'important',
-      name: 'Важное',
-      icon: <StarIcon />,
-    },
-    {
-      id: 'completed',
-      name: 'Выполненные',
-      icon: <CompletedIcon />,
-    },
-    {
-      id: 'deleted',
-      name: 'Удалённые',
-      icon: <DeleteIcon />,
-    },
-  ];
+const categories = [
+  {
+    id: 'today',
+    name: 'Сегодня',
+    icon: <TodayIcon />,
+  },
+  {
+    id: 'inbox',
+    name: 'Предстоящие',
+    icon: <InboxIcon />,
+  },
+  {
+    id: 'important',
+    name: 'Важное',
+    icon: <StarIcon />,
+  },
+  {
+    id: 'completed',
+    name: 'Выполненные',
+    icon: <CompletedIcon />,
+  },
+  {
+    id: 'deleted',
+    name: 'Удалённые',
+    icon: <DeleteIcon />,
+  },
+];
 
-  return (
-    <aside className={classes.Sidebar}>
-      <ToggleSidebar />
-      <CategoriesList categories={categories} />
-      <FoldersList />
-      <AddButton type="folderModal" label="Добавить папку" />
-      <AddButton type="taskModal" label="Добавить задачу" />
-    </aside>
-  );
-};
+const Sidebar = (): JSX.Element => (
+  <aside className={classes.Sidebar}>
+    <ToggleSidebar />
+    <CategoriesList categories={categories} />
+    <FoldersList />
+    <AddButton modalType="folder" label="Добавить папку" />
+    <AddButton modalType="task" label="Добавить задачу" />
+  </aside>
+);
 
 export default Sidebar;

@@ -1,43 +1,49 @@
-.btn {
+.Button {
   position: relative;
+
   @include font-sans(rem(14), null, normal, normal);
-  letter-spacing: 0.15px;
-  border: none;
+  @include reset-btn();
+
   width: 100%;
-  background-color: transparent;
 
   &:hover {
     cursor: pointer;
   }
 }
 
-.quickAddTaskBtn {
+.TaskBtn {
+  color: $hover-color;
+
   padding-left: rem(105);
-  color: #2684ff;
   margin: auto 0 0 0;
 
   &:hover:before {
     transform: rotate(45deg);
-    box-shadow: 0 0 1px 15px rgba(#2684ff, 0.3), 0 0 1px 30px rgba(#2684ff, 0.1),
-      0 0 1px 45px rgba(#2684ff, 0.1);
+    box-shadow: 0 0 1px 15px rgba($hover-color, 0.3),
+      0 0 1px 30px rgba($hover-color, 0.1), 0 0 1px 45px rgba($hover-color, 0.1);
   }
 
   &:before {
     @include pseudo(block, absolute, '+');
     font-size: rem(36);
+
     min-width: rem(50);
     min-height: rem(50);
-    border-radius: 100%;
+
     color: #fff;
-    background: #2684ff;
+
+    border-radius: 100%;
+    background: $hover-color;
+
     top: rem(-14);
     left: rem(47);
+
     transition: box-shadow 0.4s cubic-bezier(0.2, 0, 0.7, 1),
       transform 0.2s cubic-bezier(0.2, 0, 0.7, 1);
   }
 }
 
-.tagAddBtn {
+.FolderBtn {
   transition: $transition-hover-color;
   color: #c4c4c4;
 
@@ -52,10 +58,13 @@
   &:before {
     @include pseudo(block, absolute, '+');
     font-size: rem(36);
+
     color: $main-text-color;
     background: transparent;
+
     top: rem(-14);
     left: rem(47);
+
     transition: $transition-hover-color;
   }
 }

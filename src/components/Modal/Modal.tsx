@@ -5,14 +5,21 @@ import classNames from 'classnames';
 import { Transition } from 'react-transition-group';
 
 import { InitialModalStateType } from '../../redux/reducers/modalReducer';
-import { closeModal, setDefaultType } from '../../redux/actions/modal/modal';
+import {
+  closeModal,
+  setDefaultModalType,
+} from '../../redux/actions/modal/modal';
 
 import HeaderModal from '../HeaderModal';
-import Form from '../Form';
+import FormWrapper from '../FormWrapper';
 
 import classes from './Modal.scss';
 
 type StateType = { modal: InitialModalStateType };
+
+type TitlesType = {
+  [key: string]: string;
+};
 
 const DURATION = 690;
 
@@ -35,7 +42,7 @@ const Modal = (): JSX.Element => {
    * also the wrong form will be displayed.
    */
   const exetedModal = useCallback(() => {
-    dispatch(setDefaultType());
+    dispatch(setDefaultModalType());
   }, [dispatch]);
 
   const onEscapeKey = useCallback(
@@ -63,8 +70,16 @@ const Modal = (): JSX.Element => {
     };
   }, [onEscapeKey]);
 
-  const getHeaderTitle = (): string =>
-    modalType === 'registration' ? 'Регистрация' : 'Вход';
+  const getHeaderTitle = useCallback((type: string): string => {
+    const titles: TitlesType = {
+      registration: 'Регистрация',
+      login: 'Вход',
+      folder: 'Добавление папки',
+      task: 'Добавление задачи',
+    };
+
+    return titles[type] || '';
+  }, []);
 
   return (
     <Transition
@@ -84,13 +99,15 @@ const Modal = (): JSX.Element => {
         >
           <div
             className={classNames({
-              [classes.Auth]: modalType === 'registration' || 'login',
+              [classes.Auth]:
+                modalType === 'registration' || modalType === 'login',
+              [classes.Main]: modalType === 'task' || modalType === 'folder',
               [classes.Modal]: true,
               [classes[`m-${state}`]]: true,
             })}
           >
-            <HeaderModal title={getHeaderTitle()} onClose={onClose} />
-            <Form type={modalType} />
+            <HeaderModal title={getHeaderTitle(modalType)} onClose={onClose} />
+            <FormWrapper modalType={modalType} />
           </div>
         </div>
       )}

@@ -1,13 +1,9 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "module": "esnext",
+    "module": "ESNext",
     "target": "ESNext",
     "jsx": "react",
     "allowJs": true,

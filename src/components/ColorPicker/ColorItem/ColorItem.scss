@@ -1,0 +1,78 @@
+.colorItem {
+  display: inline-block;
+
+  width: rem(20);
+  height: rem(20);
+
+  border-radius: 100%;
+  border: none;
+  transition: box-shadow 0.2s linear;
+
+  margin-bottom: rem(25);
+
+  &:not(:last-child) {
+    margin-right: rem(7);
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &[data-color='teal']:hover {
+    box-shadow: 0 0 1px 4px rgba(#64d2ff, 0.3);
+  }
+  &[data-color='red']:hover {
+    box-shadow: 0 0 1px 4px rgba(#ff453a, 0.3);
+  }
+  &[data-color='yellow']:hover {
+    box-shadow: 0 0 1px 4px rgba(#ffd60a, 0.3);
+  }
+  &[data-color='green']:hover {
+    box-shadow: 0 0 1px 4px rgba(#32d74b, 0.3);
+  }
+  &[data-color='indigo']:hover {
+    box-shadow: 0 0 1px 4px rgba(#5e5ce6, 0.3);
+  }
+  &[data-color='purple']:hover {
+    box-shadow: 0 0 1px 4px rgba(#bf5af2, 0.3);
+  }
+  &[data-color='pink']:hover {
+    box-shadow: 0 0 1px 4px rgba(#ff375f, 0.3);
+  }
+  &[data-color='orange']:hover {
+    box-shadow: 0 0 1px 4px rgba(#ff9f0a, 0.3);
+  }
+  &[data-color='default']:hover {
+    box-shadow: 0 0 1px 4px rgba(#505f79, 0.3);
+  }
+}
+
+.active {
+  &-teal {
+    box-shadow: 0 0 1px 5px rgba(#64d2ff, 0.3);
+  }
+  &-red {
+    box-shadow: 0 0 1px 5px rgba(#ff453a, 0.3) ;
+  }
+  &-yellow {
+    box-shadow: 0 0 1px 5px rgba(#ffd60a, 0.3) ;
+  }
+  &-green {
+    box-shadow: 0 0 1px 5px rgba(#32d74b, 0.3) ;
+  }
+  &-indigo {
+    box-shadow: 0 0 1px 5px rgba(#5e5ce6, 0.3) ;
+  }
+  &-purple {
+    box-shadow: 0 0 1px 5px rgba(#bf5af2, 0.3) ;
+  }
+  &-pink {
+    box-shadow: 0 0 1px 5px rgba(#ff375f, 0.3) ;
+  }
+  &-orange {
+    box-shadow: 0 0 1px 5px rgba(#ff9f0a, 0.3) ;
+  }
+  &-default {
+    box-shadow: 0 0 1px 5px rgba(#505f79, 0.3) ;
+  }
+}

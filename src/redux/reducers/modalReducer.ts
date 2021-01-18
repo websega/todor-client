@@ -2,7 +2,7 @@ import {
   ActionModalTypes,
   CLOSE_MODAL,
   OPEN_MODAL,
-  SET_TYPE,
+  SET_DEFAULT_MODAL_TYPE,
   TOGGLE_MENU,
 } from '../actions/modal/types';
 
@@ -30,7 +30,7 @@ export const modalReducer = (
         ...state,
         isOpen: false,
       };
-    case SET_TYPE:
+    case SET_DEFAULT_MODAL_TYPE:
       return {
         ...state,
         modalType: '',

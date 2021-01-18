@@ -1,21 +1,28 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import classNames from 'classnames';
+
+import { openModal } from '../../redux/actions/modal/modal';
 
 import classes from './AddButton.scss';
 
-const AddButton = ({ label, type }): JSX.Element => {
-  const cls = [classes.btn];
+type AddButtonProps = { label: string; modalType: string };
 
-  if (type === 'taskModal') {
-    cls.push(classes.quickAddTaskBtn);
-  } else if (type === 'folderModal') {
-    cls.push(classes.tagAddBtn);
-  }
+const AddButton = ({ label, modalType }: AddButtonProps): JSX.Element => {
+  const dispatch = useDispatch();
 
   return (
     <button
-      className={cls.join(' ')}
+      className={classNames({
+        [classes.Button]: true,
+        [classes.TaskBtn]: modalType === 'task',
+        [classes.FolderBtn]: modalType === 'folder',
+      })}
       type="button"
-      onClick={() => onClick(type)}
+      onClick={() => {
+        dispatch(openModal(modalType));
+      }}
     >
       {label}
     </button>

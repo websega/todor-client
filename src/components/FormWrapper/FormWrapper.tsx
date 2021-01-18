@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { registration, login } from '../../redux/actions/user/async';
-
-import InputBox from '../InputBox';
-import ButtonModal from '../ButtonModal';
-import FormErrorMessage from '../FormErrorMessage';
-
-import classes from './Form.scss';
-import { InitialUserStateType } from '../../redux/reducers/userReducer';
 import { setAuthError } from '../../redux/actions/user/user';
+
+import { InitialUserStateType } from '../../redux/reducers/userReducer';
+
+import AuthForm from './AuthForm';
+import AddForm from './AddForm';
+import ButtonModal from '../ButtonModal';
+
+import classes from './FormWrapper.scss';
 
 const registerationSchema = Yup.object({
   username: Yup.string()
@@ -46,16 +47,21 @@ const loginSchema = Yup.object({
     .required('Введите email!'),
 });
 
-type FormProps = { type: string };
+type FormProps = { modalType: string };
+
 type StateType = {
   user: InitialUserStateType;
 };
 
-const Form = ({ type }: FormProps): JSX.Element => {
+type ButtonNamesType = {
+  [key: string]: string;
+};
+
+const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
   const serverError = useSelector((state: StateType) => state.user.errorMsg);
   const dispatch = useDispatch();
 
-  const formik = useFormik({
+  const { errors, values, isValid, handleSubmit, handleChange } = useFormik({
     initialValues: {
       username: '',
       password: '',
@@ -63,10 +69,10 @@ const Form = ({ type }: FormProps): JSX.Element => {
     },
 
     validationSchema:
-      type === 'registration' ? registerationSchema : loginSchema,
+      modalType === 'registration' ? registerationSchema : loginSchema,
 
     onSubmit: ({ username, email, password }) => {
-      switch (type) {
+      switch (modalType) {
         case 'registration':
           dispatch(registration(username, email, password));
           break;
@@ -80,70 +86,46 @@ const Form = ({ type }: FormProps): JSX.Element => {
     },
   });
 
-  if (
-    serverError &&
-    (formik.errors.username || formik.errors.password || formik.errors.email)
-  ) {
+  if (serverError && (errors.username || errors.password || errors.email)) {
     dispatch(setAuthError(''));
   }
 
-  const getButtonName = (): string =>
-    type === 'registration' ? 'Зарегистрироваться' : 'Войти';
+  const getButtonName = useCallback((type: string): string => {
+    const names: ButtonNamesType = {
+      registration: 'Зарегистрироваться',
+      login: 'Войти',
+      folder: 'Добавить',
+      task: 'Добавить',
+    };
+
+    return names[type] || '';
+  }, []);
 
   return (
-    <form className={classes.Form} onSubmit={formik.handleSubmit}>
-      {type === 'registration' && (
-        <>
-          <InputBox
-            value={formik.values.username}
-            name="username"
-            inputId="username"
-            type="text"
-            onChange={formik.handleChange}
-            placeholder="Имя"
-            hasError={!!formik.errors.username || !!serverError}
-          />
-
-          <FormErrorMessage
-            msg={formik.errors.username || serverError}
-            isIn={!!formik.errors.username || !!serverError}
-          />
-        </>
+    <form className={classes.Form} onSubmit={handleSubmit}>
+      {(modalType === 'registration' || modalType === 'login') && (
+        <AuthForm
+          modalType={modalType}
+          errors={errors}
+          serverError={serverError}
+          values={values}
+          onChange={handleChange}
+        />
       )}
 
-      <InputBox
-        value={formik.values.email}
-        name="email"
-        inputId="email"
-        type="email"
-        onChange={formik.handleChange}
-        placeholder="Электронная почта"
-        hasError={!!formik.errors.email || !!serverError}
-      />
+      {(modalType === 'folder' || modalType === 'task') && (
+        <AddForm
+          modalType={modalType}
+          errors={errors}
+          serverError={serverError}
+          values={values}
+          onChange={handleChange}
+        />
+      )}
 
-      <FormErrorMessage
-        msg={formik.errors.email || serverError}
-        isIn={!!formik.errors.email || !!serverError}
-      />
-
-      <InputBox
-        value={formik.values.password}
-        name="password"
-        inputId="password"
-        type="password"
-        onChange={formik.handleChange}
-        placeholder="Пароль"
-        hasError={!!formik.errors.password || !!serverError}
-      />
-
-      <FormErrorMessage
-        msg={formik.errors.password || serverError}
-        isIn={!!formik.errors.password || !!serverError}
-      />
-
-      <ButtonModal name={getButtonName()} disabled={!formik.isValid} />
+      <ButtonModal name={getButtonName(modalType)} disabled={!isValid} />
     </form>
   );
 };
 
-export default Form;
+export default FormWrapper;

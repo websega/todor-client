@@ -2,7 +2,7 @@ import {
   ActionModalTypes,
   CLOSE_MODAL,
   OPEN_MODAL,
-  SET_TYPE,
+  SET_DEFAULT_MODAL_TYPE,
   TOGGLE_MENU,
 } from './types';
 
@@ -15,8 +15,8 @@ export const closeModal = (): ActionModalTypes => ({
   type: CLOSE_MODAL,
 });
 
-export const setDefaultType = (): ActionModalTypes => ({
-  type: SET_TYPE,
+export const setDefaultModalType = (): ActionModalTypes => ({
+  type: SET_DEFAULT_MODAL_TYPE,
 });
 
 export const toggleMenu = (): ActionModalTypes => ({
