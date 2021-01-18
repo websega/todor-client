@@ -1,0 +1,51 @@
+.item {
+  position: relative;
+  height: rem(50);
+  padding-right: rem(10);
+  padding-left: rem(91);
+  margin-right: rem(9);
+  background-color: transparent;
+  border-radius: 0 rem(50) rem(50) 0;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $active-color;
+  }
+}
+
+.btn {
+  @include font-sans(rem(18), #505f79, normal, normal);
+  @include display(flex, space-between, center);
+  line-height: rem(50);
+  text-decoration: none;
+  background: none;
+  border: none;
+  width: 100%;
+
+  &:hover {
+    color: $hover-color;
+  }
+
+  &:hover svg {
+    color: $hover-color;
+  }
+}
+
+.left {
+  @include display(flex, flex-start, center);
+}
+
+.badge {
+  position: absolute;
+  width: rem(10);
+  height: rem(10);
+  left: rem(51);
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: rem(100);
+}
+
+.active {
+  background-color: $active-color;
+}

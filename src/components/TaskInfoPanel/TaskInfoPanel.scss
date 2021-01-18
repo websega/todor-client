@@ -1,0 +1,43 @@
+.info {
+  @include display(flex, space-between, center);
+  width: 100%;
+  height: rem(100);
+  background-color: #fff;
+  padding-left: rem(45);
+  padding-right: rem(28);
+}
+
+.right {
+  @include display(flex, space-between, center);
+  min-width: 13%;
+}
+
+.borderBottomColor {
+  &-teal {
+    border-bottom: 4px solid #64d2ff;
+  }
+  &-red {
+    border-bottom: 4px solid #ff453a;
+  }
+  &-yellow {
+    border-bottom: 4px solid #ffd60a;
+  }
+  &-green {
+    border-bottom: 4px solid #32d74b;
+  }
+  &-indigo {
+    border-bottom: 4px solid #5e5ce6;
+  }
+  &-purple {
+    border-bottom: 4px solid #bf5af2;
+  }
+  &-pink {
+    border-bottom: 4px solid #ff375f;
+  }
+  &-orange {
+    border-bottom: 4px solid #ff9f0a;
+  }
+  &-default {
+    border-bottom: 4px solid #505f79;
+  }
+}

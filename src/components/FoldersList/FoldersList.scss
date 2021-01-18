@@ -1,0 +1,13 @@
+.folder {
+  position: relative;
+  
+  padding: rem(11) 0;
+  max-height: rem(174);
+
+  overflow-y: scroll;
+
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+
+  margin-bottom: rem(24);
+}

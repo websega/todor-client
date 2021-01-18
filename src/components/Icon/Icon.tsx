@@ -21,11 +21,11 @@ const Icon = ({ icon, type = 'default' }: IconProps): JSX.Element => {
       cls.push(classes.Close);
       break;
     case 'sign':
-       cls.push('mr-r-21');
+      cls.push('mr-r-21');
       cls.push(classes.SignIcon);
       break;
     case 'reg':
-       cls.push('mr-r-21');
+      cls.push('mr-r-21');
       cls.push(classes.RegIcon);
       break;
     case 'important':
@@ -33,6 +33,7 @@ const Icon = ({ icon, type = 'default' }: IconProps): JSX.Element => {
       cls.push(classes.MainIcon);
       break;
     case 'category':
+      cls.push('mr-r-21');
       cls.push(classes.MainIcon);
       break;
     default:

@@ -1,0 +1,20 @@
+.textInput {
+  @include font-sans(rem(18), $main-text-color, normal, normal, rem(28));
+  width: 100%;
+  height: rem(620);
+  overflow-y: auto;
+  border: none;
+  letter-spacing: 0.15px;
+  resize: none;
+
+  &::placeholder {
+    @include font-sans(
+      rem(18),
+      $placeholder-text-color,
+      normal,
+      normal,
+      rem(28)
+    );
+    letter-spacing: 0.15px;
+  }
+}

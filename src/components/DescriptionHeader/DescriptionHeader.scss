@@ -1,0 +1,4 @@
+.header {
+  @include display(flex, space-between, center);
+  margin-bottom: rem(51);
+}

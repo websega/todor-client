@@ -1,0 +1,44 @@
+.item {
+  @include font-sans(rem(18), #505f79, normal, normal, rem(50));
+  letter-spacing: 0.15px;
+
+  position: relative;
+
+  height: rem(50);
+
+  padding-right: rem(10);
+  margin-right: rem(13);
+
+  padding-left: rem(45);
+  
+  &:not(:last-child) {
+    margin-bottom: rem(8);
+  }
+}
+
+.btn {
+  @include display(flex, space-between, center);
+
+  @include reset-btn();
+
+  &:hover {
+    cursor: pointer;
+    color: $hover-color;
+  }
+
+  &:hover svg {
+    color: $hover-color;
+  }
+}
+
+.left {
+  @include display(flex, flex-start, center);
+}
+
+.active {
+  color: $hover-color;
+
+  & svg {
+    color: $hover-color;
+  }
+}

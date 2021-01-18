@@ -1,6 +1,6 @@
 .Menu {
   position: absolute;
-  top: 75px;
+  top: rem(60);
   right: 0;
   width: rem(238);
   min-height: rem(50);
@@ -13,7 +13,6 @@
   padding-top: rem(8);
   padding-bottom: rem(8);
 
-  // transform: translateY(-100%);
   z-index: z('dropmenu');
 }
 

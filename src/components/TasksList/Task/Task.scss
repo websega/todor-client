@@ -1,0 +1,23 @@
+.task {
+  @include display(flex, space-between, center);
+  width: 100%;
+  height: rem(127);
+  background-color: $main-bg-color;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 3px;
+  padding-left: rem(45);
+  padding-right: rem(22);
+
+  &:hover {
+    cursor: pointer;
+
+    & h3 {
+      color: $hover-color;
+      transition: $transition-hover-color;
+    }
+  }
+}
+
+.active {
+  background-color: rgba($color: $active-color, $alpha: 0.5);
+}
