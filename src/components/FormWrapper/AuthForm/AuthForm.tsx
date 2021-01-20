@@ -58,12 +58,12 @@ const AuthForm = ({
         type="email"
         onChange={onChange}
         placeholder="Электронная почта"
-        hasError={hasPasswordError}
+        hasError={hasEmailError}
       />
 
       <FormErrorMessage
         msg={errors.email || serverError}
-        isIn={hasPasswordError}
+        isIn={hasEmailError}
       />
 
       <InputBox
@@ -72,12 +72,12 @@ const AuthForm = ({
         type="password"
         onChange={onChange}
         placeholder="Пароль"
-        hasError={hasEmailError}
+        hasError={hasPasswordError}
       />
 
       <FormErrorMessage
         msg={errors.password || serverError}
-        isIn={hasEmailError}
+        isIn={hasPasswordError}
       />
     </>
   );
