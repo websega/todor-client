@@ -9,14 +9,12 @@ import ColorPicker from '../../ColorPicker';
 type AddFormProps = {
   modalType: string;
   errors: FormikErrors<{
-    username: string;
-    password: string;
-    email: string;
+    taskTitle: 'string';
+    folderName: 'string';
   }>;
   values: {
-    username: string;
-    password: string;
-    email: string;
+    taskTitle: string;
+    folderName: string;
   };
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   serverError: string;
@@ -30,33 +28,19 @@ const AddForm = ({
   serverError,
 }: AddFormProps): JSX.Element => (
   <>
-    {modalType === 'task' && (
-      <InputBox
-        value={values.email}
-        name="task-inp"
-        inputId="task-inp"
-        type="text"
-        onChange={onChange}
-        placeholder="Добавьте задачу"
-        hasError={!!errors.email || !!serverError}
-      />
-    )}
-
-    {modalType === 'folder' && (
-      <InputBox
-        value={values.email}
-        name="folder-inp"
-        inputId="folder-inp"
-        type="text"
-        onChange={onChange}
-        placeholder="Добавьте папку"
-        hasError={!!errors.email || !!serverError}
-      />
-    )}
+    <InputBox
+      value={modalType === 'task' ? values.taskTitle : values.folderName}
+      name={modalType === 'task' ? 'taskTitle' : 'folderName'}
+      inputId={modalType === 'task' ? 'taskTitle' : 'folderName'}
+      type="text"
+      onChange={onChange}
+      placeholder={modalType === 'task' ? 'Добавьте задачу' : 'Добавьте папку'}
+      hasError={!!errors.taskTitle || !!errors.folderName || !!serverError}
+    />
 
     <FormErrorMessage
-      msg={errors.email || serverError}
-      isIn={!!errors.email || !!serverError}
+      msg={errors.taskTitle || errors.folderName || serverError}
+      isIn={!!errors.taskTitle || !!errors.folderName || !!serverError}
     />
 
     {modalType === 'folder' && <ColorPicker />}

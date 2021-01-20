@@ -47,6 +47,33 @@ const loginSchema = Yup.object({
     .required('Введите email!'),
 });
 
+const addTaskSchema = Yup.object({
+  taskTitle: Yup.string()
+    .min(4, 'Описание задачи должно быть больше 4 символов!')
+    .required('Не может быть пустым!'),
+});
+
+const addFolderSchema = Yup.object({
+  folderName: Yup.string()
+    .min(4, 'Имя папки должно быть больше 4 символов!')
+    .max(10, 'Имя папки должно быть меньше 10 символов')
+    .required('Не может быть пустым!'),
+});
+
+type RegistrationSchemaType = typeof registerationSchema;
+
+type LoginSchemaType = typeof loginSchema;
+
+type AddFolderSchemaType = typeof addFolderSchema;
+
+type AddTaskType = typeof addTaskSchema;
+
+type ValidationSchemasTypes =
+  | RegistrationSchemaType
+  | LoginSchemaType
+  | AddFolderSchemaType
+  | AddTaskType;
+
 type FormProps = { modalType: string };
 
 type StateType = {
@@ -57,27 +84,49 @@ type ButtonNamesType = {
   [key: string]: string;
 };
 
+type ValidationSchemaType = {
+  [key: string]: ValidationSchemasTypes;
+};
+
 const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
   const serverError = useSelector((state: StateType) => state.user.errorMsg);
   const dispatch = useDispatch();
+
+  const getValidationSchema = (type: string): ValidationSchemasTypes | null => {
+    const schemas: ValidationSchemaType = {
+      registration: registerationSchema,
+      login: loginSchema,
+      folder: addFolderSchema,
+      task: addTaskSchema,
+    };
+
+    return schemas[type] || null;
+  };
 
   const { errors, values, isValid, handleSubmit, handleChange } = useFormik({
     initialValues: {
       username: '',
       password: '',
       email: '',
+      folderName: '',
+      taskTitle: '',
     },
 
-    validationSchema:
-      modalType === 'registration' ? registerationSchema : loginSchema,
+    validationSchema: getValidationSchema(modalType),
 
-    onSubmit: ({ username, email, password }) => {
+    onSubmit: ({ username, email, password, folderName, taskTitle }) => {
       switch (modalType) {
         case 'registration':
           dispatch(registration(username, email, password));
           break;
         case 'login':
           dispatch(login(email, password));
+          break;
+        case 'folder':
+          console.log(folderName);
+          break;
+        case 'task':
+          console.log(taskTitle);
           break;
 
         default:
