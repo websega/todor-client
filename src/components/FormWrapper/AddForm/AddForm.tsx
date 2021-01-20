@@ -26,25 +26,30 @@ const AddForm = ({
   values,
   onChange,
   serverError,
-}: AddFormProps): JSX.Element => (
-  <>
-    <InputBox
-      value={modalType === 'task' ? values.taskTitle : values.folderName}
-      name={modalType === 'task' ? 'taskTitle' : 'folderName'}
-      inputId={modalType === 'task' ? 'taskTitle' : 'folderName'}
-      type="text"
-      onChange={onChange}
-      placeholder={modalType === 'task' ? 'Добавьте задачу' : 'Добавьте папку'}
-      hasError={!!errors.taskTitle || !!errors.folderName || !!serverError}
-    />
+}: AddFormProps): JSX.Element => {
+  const name = modalType === 'task' ? 'taskTitle' : 'folderName';
+  const value = modalType === 'task' ? values.taskTitle : values.folderName;
+  const placeholder =
+    modalType === 'task' ? 'Добавьте задачу' : 'Добавьте папку';
+  const hasError = !!errors.taskTitle || !!errors.folderName || !!serverError;
+  const errorMsg = errors.taskTitle || errors.folderName || serverError;
 
-    <FormErrorMessage
-      msg={errors.taskTitle || errors.folderName || serverError}
-      isIn={!!errors.taskTitle || !!errors.folderName || !!serverError}
-    />
+  return (
+    <>
+      <InputBox
+        value={value}
+        name={name}
+        type="text"
+        onChange={onChange}
+        placeholder={placeholder}
+        hasError={hasError}
+      />
 
-    {modalType === 'folder' && <ColorPicker />}
-  </>
-);
+      <FormErrorMessage msg={errorMsg} isIn={hasError} />
+
+      {modalType === 'folder' && <ColorPicker />}
+    </>
+  );
+};
 
 export default AddForm;

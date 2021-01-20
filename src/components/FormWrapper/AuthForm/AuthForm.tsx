@@ -27,57 +27,60 @@ const AuthForm = ({
   values,
   onChange,
   serverError,
-}: AuthFormProps): JSX.Element => (
-  <>
-    {modalType === 'registration' && (
-      <>
-        <InputBox
-          value={values.username}
-          name="username"
-          inputId="username"
-          type="text"
-          onChange={onChange}
-          placeholder="Имя"
-          hasError={!!errors.username || !!serverError}
-        />
+}: AuthFormProps): JSX.Element => {
+  const hasUsernameError = !!errors.username || !!serverError;
+  const hasPasswordError = !!errors.password || !!serverError;
+  const hasEmailError = !!errors.email || !!serverError;
 
-        <FormErrorMessage
-          msg={errors.username || serverError}
-          isIn={!!errors.username || !!serverError}
-        />
-      </>
-    )}
+  return (
+    <>
+      {modalType === 'registration' && (
+        <>
+          <InputBox
+            value={values.username}
+            name="username"
+            type="text"
+            onChange={onChange}
+            placeholder="Имя"
+            hasError={hasUsernameError}
+          />
 
-    <InputBox
-      value={values.email}
-      name="email"
-      inputId="email"
-      type="email"
-      onChange={onChange}
-      placeholder="Электронная почта"
-      hasError={!!errors.email || !!serverError}
-    />
+          <FormErrorMessage
+            msg={errors.username || serverError}
+            isIn={hasUsernameError}
+          />
+        </>
+      )}
 
-    <FormErrorMessage
-      msg={errors.email || serverError}
-      isIn={!!errors.email || !!serverError}
-    />
+      <InputBox
+        value={values.email}
+        name="email"
+        type="email"
+        onChange={onChange}
+        placeholder="Электронная почта"
+        hasError={hasPasswordError}
+      />
 
-    <InputBox
-      value={values.password}
-      name="password"
-      inputId="password"
-      type="password"
-      onChange={onChange}
-      placeholder="Пароль"
-      hasError={!!errors.password || !!serverError}
-    />
+      <FormErrorMessage
+        msg={errors.email || serverError}
+        isIn={hasPasswordError}
+      />
 
-    <FormErrorMessage
-      msg={errors.password || serverError}
-      isIn={!!errors.password || !!serverError}
-    />
-  </>
-);
+      <InputBox
+        value={values.password}
+        name="password"
+        type="password"
+        onChange={onChange}
+        placeholder="Пароль"
+        hasError={hasEmailError}
+      />
+
+      <FormErrorMessage
+        msg={errors.password || serverError}
+        isIn={hasEmailError}
+      />
+    </>
+  );
+};
 
 export default AuthForm;

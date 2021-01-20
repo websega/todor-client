@@ -11,7 +11,6 @@ type InputBoxProps = {
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   hasError: boolean;
-  inputId: string;
 };
 
 const InputBox = React.memo(
@@ -22,11 +21,10 @@ const InputBox = React.memo(
     onChange,
     hasError,
     name,
-    inputId,
   }: InputBoxProps): JSX.Element => (
-    <label htmlFor={inputId}>
+    <label htmlFor={name}>
       <input
-        id={inputId}
+        id={name}
         value={value}
         name={name}
         type={type}
