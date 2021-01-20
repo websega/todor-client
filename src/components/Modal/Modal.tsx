@@ -15,13 +15,23 @@ import FormWrapper from '../FormWrapper';
 
 import classes from './Modal.scss';
 
-type StateType = { modal: InitialModalStateType };
-
 type TitlesType = {
   [key: string]: string;
 };
 
+const headerTitles: TitlesType = {
+  registration: 'Регистрация',
+  login: 'Вход',
+  folder: 'Добавление папки',
+  task: 'Добавление задачи',
+};
+
+const getHeaderTitle = (titles: TitlesType, type: string): string =>
+  titles[type] || '';
+
 const DURATION = 690;
+
+type StateType = { modal: InitialModalStateType };
 
 const Modal = (): JSX.Element => {
   const overlayElement = useRef<HTMLDivElement | null>(null);
@@ -70,17 +80,6 @@ const Modal = (): JSX.Element => {
     };
   }, [onEscapeKey]);
 
-  const getHeaderTitle = useCallback((type: string): string => {
-    const titles: TitlesType = {
-      registration: 'Регистрация',
-      login: 'Вход',
-      folder: 'Добавление папки',
-      task: 'Добавление задачи',
-    };
-
-    return titles[type] || '';
-  }, []);
-
   return (
     <Transition
       in={isOpen}
@@ -106,7 +105,10 @@ const Modal = (): JSX.Element => {
               [classes[`m-${state}`]]: true,
             })}
           >
-            <HeaderModal title={getHeaderTitle(modalType)} onClose={onClose} />
+            <HeaderModal
+              title={getHeaderTitle(headerTitles, modalType)}
+              onClose={onClose}
+            />
             <FormWrapper modalType={modalType} />
           </div>
         </div>
