@@ -3,5 +3,35 @@
   .mr-r-21 {
     margin-right: rem(21);
   }
+
+  .bgColor {
+    &-teal {
+      background-color: #64d2ff;
+    }
+    &-red {
+      background-color: #ff453a;
+    }
+    &-yellow {
+      background-color: #ffd60a;
+    }
+    &-green {
+      background-color: #32d74b;
+    }
+    &-indigo {
+      background-color: #5e5ce6;
+    }
+    &-purple {
+      background-color: #bf5af2;
+    }
+    &-pink {
+      background-color: #ff375f;
+    }
+    &-orange {
+      background-color: #ff9f0a;
+    }
+    &-default {
+      background-color: #505f79;
+    }
+  }
 }
 /* End global */

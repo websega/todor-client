@@ -10,9 +10,10 @@ const ColorItem = ({ name }: ColorItemProps): JSX.Element => (
   <button
     type="button"
     className={classNames({
-      [classes.colorItem]: true,
+      [classes.СolorItem]: true,
       [`bgColor-${name}`]: true,
     })}
+    data-color={name}
   />
 );
 

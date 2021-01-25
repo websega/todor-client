@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ColorItem from './ColorItem/index';
+import ColorItem from './ColorItem';
 
 import classes from './ColorPanel.scss';
 
@@ -29,7 +29,7 @@ const colors: ColorsType[] = [
 ];
 
 const ColorPicker = (): JSX.Element => (
-  <div className={classes.colors}>
+  <div className={classes.Сolors}>
     {colors.map((color) => {
       const { id, name } = color;
 
