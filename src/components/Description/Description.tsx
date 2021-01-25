@@ -10,8 +10,7 @@ const Description = ({
   onTaskChecked,
   onTaskImportant,
   onOpenContextMenu,
-}) => {
-  return (
+}) => (
     <section className={classes.description}>
       {selectedTask && (
         <DescriptionHeader
@@ -25,6 +24,5 @@ const Description = ({
       <DescriptionTextArea />
     </section>
   );
-};
 
 export default Description;

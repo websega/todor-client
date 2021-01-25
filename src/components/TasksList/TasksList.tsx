@@ -4,8 +4,7 @@ import Task from './Task';
 
 import classes from './TasksList.scss';
 
-const TasksList = (): JSX.Element=> {
-  return (
+const TasksList = (): JSX.Element=> (
     <div className={classes.tasksContainer}>
       {[].map((task) => {
         const { id } = task;
@@ -13,6 +12,5 @@ const TasksList = (): JSX.Element=> {
       })}
     </div>
   );
-};
 
 export default TasksList;

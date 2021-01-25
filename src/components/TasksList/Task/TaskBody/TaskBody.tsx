@@ -10,8 +10,7 @@ import IconButton from '../../../IconButton';
 
 import classes from './TaskBody.scss';
 
-const TaskBody = (): JSX.Element => {
-  return (
+const TaskBody = (): JSX.Element => (
     <>
       <div className={classes.left}>
         <Checkbox
@@ -40,6 +39,5 @@ const TaskBody = (): JSX.Element => {
       </div>
     </>
   );
-};
 
 export default TaskBody;
