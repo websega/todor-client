@@ -16,8 +16,16 @@ const TaskInfoPanel = (): JSX.Element => {
       <TaskInfoTitle title="TaskInfoTitle" />
 
       <div className={classes.right}>
-        <IconButton icon={<SortIconAB />} iconType="sort" onClick={() => {}} />
-        <IconButton icon={<DotsIcon />} iconType="dots" onClick={() => {}} />
+        <IconButton
+          icon={<SortIconAB />}
+          iconType="sort"
+          onClick={() => console.log('click')}
+        />
+        <IconButton
+          icon={<DotsIcon />}
+          iconType="dots"
+          onClick={() => console.log('click')}
+        />
       </div>
     </div>
   );

@@ -12,6 +12,8 @@ import { setAuthError } from '../../redux/actions/user/user';
 
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
 
+import getElementLabel from '../../helpers/getElementLabel';
+
 import AuthForm from './AuthForm';
 import AddForm from './AddForm';
 import ButtonModal from '../ButtonModal';
@@ -34,9 +36,6 @@ const buttonNames: ButtonNamesType = {
   folder: 'Добавить',
   task: 'Добавить',
 };
-
-const getButtonName = (names: ButtonNamesType, type: string): string =>
-  names[type] || '';
 
 const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
   const serverError = useSelector((state: StateType) => state.user.errorMsg);
@@ -101,7 +100,7 @@ const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
       )}
 
       <ButtonModal
-        name={getButtonName(buttonNames, modalType)}
+        name={getElementLabel(buttonNames, modalType)}
         disabled={!isValid}
       />
     </form>

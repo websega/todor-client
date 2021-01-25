@@ -13,6 +13,8 @@ import {
 import HeaderModal from '../HeaderModal';
 import FormWrapper from '../FormWrapper';
 
+import getElementLabel from '../../helpers/getElementLabel';
+
 import classes from './Modal.scss';
 
 type TitlesType = {
@@ -25,9 +27,6 @@ const headerTitles: TitlesType = {
   folder: 'Добавление папки',
   task: 'Добавление задачи',
 };
-
-const getHeaderTitle = (titles: TitlesType, type: string): string =>
-  titles[type] || '';
 
 const DURATION = 690;
 
@@ -106,7 +105,7 @@ const Modal = (): JSX.Element => {
             })}
           >
             <HeaderModal
-              title={getHeaderTitle(headerTitles, modalType)}
+              title={getElementLabel(headerTitles, modalType)}
               onClose={onClose}
             />
             <FormWrapper modalType={modalType} />
