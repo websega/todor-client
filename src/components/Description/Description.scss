@@ -1,5 +1,8 @@
 .description {
+  position: relative;
+
   border-left: 1px solid $border-color;
   padding: rem(74) rem(34) rem(45) rem(57);
+  
   grid-area: description;
 }

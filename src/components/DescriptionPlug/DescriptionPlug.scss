@@ -1,0 +1,25 @@
+.PlugWrapper {
+  @include display(flex, center, center);
+  flex-direction: column;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  & svg {
+    width: 100%;
+    height: 100%;
+    max-width: rem(200);
+    max-height: rem(200);
+
+    color: #e4e5e7;
+
+    margin-bottom: rem(20);
+  }
+}
+
+.EmptyText {
+  @include font-sans(rem(24), #e4e5e7, normal, normal, 1.2);
+}
