@@ -1,6 +1,6 @@
-.count {
+.Count {
   @include display(flex, center, center);
-  
+
   @include font-sans(rem(12), #fff, bold, normal, rem(11));
   letter-spacing: 0.15px;
 
