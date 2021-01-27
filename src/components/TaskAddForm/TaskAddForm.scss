@@ -1,45 +1,57 @@
-.taskAdd {
+.AddWrapper {
   @include display(flex, center, center);
   width: 100%;
+
   height: rem(152);
+
   border-bottom: 1px solid $border-color;
+
   padding: 0 rem(45);
 }
 
-.taskInput {
+.Form {
   position: relative;
   max-width: rem(562);
   width: rem(562);
 
   & input {
-    @include font-sans(rem(14), $main-text-color, normal, normal, 1.2);
-    letter-spacing: 0.15px;
+    // @include font-sans(rem(14), $main-text-color, normal, normal, 1.2);
+    // letter-spacing: 0.15px;
 
-    width: 100%;
-    height: rem(44);
+    // width: 100%;
+    // height: rem(44);
+
     padding-left: rem(68);
     padding-right: rem(60);
-    background: $main-bg-color;
-    border: 1px solid $border-color;
-    border-radius: rem(100);
 
-    &::placeholder {
-      @include font-sans(rem(14), $placeholder-text-color, normal, normal, 1.2);
-      letter-spacing: 0.4px;
-    }
+    // background: $main-bg-color;
+
+    // border: 1px solid $border-color;
+    border-radius: rem(100);
+    margin-bottom: 0;
+
+    // &::placeholder {
+    //   @include font-sans(rem(14), $placeholder-text-color, normal, normal, 1.2);
+    //   letter-spacing: 0.4px;
+    // }
   }
 }
 
-.plusBtn {
+.AddBtn {
   position: absolute;
-  z-index: z('task-add-btn');
+
   width: rem(40);
   height: rem(40);
+
   color: #fff;
+
   left: 2px;
   top: 2px;
+
   border-radius: 50%;
   border: none;
+
+  z-index: z('task-add-btn');
 
   &:after {
     @include pseudo(block, absolute, '+');
@@ -54,9 +66,10 @@
   }
 }
 
-.calendarBtn {
+.CalendarBtn {
   position: absolute;
+
   top: 50%;
-  transform: translateY(-50%);
   right: rem(29);
+  transform: translateY(-50%);
 }

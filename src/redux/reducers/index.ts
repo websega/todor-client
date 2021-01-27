@@ -7,7 +7,7 @@ import { modalReducer } from './modalReducer';
 
 export const rootReducer = combineReducers({
   user: userReducer,
-  folder: folderReducer,
+  foldersList: folderReducer,
   modal: modalReducer,
 });
 

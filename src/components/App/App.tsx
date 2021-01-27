@@ -29,6 +29,7 @@ const App = (): JSX.Element => {
       <Sidebar />
       <TaskArea />
       <Description />
+
       {ReactDOM.createPortal(<Modal />, modalRoot)}
       {ReactDOM.createPortal(<DropdownMenu />, dropdownRoot)}
     </div>

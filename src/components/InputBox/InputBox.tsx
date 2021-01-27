@@ -10,7 +10,7 @@ type InputBoxProps = {
   type: string;
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  hasError: boolean;
+  hasError?: boolean;
 };
 
 const InputBox = React.memo(

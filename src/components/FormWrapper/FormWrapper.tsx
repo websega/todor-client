@@ -7,7 +7,9 @@ import {
   getValidationSchema,
   validationSchemas,
 } from '../../yupSchema/yupSchema';
-import { registration, login } from '../../redux/actions/user/async';
+
+import { registration, login, addFolder } from '../../redux/actions/user/async';
+
 import { setAuthError } from '../../redux/actions/user/user';
 
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
@@ -39,6 +41,7 @@ const buttonNames: ButtonNamesType = {
 
 const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
   const serverError = useSelector((state: StateType) => state.user.errorMsg);
+  const userId = useSelector((state: StateType) => state.user.currentUser.id);
   const dispatch = useDispatch();
 
   const { errors, values, isValid, handleSubmit, handleChange } = useFormik({
@@ -61,6 +64,7 @@ const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
           dispatch(login(email, password));
           break;
         case 'folder':
+          dispatch(addFolder(userId, folderName, 'purple'));
           console.log(folderName);
           break;
         case 'task':

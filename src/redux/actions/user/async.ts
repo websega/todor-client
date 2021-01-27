@@ -4,16 +4,19 @@ import { ThunkAction } from 'redux-thunk';
 
 import { ActionUserTypes } from './types';
 import { ActionModalTypes } from '../modal/types';
-import { setAuthError, setUser } from './user';
-
+import { ActionFolderTypes, FolderType, TaskType } from '../folder/types';
 import { RootStateType } from '../../reducers';
+
+import { setAuthError, setUser } from './user';
 import { closeModal } from '../modal/modal';
+import { setAllFolders, setFolder, setTask } from '../folder/folder';
 
 type ThunkType = ThunkAction<
   Promise<void>,
   RootStateType,
   unknown,
-  Action<ActionUserTypes['type']> | Action<ActionModalTypes['type']>
+  | Action<ActionUserTypes['type']>
+  | Action<ActionModalTypes['type'] | ActionFolderTypes['type']>
 >;
 
 export const registration = (
@@ -68,5 +71,55 @@ export const auth = (): ThunkType => async (dispatch) => {
     localStorage.setItem('token', response.data.token);
   } catch (error) {
     localStorage.removeItem('token');
+  }
+};
+
+export const addTask = (task: TaskType): ThunkType => async (dispatch) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/auth/auth', {
+      task,
+    });
+
+    dispatch(setTask(response.data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getFolders = (userId: string): ThunkType => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/api/folder/get-all/${userId}`
+    );
+
+    console.log(response.data.folders);
+    dispatch(setAllFolders(response.data.folders));
+    dispatch(closeModal());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addFolder = (
+  userId: string,
+  name: string,
+  colorId: string
+): ThunkType => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      'http://localhost:5000/api/folder/add-folder',
+      {
+        userId,
+        name,
+        colorId,
+      }
+    );
+    // eslint-disable-next-line no-alert
+    alert(response.data.message);
+    console.log(response.data.folder);
+    dispatch(setFolder(response.data.folder));
+    dispatch(closeModal());
+  } catch (error) {
+    console.log(error);
   }
 };

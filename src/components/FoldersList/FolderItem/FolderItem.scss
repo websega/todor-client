@@ -1,4 +1,4 @@
-.item {
+.Item {
   position: relative;
   height: rem(50);
   padding-right: rem(10);
@@ -14,7 +14,7 @@
   }
 }
 
-.btn {
+.Btn {
   @include font-sans(rem(18), #505f79, normal, normal);
   @include display(flex, space-between, center);
   line-height: rem(50);
@@ -32,11 +32,11 @@
   }
 }
 
-.left {
+.Left {
   @include display(flex, flex-start, center);
 }
 
-.badge {
+.Badge {
   position: absolute;
   width: rem(10);
   height: rem(10);
@@ -46,6 +46,6 @@
   border-radius: rem(100);
 }
 
-.active {
+.Active {
   background-color: $active-color;
 }
