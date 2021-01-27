@@ -30,15 +30,24 @@ const colors: ColorsType[] = [
 
 type ColorPickerTypes = {
   onColorItem: (id: string) => void;
+  activeColorId: string;
 };
 
-const ColorPicker = ({ onColorItem }: ColorPickerTypes): JSX.Element => (
+const ColorPicker = ({
+  onColorItem,
+  activeColorId,
+}: ColorPickerTypes): JSX.Element => (
   <div className={classes.Сolors}>
     {colors.map((color) => {
       const { id, name } = color;
 
       return (
-        <ColorItem key={id} name={name} onClick={() => onColorItem(id)} />
+        <ColorItem
+          key={id}
+          name={name}
+          isActive={activeColorId === id}
+          onClick={() => onColorItem(id)}
+        />
       );
     })}
   </div>

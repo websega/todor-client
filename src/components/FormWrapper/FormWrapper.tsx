@@ -104,7 +104,9 @@ const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
         />
       )}
 
-      {modalType === 'folder' && <ColorPicker onColorItem={setColorId} />}
+      {modalType === 'folder' && (
+        <ColorPicker onColorItem={setColorId} activeColorId={colorId} />
+      )}
 
       <ButtonModal
         name={getElementLabel(buttonNames, modalType)}
