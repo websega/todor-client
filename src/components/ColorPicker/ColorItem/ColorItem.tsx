@@ -4,9 +4,9 @@ import classNames from 'classnames';
 
 import classes from './ColorItem.scss';
 
-type ColorItemProps = { name: string };
+type ColorItemProps = { name: string; onClick: () => void };
 
-const ColorItem = ({ name }: ColorItemProps): JSX.Element => (
+const ColorItem = ({ name, onClick }: ColorItemProps): JSX.Element => (
   <button
     type="button"
     className={classNames({
@@ -14,6 +14,7 @@ const ColorItem = ({ name }: ColorItemProps): JSX.Element => (
       [`bgColor-${name}`]: true,
     })}
     data-color={name}
+    onClick={onClick}
   />
 );
 

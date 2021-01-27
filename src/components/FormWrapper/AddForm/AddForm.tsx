@@ -4,7 +4,6 @@ import { FormikErrors } from 'formik';
 
 import InputBox from '../../InputBox';
 import FormErrorMessage from '../../FormErrorMessage';
-import ColorPicker from '../../ColorPicker';
 
 type AddFormProps = {
   modalType: string;
@@ -46,8 +45,6 @@ const AddForm = ({
       />
 
       <FormErrorMessage msg={errorMsg} isIn={hasError} />
-
-      {modalType === 'folder' && <ColorPicker />}
     </>
   );
 };

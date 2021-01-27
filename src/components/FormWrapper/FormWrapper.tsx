@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useFormik } from 'formik';
@@ -21,6 +21,7 @@ import AddForm from './AddForm';
 import ButtonModal from '../ButtonModal';
 
 import classes from './FormWrapper.scss';
+import ColorPicker from '../ColorPicker';
 
 type FormProps = { modalType: string };
 
@@ -42,6 +43,7 @@ const buttonNames: ButtonNamesType = {
 const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
   const serverError = useSelector((state: StateType) => state.user.errorMsg);
   const userId = useSelector((state: StateType) => state.user.currentUser.id);
+  const [colorId, setColorId] = useState<string>('teal');
   const dispatch = useDispatch();
 
   const { errors, values, isValid, handleSubmit, handleChange } = useFormik({
@@ -64,8 +66,7 @@ const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
           dispatch(login(email, password));
           break;
         case 'folder':
-          dispatch(addFolder(userId, folderName, 'purple'));
-          console.log(folderName);
+          dispatch(addFolder(userId, folderName, colorId));
           break;
         case 'task':
           console.log(taskTitle);
@@ -102,6 +103,8 @@ const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
           onChange={handleChange}
         />
       )}
+
+      {modalType === 'folder' && <ColorPicker onColorItem={setColorId} />}
 
       <ButtonModal
         name={getElementLabel(buttonNames, modalType)}

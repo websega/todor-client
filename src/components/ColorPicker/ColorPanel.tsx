@@ -28,12 +28,18 @@ const colors: ColorsType[] = [
   createColor('default', '#505f79'),
 ];
 
-const ColorPicker = (): JSX.Element => (
+type ColorPickerTypes = {
+  onColorItem: (id: string) => void;
+};
+
+const ColorPicker = ({ onColorItem }: ColorPickerTypes): JSX.Element => (
   <div className={classes.Сolors}>
     {colors.map((color) => {
       const { id, name } = color;
 
-      return <ColorItem key={id} name={name} />;
+      return (
+        <ColorItem key={id} name={name} onClick={() => onColorItem(id)} />
+      );
     })}
   </div>
 );
