@@ -1,7 +1,0 @@
-.text {
-  @include font-sans(rem(18), null, normal, normal);
-
-  width: rem(160);
-  
-  transition: $transition-hover-color;
-}

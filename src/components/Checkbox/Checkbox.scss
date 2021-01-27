@@ -1,31 +1,43 @@
 .checkbox {
   position: relative;
+
   top: 0;
   left: 0;
+
   min-width: rem(40);
   min-height: rem(40);
+
   margin-right: rem(30);
 
   & input {
     position: absolute;
     width: 100%;
     height: 100%;
+
     margin: 0;
     padding: 0;
+
     border-radius: 50%;
     appearance: none;
+
     cursor: pointer;
 
     &:checked {
       &:after {
         @include pseudo(block, absolute, '');
+        
         background: url('data:image/svg+xml;ut8,<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path d="M19.17 5L8.59 15.58l-4.18-4.17L3 12.82l5.59 5.59 12-12L19.17 5z" fill="white"/></svg>');
+
         background-size: rem(28) rem(28);
+
         background-color: transparent;
+
         width: rem(28);
         height: rem(28);
+
         top: 55%;
         left: 55%;
+
         transform: translate(-50%, -50%);
       }
     }

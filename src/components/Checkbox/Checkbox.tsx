@@ -1,25 +1,22 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import classes from './Checkbox.scss';
 
-const Checkbox = (): JSX.Element => {
-  const cls = [classes[`borderColor-${activeColor}`]];
+type CheckboxPropsType = { completed: boolean; color: string };
 
-  if (completed) {
-    cls.push(`bgColor-${activeColor}`);
-  }
-
-  return (
-    <div className={classes.checkbox}>
-      <input
-        className={cls.join(' ')}
-        type="checkbox"
-        name="task-check"
-        onChange={onTaskChecked}
-        checked={completed}
-      />
-    </div>
-  );
-};
-
+const Checkbox = ({ completed, color }: CheckboxPropsType): JSX.Element => (
+  <div className={classes.checkbox}>
+    <input
+      className={classNames({
+        [classes[`borderColor-${color}`]]: true,
+        [`bgColor-${color}`]: completed,
+      })}
+      type="checkbox"
+      name="task-check"
+      checked={completed}
+    />
+  </div>
+);
 export default Checkbox;

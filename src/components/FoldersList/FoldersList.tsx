@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentFolder } from '../../redux/actions/folder/folder';
 
 import { getFolders } from '../../redux/actions/user/async';
 
@@ -24,6 +25,10 @@ const FoldersList = (): JSX.Element => {
     dispatch(getFolders(userId));
   }, [dispatch, userId]);
 
+  const folderClickHandler = (id: string) => {
+    dispatch(setCurrentFolder(id));
+  };
+
   return (
     <nav className={classes.FolderList}>
       {folders.map((folder) => {
@@ -35,6 +40,7 @@ const FoldersList = (): JSX.Element => {
             color={colorId}
             name={name}
             numberOfTask={tasks.length}
+            onClick={() => folderClickHandler(_id)}
           />
         );
       })}

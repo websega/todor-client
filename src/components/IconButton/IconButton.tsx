@@ -11,6 +11,7 @@ type IconButtonProps = {
   iconType?: string;
   onClick: () => void;
   inverted?: boolean;
+  important?: boolean;
 };
 
 const IconButton = ({
@@ -18,6 +19,7 @@ const IconButton = ({
   iconType = 'default',
   onClick,
   inverted = false,
+  important,
 }: IconButtonProps): JSX.Element => (
   <button
     className={classNames({
@@ -27,7 +29,7 @@ const IconButton = ({
     type="button"
     onClick={onClick}
   >
-    <Icon icon={icon} type={iconType} />
+    <Icon icon={icon} type={iconType} important={important} />
   </button>
 );
 

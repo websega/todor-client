@@ -1,6 +1,5 @@
 import React from 'react';
 
-import MainText from '../../MainText';
 import Count from '../../Count';
 import Icon from '../../Icon';
 
@@ -16,7 +15,7 @@ const CategoryItem = ({ icon, name }: CategoryItemPropsType): JSX.Element => (
     <div role="button" tabIndex={0} className={classes.Btn}>
       <div className={classes.Left}>
         <Icon icon={icon} type="category" />
-        <MainText name={name} />
+        <span>{name}</span>
       </div>
 
       <Count numberOfTask={10} color="default" />

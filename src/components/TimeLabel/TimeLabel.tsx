@@ -2,9 +2,11 @@ import React from 'react';
 
 import classes from './TimeLabel.scss';
 
-const TimeLabel = (): JSX.Element => (
+type TimeLabelPropsType = { date: string };
+
+const TimeLabel = ({ date }: TimeLabelPropsType): JSX.Element => (
   <time dateTime="2020-08-03" className={classes.taskDate}>
-    000000
+    {date}
   </time>
 );
 

@@ -56,7 +56,8 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
     "import/extensions": "off",
-    "react/require-default-props": 0
+    "react/require-default-props": 0,
+    "no-underscore-dangle": 0
   },
   "settings": {
     "import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },

@@ -4,28 +4,11 @@ import {
   SET_FOLDER,
   SET_TASK,
   SET_ALL_FOLDERS,
+  SET_CURRENT_FOLDER,
 } from '../actions/folder/types';
 
 const initialState = {
-  folders: [
-    // {
-    //   _id: 'folder-1',
-    //   userId: 'guest-1',
-    //   name: 'Продукты',
-    //   colorId: 'red',
-    //   tasks: [
-    //     {
-    //       id: 'guest-folder-task-1',
-    //       title: 'Купить молока',
-    //       description: '',
-    //       date: '',
-    //       completed: false,
-    //       important: false,
-    //       deleted: false,
-    //     },
-    //   ],
-    // },
-  ],
+  folders: [],
   currentFolder: null,
 };
 
@@ -33,7 +16,6 @@ export type InitialFolderStateType = {
   folders: FolderType[];
   currentFolder: string | null;
 };
-// export type InitialFolderStateType = typeof initialState;
 
 const folderReducer = (
   state: InitialFolderStateType = initialState,
@@ -53,6 +35,11 @@ const folderReducer = (
       return {
         ...state,
         folders: [...state.folders, ...action.payload],
+      };
+    case SET_CURRENT_FOLDER:
+      return {
+        ...state,
+        currentFolder: action.payload,
       };
     default:
       return state;

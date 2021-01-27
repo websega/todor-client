@@ -1,15 +1,15 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import classes from './TaskTitle.scss';
 
-const TaskTitle = (): JSX.Element=> {
-  const classNames = [cls, 'crop-text'];
+type TaskTitlePropsType = { title: string };
 
-  return (
-    <div className={classes.taskTitle}>
-      <h3 className={classNames.join(' ')}>{title}</h3>
-    </div>
-  );
-};
+const TaskTitle = ({ title }: TaskTitlePropsType): JSX.Element => (
+  <div className={classes.taskTitle}>
+    <h3 className={classNames()}>{title}</h3>
+  </div>
+);
 
 export default TaskTitle;

@@ -1,10 +1,14 @@
 .task {
   @include display(flex, space-between, center);
+
   width: 100%;
   height: rem(127);
+
   background-color: $main-bg-color;
+
   border-bottom: 1px solid $border-color;
   margin-bottom: 3px;
+
   padding-left: rem(45);
   padding-right: rem(22);
 
@@ -20,4 +24,18 @@
 
 .active {
   background-color: rgba($color: $active-color, $alpha: 0.5);
+}
+
+.left {
+  @include display(flex, flex-start, center);
+  max-width: 87%;
+}
+
+.right {
+  @include display(flex, space-between, center);
+  min-width: rem(76);
+}
+
+.taskInfo {
+  max-width: 95%;
 }
