@@ -5,6 +5,7 @@ import {
   SET_DEFAULT_MODAL_TYPE,
   TOGGLE_MENU,
   SET_CURRENT_FOLDER,
+  SET_CURRENT_TASK,
 } from '../actions/system/types';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   isMenuOpen: false,
   modalType: '',
   currentFolder: '',
+  currentTask: '',
 };
 
 export type InitialSystemStateType = typeof initialState;
@@ -46,6 +48,11 @@ export const systemReducer = (
       return {
         ...state,
         currentFolder: action.payload,
+      };
+    case SET_CURRENT_TASK:
+      return {
+        ...state,
+        currentTask: action.payload,
       };
 
     default:

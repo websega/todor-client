@@ -1,3 +1,3 @@
-import TaskInner from './TaskBody';
+import TaskBody from './TaskBody';
 
-export default TaskInner;
+export default TaskBody;

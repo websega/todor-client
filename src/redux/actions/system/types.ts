@@ -3,6 +3,7 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const SET_DEFAULT_MODAL_TYPE = 'SET_DEFAULT_MODAL_TYPE';
 
 export const SET_CURRENT_FOLDER = 'SET_CURRENT_FOLDER';
+export const SET_CURRENT_TASK = 'SET_CURRENT_TASK';
 
 export const TOGGLE_MENU = 'TOGGLE_MENU';
 
@@ -17,9 +18,15 @@ type ActionCurrentFolderType = {
   payload: string;
 };
 
+type ActionCurrentTaskType = {
+  type: typeof SET_CURRENT_TASK;
+  payload: string;
+};
+
 export type ActionSystemTypes =
   | ActionOpenModalType
   | ActionCloseModalType
   | ActionSetDefaultType
   | ActionDropdownMenuType
-  | ActionCurrentFolderType;
+  | ActionCurrentFolderType
+  | ActionCurrentTaskType;

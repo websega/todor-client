@@ -4,7 +4,6 @@ import {
   SET_FOLDER,
   SET_ALL_FOLDERS,
   SET_FOLDER_WITH_NEW_TASK,
-  // TaskType,
 } from './types';
 
 export const setTask = (folder: FolderType): ActionFolderTypes => ({

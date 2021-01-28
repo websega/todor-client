@@ -10,34 +10,45 @@ import IconButton from '../../../IconButton';
 
 import classes from './TaskBody.scss';
 
-const TaskBody = (): JSX.Element => (
-    <>
-      <div className={classes.left}>
-        <Checkbox
-          completed={completed}
-          onTaskChecked={onTaskChecked}
-          activeColor={activeColor}
-        />
+type TaskPropsType = {
+  title: string;
+  completed: boolean;
+  important: boolean;
+  date: string;
+  currentFolderColor: string;
+};
 
-        <div className={classes.taskInfo}>
-          <TaskTitle cls={cls} title={title} />
-          <TimeLabel date={date} />
-        </div>
-      </div>
+const TaskBody = ({
+  title,
+  completed,
+  important,
+  date,
+  currentFolderColor,
+}: TaskPropsType): JSX.Element => (
+  <>
+    <div className={classes.left}>
+      <Checkbox completed={completed} color={currentFolderColor} />
 
-      <div className={classes.right}>
-        <IconButton
-          icon={<StarIcon />}
-          important={important}
-          onClick={onTaskImportant}
-        />
-        <IconButton
-          icon={<DotsIcon />}
-          iconType="dots"
-          onClick={onOpenContextMenu}
-        />
+      <div className={classes.taskInfo}>
+        <TaskTitle title={title} />
+        <TimeLabel date={date} />
       </div>
-    </>
-  );
+    </div>
+
+    <div className={classes.right}>
+      <IconButton
+        icon={<StarIcon />}
+        important={important}
+        iconType="important"
+        onClick={() => console.log('click important')}
+      />
+      <IconButton
+        icon={<DotsIcon />}
+        iconType="dots"
+        onClick={() => console.log('click context menu')}
+      />
+    </div>
+  </>
+);
 
 export default TaskBody;

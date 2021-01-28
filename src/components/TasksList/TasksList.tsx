@@ -1,7 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FolderType } from '../../redux/actions/folder/types';
+import { setCurrentTask } from '../../redux/actions/system/system';
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
@@ -15,6 +16,7 @@ type StateType = {
 };
 
 const TasksList = (): JSX.Element => {
+  const dispatch = useDispatch();
   const folders = useSelector((state: StateType) => state.foldersList.folders);
   const currentFolderId = useSelector(
     (state: StateType) => state.system.currentFolder
@@ -23,6 +25,10 @@ const TasksList = (): JSX.Element => {
   const currentFolder: FolderType | undefined = folders.find(
     (folder) => folder._id === currentFolderId
   );
+
+  const taskClickHandler = (id: string) => {
+    dispatch(setCurrentTask(id));
+  };
 
   return (
     <div className={classes.tasksContainer}>
@@ -37,6 +43,7 @@ const TasksList = (): JSX.Element => {
               important={important}
               date={date}
               currentFolderColor={currentFolder.colorId}
+              onClick={() => taskClickHandler(id)}
             />
           );
         })}

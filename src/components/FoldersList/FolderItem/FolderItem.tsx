@@ -11,6 +11,7 @@ type FolderItemPropsType = {
   name: string;
   numberOfTask: number;
   onClick: () => void;
+  active: boolean;
 };
 
 const FolderItem = ({
@@ -18,9 +19,14 @@ const FolderItem = ({
   name,
   numberOfTask,
   onClick,
+  active,
 }: FolderItemPropsType): JSX.Element => (
   <button
-    className={classNames(classes.Item, classes.Btn)}
+    className={classNames({
+      [classes.Item]: true,
+      [classes.Btn]: true,
+      [classes.Active]: active,
+    })}
     type="button"
     tabIndex={0}
     onClick={onClick}

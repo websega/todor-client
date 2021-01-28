@@ -25,17 +25,3 @@
 .active {
   background-color: rgba($color: $active-color, $alpha: 0.5);
 }
-
-.left {
-  @include display(flex, flex-start, center);
-  max-width: 87%;
-}
-
-.right {
-  @include display(flex, space-between, center);
-  min-width: rem(76);
-}
-
-.taskInfo {
-  max-width: 95%;
-}

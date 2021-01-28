@@ -114,7 +114,6 @@ export const getFolders = (userId: string): ThunkType => async (dispatch) => {
     );
 
     dispatch(setAllFolders(response.data.folders));
-    dispatch(closeModal());
   } catch (error) {
     console.log(error);
   }
