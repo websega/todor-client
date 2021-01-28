@@ -41,7 +41,7 @@ const addTaskSchema = Yup.object({
 const addFolderSchema = Yup.object({
   folderName: Yup.string()
     .min(4, 'Имя папки должно быть больше 4 символов!')
-    .max(10, 'Имя папки должно быть меньше 10 символов')
+    .max(20, 'Имя папки должно быть меньше 20 символов')
     .required('Не может быть пустым!'),
 });
 
