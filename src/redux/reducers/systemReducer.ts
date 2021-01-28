@@ -14,12 +14,12 @@ const initialState = {
   currentFolder: '',
 };
 
-export type InitialModalStateType = typeof initialState;
+export type InitialSystemStateType = typeof initialState;
 
 export const systemReducer = (
-  state: InitialModalStateType = initialState,
+  state: InitialSystemStateType = initialState,
   action: ActionSystemTypes
-): InitialModalStateType => {
+): InitialSystemStateType => {
   switch (action.type) {
     case OPEN_MODAL:
       return {

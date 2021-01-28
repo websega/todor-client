@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { InitialModalStateType } from '../../redux/reducers/systemReducer';
+import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
 
 import { toggleMenu } from '../../redux/actions/system/system';
@@ -15,13 +15,13 @@ import ArrowIcon from '../../assets/images/icons/arrow_down.svg';
 import classes from './Account.scss';
 
 type StateType = {
-  modal: InitialModalStateType;
+  system: InitialSystemStateType;
   user: InitialUserStateType;
 };
 
 const Account = React.memo(
   (): JSX.Element => {
-    const isOpen = useSelector((state: StateType) => state.modal.isMenuOpen);
+    const isOpen = useSelector((state: StateType) => state.system.isMenuOpen);
     const username = useSelector(
       (state: StateType) => state.user.currentUser.username
     );

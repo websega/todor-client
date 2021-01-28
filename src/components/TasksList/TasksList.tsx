@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { FolderType } from '../../redux/actions/folder/types';
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
+import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import Task from './Task';
 
@@ -10,12 +11,13 @@ import classes from './TasksList.scss';
 
 type StateType = {
   foldersList: InitialFolderStateType;
+  system: InitialSystemStateType;
 };
 
 const TasksList = (): JSX.Element => {
   const folders = useSelector((state: StateType) => state.foldersList.folders);
   const currentFolderId = useSelector(
-    (state: StateType) => state.foldersList.currentFolder
+    (state: StateType) => state.system.currentFolder
   );
 
   const currentFolder: FolderType | undefined = folders.find(

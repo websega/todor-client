@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 import { Transition } from 'react-transition-group';
 
-import { InitialModalStateType } from '../../redux/reducers/systemReducer';
+import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 import {
   closeModal,
   setDefaultModalType,
@@ -30,13 +30,13 @@ const headerTitles: TitlesType = {
 
 const DURATION = 690;
 
-type StateType = { modal: InitialModalStateType };
+type StateType = { system: InitialSystemStateType };
 
 const Modal = (): JSX.Element => {
   const overlayElement = useRef<HTMLDivElement | null>(null);
 
-  const isOpen = useSelector((state: StateType) => state.modal.isOpen);
-  const modalType = useSelector((state: StateType) => state.modal.modalType);
+  const isOpen = useSelector((state: StateType) => state.system.isOpen);
+  const modalType = useSelector((state: StateType) => state.system.modalType);
   const dispatch = useDispatch();
 
   const onClose = useCallback(() => {
