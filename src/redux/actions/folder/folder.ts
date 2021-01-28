@@ -3,14 +3,14 @@ import {
   FolderType,
   SET_FOLDER,
   SET_ALL_FOLDERS,
-  SET_TASK,
-  TaskType,
+  SET_FOLDER_WITH_NEW_TASK,
+  // TaskType,
   SET_CURRENT_FOLDER,
 } from './types';
 
-export const setTask = (task: TaskType): ActionFolderTypes => ({
-  type: SET_TASK,
-  payload: task,
+export const setTask = (folder: FolderType): ActionFolderTypes => ({
+  type: SET_FOLDER_WITH_NEW_TASK,
+  payload: folder,
 });
 
 export const setFolder = (folder: FolderType): ActionFolderTypes => ({

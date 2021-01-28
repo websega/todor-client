@@ -74,13 +74,34 @@ export const auth = (): ThunkType => async (dispatch) => {
   }
 };
 
-export const addTask = (task: TaskType): ThunkType => async (dispatch) => {
+export const addTask = (task: TaskType, folderId: string): ThunkType => async (
+  dispatch
+) => {
   try {
-    const response = await axios.post('http://localhost:5000/api/auth/auth', {
-      task,
-    });
+    const {
+      id,
+      title,
+      description,
+      date,
+      completed,
+      important,
+      deleted,
+    } = task;
 
-    dispatch(setTask(response.data));
+    const response = await axios.post(
+      `http://localhost:5000/api/folder/add-task/${folderId}`,
+      {
+        id,
+        title,
+        description,
+        date,
+        completed,
+        important,
+        deleted,
+      }
+    );
+
+    dispatch(setTask(response.data.folder));
   } catch (error) {
     console.log(error);
   }
@@ -92,7 +113,6 @@ export const getFolders = (userId: string): ThunkType => async (dispatch) => {
       `http://localhost:5000/api/folder/get-all/${userId}`
     );
 
-    console.log(response.data.folders);
     dispatch(setAllFolders(response.data.folders));
     dispatch(closeModal());
   } catch (error) {
