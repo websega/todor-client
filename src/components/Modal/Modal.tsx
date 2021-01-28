@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 import { Transition } from 'react-transition-group';
 
-import { InitialModalStateType } from '../../redux/reducers/modalReducer';
+import { InitialModalStateType } from '../../redux/reducers/systemReducer';
 import {
   closeModal,
   setDefaultModalType,
-} from '../../redux/actions/modal/modal';
+} from '../../redux/actions/system/system';
 
 import HeaderModal from '../HeaderModal';
 import FormWrapper from '../FormWrapper';

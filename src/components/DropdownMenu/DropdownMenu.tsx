@@ -5,10 +5,10 @@ import classNames from 'classnames';
 import { Transition } from 'react-transition-group';
 
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
-import { InitialModalStateType } from '../../redux/reducers/modalReducer';
+import { InitialModalStateType } from '../../redux/reducers/systemReducer';
 
 import { logout } from '../../redux/actions/user/user';
-import { openModal, toggleMenu } from '../../redux/actions/modal/modal';
+import { openModal, toggleMenu } from '../../redux/actions/system/system';
 
 import Icon from '../Icon';
 

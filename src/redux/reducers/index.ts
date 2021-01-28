@@ -2,13 +2,12 @@ import { combineReducers } from 'redux';
 
 import { userReducer } from './userReducer';
 import folderReducer from './folderReducer';
-import { modalReducer } from './modalReducer';
-
+import { systemReducer } from './systemReducer';
 
 export const rootReducer = combineReducers({
   user: userReducer,
   foldersList: folderReducer,
-  modal: modalReducer,
+  system: systemReducer,
 });
 
-export type RootStateType = ReturnType<typeof rootReducer>
+export type RootStateType = ReturnType<typeof rootReducer>;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentFolder } from '../../redux/actions/folder/folder';
+import { setCurrentFolder } from '../../redux/actions/system/system';
 
 import { getFolders } from '../../redux/actions/user/async';
 

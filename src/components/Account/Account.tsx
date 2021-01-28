@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { InitialModalStateType } from '../../redux/reducers/modalReducer';
+import { InitialModalStateType } from '../../redux/reducers/systemReducer';
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
 
-import { toggleMenu } from '../../redux/actions/modal/modal';
+import { toggleMenu } from '../../redux/actions/system/system';
 
 import AccountImg from './AccountImg';
 import AccountName from './AccountName';

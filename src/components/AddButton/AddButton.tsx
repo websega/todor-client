@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import classNames from 'classnames';
 
-import { openModal } from '../../redux/actions/modal/modal';
+import { openModal } from '../../redux/actions/system/system';
 
 import classes from './AddButton.scss';
 

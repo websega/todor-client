@@ -3,18 +3,15 @@ import {
   FolderType,
   SET_FOLDER,
   SET_ALL_FOLDERS,
-  SET_CURRENT_FOLDER,
   SET_FOLDER_WITH_NEW_TASK,
 } from '../actions/folder/types';
 
 const initialState = {
   folders: [],
-  currentFolder: null,
 };
 
 export type InitialFolderStateType = {
   folders: FolderType[];
-  currentFolder: string | null;
 };
 
 const folderReducer = (
@@ -44,11 +41,6 @@ const folderReducer = (
       return {
         ...state,
         folders: [...state.folders, ...action.payload],
-      };
-    case SET_CURRENT_FOLDER:
-      return {
-        ...state,
-        currentFolder: action.payload,
       };
     default:
       return state;

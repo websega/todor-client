@@ -3,12 +3,12 @@ import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
 import { ActionUserTypes } from './types';
-import { ActionModalTypes } from '../modal/types';
-import { ActionFolderTypes, FolderType, TaskType } from '../folder/types';
+import { ActionFolderTypes, TaskType } from '../folder/types';
+import { ActionSystemTypes } from '../system/types';
 import { RootStateType } from '../../reducers';
 
 import { setAuthError, setUser } from './user';
-import { closeModal } from '../modal/modal';
+import { closeModal } from '../system/system';
 import { setAllFolders, setFolder, setTask } from '../folder/folder';
 
 type ThunkType = ThunkAction<
@@ -16,7 +16,7 @@ type ThunkType = ThunkAction<
   RootStateType,
   unknown,
   | Action<ActionUserTypes['type']>
-  | Action<ActionModalTypes['type'] | ActionFolderTypes['type']>
+  | Action<ActionSystemTypes['type'] | ActionFolderTypes['type']>
 >;
 
 export const registration = (

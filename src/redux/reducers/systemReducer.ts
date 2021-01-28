@@ -1,22 +1,24 @@
 import {
-  ActionModalTypes,
+  ActionSystemTypes,
   CLOSE_MODAL,
   OPEN_MODAL,
   SET_DEFAULT_MODAL_TYPE,
   TOGGLE_MENU,
-} from '../actions/modal/types';
+  SET_CURRENT_FOLDER,
+} from '../actions/system/types';
 
 const initialState = {
   isOpen: false,
   isMenuOpen: false,
   modalType: '',
+  currentFolder: '',
 };
 
 export type InitialModalStateType = typeof initialState;
 
-export const modalReducer = (
+export const systemReducer = (
   state: InitialModalStateType = initialState,
-  action: ActionModalTypes
+  action: ActionSystemTypes
 ): InitialModalStateType => {
   switch (action.type) {
     case OPEN_MODAL:
@@ -39,6 +41,11 @@ export const modalReducer = (
       return {
         ...state,
         isMenuOpen: !state.isMenuOpen,
+      };
+    case SET_CURRENT_FOLDER:
+      return {
+        ...state,
+        currentFolder: action.payload,
       };
 
     default:
