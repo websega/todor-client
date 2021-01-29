@@ -8,20 +8,24 @@ import classes from './Task.scss';
 
 type TaskPropsType = {
   title: string;
+  inputId: string;
   completed: boolean;
   important: boolean;
   date: string;
   currentFolderColor: string;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
+  onChecked: () => void;
 };
 
 const Task = ({
   title,
+  inputId,
   completed,
   important,
   date,
   currentFolderColor,
   onClick,
+  onChecked,
 }: TaskPropsType): JSX.Element => (
   <div
     className={classNames(classes.task)}
@@ -32,10 +36,12 @@ const Task = ({
   >
     <TaskBody
       title={title}
+      inputId={inputId}
       completed={completed}
       important={important}
       date={date}
       currentFolderColor={currentFolderColor}
+      onChecked={onChecked}
     />
   </div>
 );

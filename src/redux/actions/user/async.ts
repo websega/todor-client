@@ -77,6 +77,8 @@ export const auth = (): ThunkType => async (dispatch) => {
   }
 };
 
+// ================================================================
+
 const createTask = (title: string): TaskType => ({
   id: createId(),
   title,
@@ -104,6 +106,41 @@ export const addTask = (
 
     const response = await axios.post(
       `http://localhost:5000/api/folder/add-task/${folderId}`,
+      {
+        id,
+        title,
+        description,
+        date,
+        completed,
+        important,
+        deleted,
+      }
+    );
+
+    dispatch(setTask(response.data.folder));
+    dispatch(closeModal());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateTask = (
+  task: TaskType,
+  folderId: string
+): ThunkType => async (dispatch) => {
+  try {
+    const {
+      id,
+      title,
+      description,
+      date,
+      completed,
+      important,
+      deleted,
+    } = task;
+
+    const response = await axios.put(
+      `http://localhost:5000/api/folder/update-task/${folderId}`,
       {
         id,
         title,

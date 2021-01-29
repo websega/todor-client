@@ -12,22 +12,31 @@ import classes from './TaskBody.scss';
 
 type TaskPropsType = {
   title: string;
+  inputId: string;
   completed: boolean;
   important: boolean;
   date: string;
   currentFolderColor: string;
+  onChecked: () => void;
 };
 
 const TaskBody = ({
   title,
+  inputId,
   completed,
   important,
   date,
   currentFolderColor,
+  onChecked,
 }: TaskPropsType): JSX.Element => (
   <>
     <div className={classes.left}>
-      <Checkbox completed={completed} color={currentFolderColor} />
+      <Checkbox
+        completed={completed}
+        color={currentFolderColor}
+        onChecked={onChecked}
+        id={inputId}
+      />
 
       <div className={classes.taskInfo}>
         <TaskTitle title={title} />
