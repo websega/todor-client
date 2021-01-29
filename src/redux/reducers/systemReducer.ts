@@ -9,7 +9,7 @@ import {
 } from '../actions/system/types';
 
 const initialState = {
-  isOpen: false,
+  isModalOpen: false,
   isMenuOpen: false,
   modalType: '',
   currentFolder: '',
@@ -26,13 +26,13 @@ export const systemReducer = (
     case OPEN_MODAL:
       return {
         ...state,
-        isOpen: true,
+        isModalOpen: true,
         modalType: action.payload,
       };
     case CLOSE_MODAL:
       return {
         ...state,
-        isOpen: false,
+        isModalOpen: false,
       };
     case SET_DEFAULT_MODAL_TYPE:
       return {

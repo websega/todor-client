@@ -35,7 +35,9 @@ type StateType = { system: InitialSystemStateType };
 const Modal = (): JSX.Element => {
   const overlayElement = useRef<HTMLDivElement | null>(null);
 
-  const isOpen = useSelector((state: StateType) => state.system.isOpen);
+  const isModalOpen = useSelector(
+    (state: StateType) => state.system.isModalOpen
+  );
   const modalType = useSelector((state: StateType) => state.system.modalType);
   const dispatch = useDispatch();
 
@@ -56,11 +58,11 @@ const Modal = (): JSX.Element => {
 
   const onEscapeKey = useCallback(
     (e: KeyboardEvent) => {
-      if ((e.key === 'Escape' || e.key === 'Esc') && isOpen) {
+      if ((e.key === 'Escape' || e.key === 'Esc') && isModalOpen) {
         onClose();
       }
     },
-    [isOpen, onClose]
+    [isModalOpen, onClose]
   );
 
   const onOverlayClick = useCallback(
@@ -81,7 +83,7 @@ const Modal = (): JSX.Element => {
 
   return (
     <Transition
-      in={isOpen}
+      in={isModalOpen}
       appear
       timeout={DURATION}
       mountOnEnter
