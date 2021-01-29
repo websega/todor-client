@@ -6,6 +6,7 @@ import {
   TOGGLE_MENU,
   SET_CURRENT_FOLDER,
   SET_CURRENT_TASK,
+  SET_CURRENT_COLOR,
 } from '../actions/system/types';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   modalType: '',
   currentFolder: '',
   currentTask: '',
+  currentColor: 'teal',
 };
 
 export type InitialSystemStateType = typeof initialState;
@@ -53,6 +55,11 @@ export const systemReducer = (
       return {
         ...state,
         currentTask: action.payload,
+      };
+    case SET_CURRENT_COLOR:
+      return {
+        ...state,
+        currentColor: action.payload,
       };
 
     default:

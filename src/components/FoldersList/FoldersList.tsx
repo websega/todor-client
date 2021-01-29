@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentFolder } from '../../redux/actions/system/system';
+
+import {
+  setCurrentColor,
+  setCurrentFolder,
+} from '../../redux/actions/system/system';
 
 import { getFolders } from '../../redux/actions/user/async';
 
@@ -32,8 +36,9 @@ const FoldersList = (): JSX.Element => {
     }
   }, [dispatch, userId]);
 
-  const folderClickHandler = (id: string) => {
+  const folderClickHandler = (id: string, color: string) => {
     dispatch(setCurrentFolder(id));
+    dispatch(setCurrentColor(color));
   };
 
   return (
@@ -49,7 +54,7 @@ const FoldersList = (): JSX.Element => {
               name={name}
               numberOfTask={tasks.length}
               active={currentFolderId === _id}
-              onClick={() => folderClickHandler(_id)}
+              onClick={() => folderClickHandler(_id, colorId)}
             />
           );
         })}

@@ -23,10 +23,16 @@ type StateType = {
 
 const TaskAddForm = (): JSX.Element => {
   const [taskTitle, setTaskTitle] = useState<string>('');
+
+  const dispatch = useDispatch();
+
   const currentFolderId = useSelector(
     (state: StateType) => state.system.currentFolder
   );
-  const dispatch = useDispatch();
+
+  const currentColor = useSelector(
+    (state: StateType) => state.system.currentColor
+  );
 
   const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +48,7 @@ const TaskAddForm = (): JSX.Element => {
     <div className={classes.AddWrapper}>
       <form className={classes.Form} onSubmit={handlerSubmit}>
         <button
-          className={classNames(classes.AddBtn, `bgColor-${'red'}`)}
+          className={classNames(classes.AddBtn, `bgColor-${currentColor}`)}
           type="submit"
         >
           {' '}

@@ -21,16 +21,22 @@ type StateType = {
 
 const Account = React.memo(
   (): JSX.Element => {
+    const dispatch = useDispatch();
+
     const isOpen = useSelector((state: StateType) => state.system.isMenuOpen);
+
     const username = useSelector(
       (state: StateType) => state.user.currentUser.username
     );
-    const dispatch = useDispatch();
+
+    const currentColor = useSelector(
+      (state: StateType) => state.system.currentColor
+    );
 
     return (
       <div className={classes.Account}>
         <div className={classes.User}>
-          <AccountImg />
+          <AccountImg color={currentColor} />
           <AccountName name={username} />
         </div>
 
