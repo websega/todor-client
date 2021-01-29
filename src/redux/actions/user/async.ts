@@ -102,6 +102,7 @@ export const addTask = (task: TaskType, folderId: string): ThunkType => async (
     );
 
     dispatch(setTask(response.data.folder));
+    dispatch(closeModal());
   } catch (error) {
     console.log(error);
   }

@@ -8,7 +8,12 @@ import {
   validationSchemas,
 } from '../../yupSchema/yupSchema';
 
-import { registration, login, addFolder } from '../../redux/actions/user/async';
+import {
+  registration,
+  login,
+  addFolder,
+  addTask,
+} from '../../redux/actions/user/async';
 
 import { setAuthError } from '../../redux/actions/user/user';
 
@@ -22,11 +27,26 @@ import ButtonModal from '../ButtonModal';
 
 import classes from './FormWrapper.scss';
 import ColorPicker from '../ColorPicker';
+import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
+import createId from '../../utils/createId';
+import createDate from '../../utils/createDate';
+import { TaskType } from '../../redux/actions/folder/types';
 
 type FormProps = { modalType: string };
 
+const createTask = (title: string): TaskType => ({
+  id: createId(),
+  title,
+  description: '',
+  date: createDate(),
+  completed: false,
+  important: false,
+  deleted: false,
+});
+
 type StateType = {
   user: InitialUserStateType;
+  system: InitialSystemStateType;
 };
 
 type ButtonNamesType = {
@@ -43,6 +63,9 @@ const buttonNames: ButtonNamesType = {
 const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
   const serverError = useSelector((state: StateType) => state.user.errorMsg);
   const userId = useSelector((state: StateType) => state.user.currentUser.id);
+  const currentFolderId = useSelector(
+    (state: StateType) => state.system.currentFolder
+  );
   const [colorId, setColorId] = useState<string>('teal');
   const dispatch = useDispatch();
 
@@ -68,9 +91,12 @@ const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
         case 'folder':
           dispatch(addFolder(userId, folderName, colorId));
           break;
-        case 'task':
-          console.log(taskTitle);
+        case 'task': {
+          const newTask = createTask(taskTitle);
+          
+          dispatch(addTask(newTask, currentFolderId));
           break;
+        }
 
         default:
           break;
