@@ -7,16 +7,12 @@ import classNames from 'classnames';
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
-import { TaskType } from '../../redux/actions/folder/types';
 import { addTask } from '../../redux/actions/user/async';
 
 import CalendarIcon from '../../assets/images/icons/calendar.svg';
 
 import IconButton from '../IconButton';
 import InputBox from '../InputBox';
-
-import createId from '../../utils/createId';
-import createDate from '../../utils/createDate';
 
 import classes from './TaskAddForm.scss';
 
