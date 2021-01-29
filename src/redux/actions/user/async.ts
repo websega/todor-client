@@ -11,6 +11,9 @@ import { setAuthError, setUser } from './user';
 import { closeModal } from '../system/system';
 import { setAllFolders, setFolder, setTask } from '../folder/folder';
 
+import createId from '../../../utils/createId';
+import createDate from '../../../utils/createDate';
+
 type ThunkType = ThunkAction<
   Promise<void>,
   RootStateType,
@@ -74,9 +77,20 @@ export const auth = (): ThunkType => async (dispatch) => {
   }
 };
 
-export const addTask = (task: TaskType, folderId: string): ThunkType => async (
-  dispatch
-) => {
+const createTask = (title: string): TaskType => ({
+  id: createId(),
+  title,
+  description: '',
+  date: createDate(),
+  completed: false,
+  important: false,
+  deleted: false,
+});
+
+export const addTask = (
+  taskTitle: string,
+  folderId: string
+): ThunkType => async (dispatch) => {
   try {
     const {
       id,
@@ -86,7 +100,7 @@ export const addTask = (task: TaskType, folderId: string): ThunkType => async (
       completed,
       important,
       deleted,
-    } = task;
+    } = createTask(taskTitle);
 
     const response = await axios.post(
       `http://localhost:5000/api/folder/add-task/${folderId}`,

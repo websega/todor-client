@@ -28,21 +28,8 @@ import ButtonModal from '../ButtonModal';
 import classes from './FormWrapper.scss';
 import ColorPicker from '../ColorPicker';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
-import createId from '../../utils/createId';
-import createDate from '../../utils/createDate';
-import { TaskType } from '../../redux/actions/folder/types';
 
 type FormProps = { modalType: string };
-
-const createTask = (title: string): TaskType => ({
-  id: createId(),
-  title,
-  description: '',
-  date: createDate(),
-  completed: false,
-  important: false,
-  deleted: false,
-});
 
 type StateType = {
   user: InitialUserStateType;
@@ -91,12 +78,9 @@ const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
         case 'folder':
           dispatch(addFolder(userId, folderName, colorId));
           break;
-        case 'task': {
-          const newTask = createTask(taskTitle);
-          
-          dispatch(addTask(newTask, currentFolderId));
+        case 'task':
+          dispatch(addTask(taskTitle, currentFolderId));
           break;
-        }
 
         default:
           break;

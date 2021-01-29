@@ -20,16 +20,6 @@ import createDate from '../../utils/createDate';
 
 import classes from './TaskAddForm.scss';
 
-const createTask = (title: string): TaskType => ({
-  id: createId(),
-  title,
-  description: '',
-  date: createDate(),
-  completed: false,
-  important: false,
-  deleted: false,
-});
-
 type StateType = {
   foldersList: InitialFolderStateType;
   system: InitialSystemStateType;
@@ -44,9 +34,8 @@ const TaskAddForm = (): JSX.Element => {
 
   const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newTask = createTask(taskTitle);
 
-    dispatch(addTask(newTask, currentFolderId));
+    dispatch(addTask(taskTitle, currentFolderId));
   };
 
   const handlerChange = (e: React.FormEvent<HTMLInputElement>) => {
