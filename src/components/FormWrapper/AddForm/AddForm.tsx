@@ -27,10 +27,14 @@ const AddForm = ({
   serverError,
 }: AddFormProps): JSX.Element => {
   const name = modalType === 'task' ? 'taskTitle' : 'folderName';
+
   const value = modalType === 'task' ? values.taskTitle : values.folderName;
+
   const placeholder =
     modalType === 'task' ? 'Добавьте задачу' : 'Добавьте папку';
+
   const hasError = !!errors.taskTitle || !!errors.folderName || !!serverError;
+
   const errorMsg = errors.taskTitle || errors.folderName || serverError;
 
   return (
@@ -42,6 +46,7 @@ const AddForm = ({
         onChange={onChange}
         placeholder={placeholder}
         hasError={hasError}
+        hasFocus
       />
 
       <FormErrorMessage msg={errorMsg} isIn={hasError} />

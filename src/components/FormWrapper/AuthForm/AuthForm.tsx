@@ -43,6 +43,7 @@ const AuthForm = ({
             onChange={onChange}
             placeholder="Имя"
             hasError={hasUsernameError}
+            hasFocus
           />
 
           <FormErrorMessage
@@ -59,6 +60,7 @@ const AuthForm = ({
         onChange={onChange}
         placeholder="Электронная почта"
         hasError={hasEmailError}
+        hasFocus={modalType !== 'registration' }
       />
 
       <FormErrorMessage
