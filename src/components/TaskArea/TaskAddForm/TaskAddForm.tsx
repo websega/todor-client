@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import classNames from 'classnames';
 
-import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
-import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
+import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
+import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 
-import { addTask } from '../../redux/actions/user/async';
+import { addTask } from '../../../redux/actions/user/async';
 
-import CalendarIcon from '../../assets/images/icons/calendar.svg';
+import CalendarIcon from '../../../assets/images/icons/calendar.svg';
 
-import IconButton from '../IconButton';
-import InputBox from '../InputBox';
+import IconButton from '../../IconButton';
+import InputBox from '../../InputBox';
 
 import classes from './TaskAddForm.scss';
 

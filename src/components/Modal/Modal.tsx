@@ -10,8 +10,8 @@ import {
   setDefaultModalType,
 } from '../../redux/actions/system/system';
 
-import HeaderModal from '../HeaderModal';
-import FormWrapper from '../FormWrapper';
+import HeaderModal from './HeaderModal';
+import FormWrapper from './FormWrapper';
 
 import getElementLabel from '../../helpers/getElementLabel';
 

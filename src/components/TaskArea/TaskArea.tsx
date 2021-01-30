@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TaskInfoPanel from '../TaskInfoPanel';
-import TaskAddForm from '../TaskAddForm';
+import TaskInfoPanel from './TaskInfoPanel';
+import TaskAddForm from './TaskAddForm';
 import TasksList from '../TasksList';
 
 import classes from './TaskArea.scss';

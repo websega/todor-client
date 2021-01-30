@@ -1,6 +1,6 @@
 import React from 'react';
 
-import EmptyIcons from '../../assets/images/icons/click-empty.svg';
+import EmptyIcons from '../../../assets/images/icons/click-empty.svg';
 
 import classes from './DescriptionPlug.scss';
 

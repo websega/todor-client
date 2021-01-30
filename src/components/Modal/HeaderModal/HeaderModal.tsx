@@ -1,8 +1,8 @@
 import React from 'react';
 
-import IconButton from '../IconButton';
+import IconButton from '../../IconButton';
 
-import CloseIcon from '../../assets/images/icons/close.svg';
+import CloseIcon from '../../../assets/images/icons/close.svg';
 
 import classes from './HeaderModal.scss';
 

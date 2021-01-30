@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TaskBody from '../TasksList/Task/TaskBody';
+import TaskBody from '../../TasksList/Task/TaskBody';
 
 import classes from './DescriptionHeader.scss';
 

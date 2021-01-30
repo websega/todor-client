@@ -3,17 +3,17 @@ import { useSelector } from 'react-redux';
 
 import classNames from 'classnames';
 
-import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
-import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
+import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
+import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 
-import SortIconAB from '../../assets/images/icons/sort_a-z.svg';
-import DotsIcon from '../../assets/images/icons/more_dots.svg';
+import SortIconAB from '../../../assets/images/icons/sort_a-z.svg';
+import DotsIcon from '../../../assets/images/icons/more_dots.svg';
 
 import TaskInfoTitle from './TaskInfoTitle';
-import IconButton from '../IconButton';
+import IconButton from '../../IconButton';
 
 import classes from './TaskInfoPanel.scss';
-import { FolderType } from '../../redux/actions/folder/types';
+import { FolderType } from '../../../redux/actions/folder/types';
 
 type StateType = {
   foldersList: InitialFolderStateType;

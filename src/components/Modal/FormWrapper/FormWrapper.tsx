@@ -6,28 +6,28 @@ import { useFormik } from 'formik';
 import {
   getValidationSchema,
   validationSchemas,
-} from '../../yupSchema/yupSchema';
+} from '../../../yupSchema/yupSchema';
 
 import {
   registration,
   login,
   addFolder,
   addTask,
-} from '../../redux/actions/user/async';
+} from '../../../redux/actions/user/async';
 
-import { setAuthError } from '../../redux/actions/user/user';
+import { setAuthError } from '../../../redux/actions/user/user';
 
-import { InitialUserStateType } from '../../redux/reducers/userReducer';
+import { InitialUserStateType } from '../../../redux/reducers/userReducer';
+import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 
-import getElementLabel from '../../helpers/getElementLabel';
+import getElementLabel from '../../../helpers/getElementLabel';
 
 import AuthForm from './AuthForm';
 import AddForm from './AddForm';
 import ButtonModal from '../ButtonModal';
+import ColorPicker from '../../ColorPicker';
 
 import classes from './FormWrapper.scss';
-import ColorPicker from '../ColorPicker';
-import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 type FormWrapperPropsType = { modalType: string };
 

@@ -2,8 +2,8 @@ import React from 'react';
 
 import { FormikErrors } from 'formik';
 
-import InputBox from '../../InputBox';
-import FormErrorMessage from '../../FormErrorMessage';
+import InputBox from '../../../InputBox';
+import FormErrorMessage from '../../../FormErrorMessage';
 
 type AddFormPropsType = {
   modalType: string;

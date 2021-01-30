@@ -7,9 +7,9 @@ import { updateTask } from '../../redux/actions/user/async';
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
-import DescriptionHeader from '../DescriptionHeader';
-import DescriptionPlug from '../DescriptionPlug';
-import DescriptionTextArea from '../DescriptionTextArea';
+import DescriptionHeader from './DescriptionHeader';
+import DescriptionPlug from './DescriptionPlug';
+import DescriptionTextArea from './DescriptionTextArea';
 
 import classes from './Description.scss';
 
