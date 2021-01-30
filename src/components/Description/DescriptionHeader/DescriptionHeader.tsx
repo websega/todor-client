@@ -11,7 +11,7 @@ type TaskPropsType = {
   important: boolean;
   date: string;
   currentFolderColor: string;
-  onChecked: () => void;
+  onComplete: (id: string, completed: boolean) => void;
 };
 
 const DescriptionHeader = ({
@@ -21,7 +21,7 @@ const DescriptionHeader = ({
   important,
   date,
   currentFolderColor,
-  onChecked,
+  onComplete,
 }: TaskPropsType): JSX.Element => (
   <div className={classes.Header}>
     <TaskBody
@@ -31,7 +31,7 @@ const DescriptionHeader = ({
       important={important}
       date={date}
       currentFolderColor={currentFolderColor}
-      onChecked={onChecked}
+      onComplete={onComplete}
     />
   </div>
 );

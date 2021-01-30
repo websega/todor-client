@@ -17,7 +17,7 @@ type TaskBodyPropsType = {
   important: boolean;
   date: string;
   currentFolderColor: string;
-  onChecked: () => void;
+  onComplete: (id: string, completed: boolean) => void;
 };
 
 const TaskBody = ({
@@ -27,14 +27,14 @@ const TaskBody = ({
   important,
   date,
   currentFolderColor,
-  onChecked,
+  onComplete,
 }: TaskBodyPropsType): JSX.Element => (
   <>
     <div className={classes.left}>
       <Checkbox
         completed={completed}
         color={currentFolderColor}
-        onChecked={onChecked}
+        onComplete={onComplete}
         id={inputId}
       />
 

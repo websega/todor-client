@@ -11,14 +11,14 @@ import {
 import {
   registration,
   login,
-  addFolder,
+  fetchFolder,
   addTask,
 } from '../../../redux/actions/user/async';
 
 import { setAuthError } from '../../../redux/actions/user/user';
 
 import { InitialUserStateType } from '../../../redux/reducers/userReducer';
-import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
+import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 
 import getElementLabel from '../../../helpers/getElementLabel';
 
@@ -33,7 +33,7 @@ type FormWrapperPropsType = { modalType: string };
 
 type StateType = {
   user: InitialUserStateType;
-  system: InitialSystemStateType;
+  folders: InitialFolderStateType;
 };
 
 type ButtonNamesType = {
@@ -48,13 +48,17 @@ const buttonNames: ButtonNamesType = {
 };
 
 const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
-  const serverError = useSelector((state: StateType) => state.user.errorMsg);
-  const userId = useSelector((state: StateType) => state.user.currentUser.id);
-  const currentFolderId = useSelector(
-    (state: StateType) => state.system.currentFolder
-  );
-  const [colorId, setColorId] = useState<string>('teal');
   const dispatch = useDispatch();
+
+  const serverError = useSelector((state: StateType) => state.user.errorMsg);
+
+  const userId = useSelector((state: StateType) => state.user.currentUser.id);
+
+  const currentFolder = useSelector(
+    (state: StateType) => state.folders.currentFolder
+  );
+
+  const [colorId, setColorId] = useState<string>('teal');
 
   const { errors, values, isValid, handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -76,10 +80,13 @@ const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
           dispatch(login(email, password));
           break;
         case 'folder':
-          dispatch(addFolder(userId, folderName, colorId));
+          dispatch(fetchFolder(userId, folderName, colorId));
           break;
         case 'task':
-          dispatch(addTask(taskTitle, currentFolderId));
+          if (currentFolder) {
+            dispatch(addTask(taskTitle, currentFolder._id));
+          }
+
           break;
 
         default:

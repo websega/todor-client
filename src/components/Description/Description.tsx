@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FolderType, TaskType } from '../../redux/actions/folder/types';
-import { updateTask } from '../../redux/actions/user/async';
+import { TaskType } from '../../redux/actions/folder/types';
+import { completedTask } from '../../redux/actions/user/async';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
@@ -14,24 +14,18 @@ import DescriptionTextArea from './DescriptionTextArea';
 import classes from './Description.scss';
 
 type StateType = {
-  foldersList: InitialFolderStateType;
+  folders: InitialFolderStateType;
   system: InitialSystemStateType;
 };
 
 const Description = (): JSX.Element => {
   const dispatch = useDispatch();
-  const folders = useSelector((state: StateType) => state.foldersList.folders);
-
-  const currentFolderId = useSelector(
-    (state: StateType) => state.system.currentFolder
+  const currentFolder = useSelector(
+    (state: StateType) => state.folders.currentFolder
   );
 
   const currentTaskId = useSelector(
     (state: StateType) => state.system.currentTask
-  );
-
-  const currentFolder: FolderType | undefined = folders.find(
-    (folder) => folder._id === currentFolderId
   );
 
   if (!currentFolder) {
@@ -54,22 +48,10 @@ const Description = (): JSX.Element => {
     );
   }
 
-  const checkboxClickHandler = (id: string) => {
-    if (!currentFolder) {
-      return;
+  const checkboxClickHandler = (id: string, completed: boolean) => {
+    if (currentFolder) {
+      dispatch(completedTask(id, currentFolder._id, completed));
     }
-
-    const newTasks = currentFolder.tasks.map((task) =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    );
-
-    const updatedTask = newTasks.find((task) => task.id === id);
-
-    if (!updatedTask) {
-      return;
-    }
-
-    dispatch(updateTask(updatedTask, currentFolderId));
   };
 
   return (
@@ -81,7 +63,7 @@ const Description = (): JSX.Element => {
         important={currentTask.important}
         date={currentTask.date}
         currentFolderColor={currentFolder.colorId}
-        onChecked={() => checkboxClickHandler(currentTask.id)}
+        onComplete={checkboxClickHandler}
       />
       <DescriptionTextArea />
     </section>

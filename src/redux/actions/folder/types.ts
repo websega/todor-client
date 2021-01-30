@@ -1,6 +1,8 @@
-export const SET_FOLDER_WITH_NEW_TASK = 'SET_FOLDER_WITH_NEW_TASK';
-export const SET_FOLDER = 'SET_FOLDER';
-export const SET_ALL_FOLDERS = 'SET_ALL_FOLDERS';
+export const SET_TASK = 'SET_TASK';
+export const ADD_FOLDER = 'ADD_FOLDER';
+export const LOAD_FOLDERS = 'LOAD_FOLDERS';
+
+export const SET_CURRENT_FOLDER = 'SET_CURRENT_FOLDER';
 
 export type TaskType = {
   id: string;
@@ -22,18 +24,24 @@ export type FolderType = {
 };
 
 type ActionSetFolderWithNewTaskType = {
-  type: typeof SET_FOLDER_WITH_NEW_TASK;
-  payload: FolderType;
+  type: typeof SET_TASK;
+  payload: { taskId: string; folderId: string; completed: boolean };
 };
 
-type ActionSetFolderType = { type: typeof SET_FOLDER; payload: FolderType };
+type ActionAddFolderType = { type: typeof ADD_FOLDER; payload: FolderType };
 
 type ActionFetchFoldersType = {
-  type: typeof SET_ALL_FOLDERS;
+  type: typeof LOAD_FOLDERS;
   payload: FolderType[];
+};
+
+type ActionCurrentFolderType = {
+  type: typeof SET_CURRENT_FOLDER;
+  payload: FolderType;
 };
 
 export type ActionFolderTypes =
   | ActionSetFolderWithNewTaskType
-  | ActionSetFolderType
-  | ActionFetchFoldersType;
+  | ActionAddFolderType
+  | ActionFetchFoldersType
+  | ActionCurrentFolderType;

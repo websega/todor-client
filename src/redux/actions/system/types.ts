@@ -2,7 +2,6 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const SET_DEFAULT_MODAL_TYPE = 'SET_DEFAULT_MODAL_TYPE';
 
-export const SET_CURRENT_FOLDER = 'SET_CURRENT_FOLDER';
 export const SET_CURRENT_TASK = 'SET_CURRENT_TASK';
 export const SET_CURRENT_COLOR = 'SET_CURRENT_COLOR';
 
@@ -13,11 +12,6 @@ type ActionCloseModalType = { type: typeof CLOSE_MODAL };
 type ActionSetDefaultType = { type: typeof SET_DEFAULT_MODAL_TYPE };
 
 type ActionDropdownMenuType = { type: typeof TOGGLE_MENU };
-
-type ActionCurrentFolderType = {
-  type: typeof SET_CURRENT_FOLDER;
-  payload: string;
-};
 
 type ActionCurrentTaskType = {
   type: typeof SET_CURRENT_TASK;
@@ -34,6 +28,5 @@ export type ActionSystemTypes =
   | ActionCloseModalType
   | ActionSetDefaultType
   | ActionDropdownMenuType
-  | ActionCurrentFolderType
   | ActionCurrentTaskType
   | ActionCurrentColorType;

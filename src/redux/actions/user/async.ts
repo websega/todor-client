@@ -9,7 +9,7 @@ import { RootStateType } from '../../reducers';
 
 import { setAuthError, setUser } from './user';
 import { closeModal } from '../system/system';
-import { setAllFolders, setFolder, setTask } from '../folder/folder';
+import { loadFolders, addFolder, setTask } from '../folder/folder';
 
 import createId from '../../../utils/createId';
 import createDate from '../../../utils/createDate';
@@ -117,61 +117,44 @@ export const addTask = (
       }
     );
 
-    dispatch(setTask(response.data.folder));
-    dispatch(closeModal());
+    // dispatch(setTask(response.data.folder));
+    // dispatch(closeModal());
   } catch (error) {
     console.log(error);
   }
 };
 
-export const updateTask = (
-  task: TaskType,
-  folderId: string
+export const completedTask = (
+  taskId: string,
+  folderId: string,
+  completed: boolean
 ): ThunkType => async (dispatch) => {
   try {
-    const {
-      id,
-      title,
-      description,
-      date,
-      completed,
-      important,
-      deleted,
-    } = task;
-
-    const response = await axios.put(
-      `http://localhost:5000/api/folder/update-task/${folderId}`,
-      {
-        id,
-        title,
-        description,
-        date,
-        completed,
-        important,
-        deleted,
-      }
+    await axios.patch(
+      `http://localhost:5000/api/folder/completed-task/?taskId=${taskId}&folderId=${folderId}`,
+      { completed }
     );
 
-    dispatch(setTask(response.data.folder));
+    dispatch(setTask(taskId, folderId, completed));
     dispatch(closeModal());
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getFolders = (userId: string): ThunkType => async (dispatch) => {
+export const fetchFolders = (userId: string): ThunkType => async (dispatch) => {
   try {
     const response = await axios.get(
       `http://localhost:5000/api/folder/get-all/${userId}`
     );
 
-    dispatch(setAllFolders(response.data.folders));
+    dispatch(loadFolders(response.data.folders));
   } catch (error) {
     console.log(error);
   }
 };
 
-export const addFolder = (
+export const fetchFolder = (
   userId: string,
   name: string,
   colorId: string
@@ -187,8 +170,7 @@ export const addFolder = (
     );
     // eslint-disable-next-line no-alert
     alert(response.data.message);
-    console.log(response.data.folder);
-    dispatch(setFolder(response.data.folder));
+    dispatch(addFolder(response.data.folder));
     dispatch(closeModal());
   } catch (error) {
     console.log(error);

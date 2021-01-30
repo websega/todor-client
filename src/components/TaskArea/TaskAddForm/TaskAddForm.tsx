@@ -19,6 +19,7 @@ import classes from './TaskAddForm.scss';
 type StateType = {
   foldersList: InitialFolderStateType;
   system: InitialSystemStateType;
+  folders: InitialFolderStateType;
 };
 
 const TaskAddForm = (): JSX.Element => {
@@ -26,8 +27,8 @@ const TaskAddForm = (): JSX.Element => {
 
   const dispatch = useDispatch();
 
-  const currentFolderId = useSelector(
-    (state: StateType) => state.system.currentFolder
+  const currentFolder = useSelector(
+    (state: StateType) => state.folders.currentFolder
   );
 
   const currentColor = useSelector(
@@ -37,7 +38,9 @@ const TaskAddForm = (): JSX.Element => {
   const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(addTask(taskTitle, currentFolderId));
+    if (currentFolder) {
+      dispatch(addTask(taskTitle, currentFolder._id));
+    }
   };
 
   const handlerChange = (e: React.FormEvent<HTMLInputElement>) => {

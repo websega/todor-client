@@ -4,7 +4,6 @@ import {
   OPEN_MODAL,
   SET_DEFAULT_MODAL_TYPE,
   TOGGLE_MENU,
-  SET_CURRENT_FOLDER,
   SET_CURRENT_TASK,
   SET_CURRENT_COLOR,
 } from '../actions/system/types';
@@ -13,7 +12,6 @@ const initialState = {
   isModalOpen: false,
   isMenuOpen: false,
   modalType: '',
-  currentFolder: '',
   currentTask: '',
   currentColor: 'teal',
 };
@@ -31,31 +29,31 @@ export const systemReducer = (
         isModalOpen: true,
         modalType: action.payload,
       };
+      
     case CLOSE_MODAL:
       return {
         ...state,
         isModalOpen: false,
       };
+
     case SET_DEFAULT_MODAL_TYPE:
       return {
         ...state,
         modalType: '',
       };
+
     case TOGGLE_MENU:
       return {
         ...state,
         isMenuOpen: !state.isMenuOpen,
       };
-    case SET_CURRENT_FOLDER:
-      return {
-        ...state,
-        currentFolder: action.payload,
-      };
+
     case SET_CURRENT_TASK:
       return {
         ...state,
         currentTask: action.payload,
       };
+
     case SET_CURRENT_COLOR:
       return {
         ...state,

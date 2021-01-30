@@ -6,7 +6,7 @@ import { systemReducer } from './systemReducer';
 
 export const rootReducer = combineReducers({
   user: userReducer,
-  foldersList: folderReducer,
+  folders: folderReducer,
   system: systemReducer,
 });
 

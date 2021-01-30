@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
+import { setCurrentFolder } from '../../redux/actions/folder/folder';
+import { FolderType } from '../../redux/actions/folder/types';
 
-import {
-  setCurrentColor,
-  setCurrentFolder,
-} from '../../redux/actions/system/system';
+import { setCurrentColor } from '../../redux/actions/system/system';
 
-import { getFolders } from '../../redux/actions/user/async';
+import { fetchFolders } from '../../redux/actions/user/async';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
@@ -17,45 +17,54 @@ import FolderItem from './FolderItem';
 import classes from './FoldersList.scss';
 
 type StateType = {
-  foldersList: InitialFolderStateType;
+  folders: InitialFolderStateType;
   user: InitialUserStateType;
   system: InitialSystemStateType;
 };
 
 const FoldersList = (): JSX.Element => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
 
-  const folders = useSelector((state: StateType) => state.foldersList.folders);
+  const folders = useSelector((state: StateType) => state.folders.folders);
+  console.log('🚀 ~ file: FoldersList.tsx ~ line 31 ~ folders', folders);
 
   const userId = useSelector((state: StateType) => state.user.currentUser.id);
 
-  const currentFolderId = useSelector(
-    (state: StateType) => state.system.currentFolder
+  const currentFolder = useSelector(
+    (state: StateType) => state.folders.currentFolder
   );
 
   useEffect(() => {
     if (userId) {
-      dispatch(getFolders(userId));
+      dispatch(fetchFolders(userId));
     }
   }, [dispatch, userId]);
 
   const folderClickHandler = useCallback(
-    (id: string, color: string) => {
-      dispatch(setCurrentFolder(id));
-      dispatch(setCurrentColor(color));
+    (folder: FolderType) => {
+      history.push(`/folder/${folder._id}`);
     },
-    [dispatch]
+    [history]
   );
 
   useEffect(() => {
+    const folderId = location.pathname.split('folder/')[1];
+
     if (folders.length) {
-      folderClickHandler(folders[0]._id, folders[0].colorId);
+      const activeFolder = folders.find((folder) => folderId === folder._id);
+
+      if (activeFolder) {
+        dispatch(setCurrentFolder(activeFolder));
+        dispatch(setCurrentColor(activeFolder.colorId));
+      }
     }
-  }, [folderClickHandler, folders]);
+  }, [dispatch, folders, location.pathname]);
 
   return (
     <nav className={classes.FolderList}>
-      {folders.length > 0 &&
+      {folders.length &&
         folders.map((folder) => {
           const { _id, colorId, name, tasks } = folder;
 
@@ -65,8 +74,8 @@ const FoldersList = (): JSX.Element => {
               color={colorId}
               name={name}
               numberOfTask={tasks.length}
-              active={currentFolderId === _id}
-              onClick={() => folderClickHandler(_id, colorId)}
+              active={currentFolder ? currentFolder._id === _id : false}
+              onClick={() => folderClickHandler(folder)}
             />
           );
         })}

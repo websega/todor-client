@@ -1,22 +1,32 @@
 import {
   ActionFolderTypes,
   FolderType,
-  SET_FOLDER,
-  SET_ALL_FOLDERS,
-  SET_FOLDER_WITH_NEW_TASK,
+  SET_CURRENT_FOLDER,
+  LOAD_FOLDERS,
+  SET_TASK,
+  ADD_FOLDER
 } from './types';
 
-export const setTask = (folder: FolderType): ActionFolderTypes => ({
-  type: SET_FOLDER_WITH_NEW_TASK,
+export const setTask = (
+  taskId: string,
+  folderId: string,
+  completed: boolean
+): ActionFolderTypes => ({
+  type: SET_TASK,
+  payload: { taskId, folderId, completed },
+});
+
+export const setCurrentFolder = (folder: FolderType): ActionFolderTypes => ({
+  type: SET_CURRENT_FOLDER,
   payload: folder,
 });
 
-export const setFolder = (folder: FolderType): ActionFolderTypes => ({
-  type: SET_FOLDER,
+export const addFolder = (folder: FolderType): ActionFolderTypes => ({
+  type: ADD_FOLDER,
   payload: folder,
 });
 
-export const setAllFolders = (folders: FolderType[]): ActionFolderTypes => ({
-  type: SET_ALL_FOLDERS,
+export const loadFolders = (folders: FolderType[]): ActionFolderTypes => ({
+  type: LOAD_FOLDERS,
   payload: folders,
 });

@@ -1,17 +1,19 @@
 import {
   ActionFolderTypes,
   FolderType,
-  SET_FOLDER,
-  SET_ALL_FOLDERS,
-  SET_FOLDER_WITH_NEW_TASK,
+  SET_CURRENT_FOLDER,
+  LOAD_FOLDERS,
+  SET_TASK,
 } from '../actions/folder/types';
 
 const initialState = {
   folders: [],
+  currentFolder: null,
 };
 
 export type InitialFolderStateType = {
   folders: FolderType[];
+  currentFolder: FolderType | null;
 };
 
 const folderReducer = (
@@ -19,11 +21,20 @@ const folderReducer = (
   action: ActionFolderTypes
 ): InitialFolderStateType => {
   switch (action.type) {
-    case SET_FOLDER_WITH_NEW_TASK: {
+    case SET_TASK: {
       const newFolders = state.folders.map((folder) => {
-        if (folder._id === action.payload._id) {
-          return action.payload;
+        if (folder._id === action.payload.folderId) {
+          const newTasks = folder.tasks.map((task) => {
+            if (task.id === action.payload.taskId) {
+              return { ...task, completed: action.payload.completed };
+            }
+
+            return task;
+          });
+
+          return { ...folder, tasks: newTasks };
         }
+
         return folder;
       });
 
@@ -32,16 +43,19 @@ const folderReducer = (
         folders: newFolders,
       };
     }
-    case SET_FOLDER:
-      return {
-        ...state,
-        folders: [...state.folders, action.payload],
-      };
-    case SET_ALL_FOLDERS:
+
+    case LOAD_FOLDERS:
       return {
         ...state,
         folders: [...state.folders, ...action.payload],
       };
+
+    case SET_CURRENT_FOLDER:
+      return {
+        ...state,
+        currentFolder: action.payload,
+      };
+
     default:
       return state;
   }

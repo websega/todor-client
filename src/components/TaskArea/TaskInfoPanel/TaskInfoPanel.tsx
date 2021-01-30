@@ -16,19 +16,13 @@ import classes from './TaskInfoPanel.scss';
 import { FolderType } from '../../../redux/actions/folder/types';
 
 type StateType = {
-  foldersList: InitialFolderStateType;
+  folders: InitialFolderStateType;
   system: InitialSystemStateType;
 };
 
 const TaskInfoPanel = (): JSX.Element => {
-  const folders = useSelector((state: StateType) => state.foldersList.folders);
-
-  const currentFolderId = useSelector(
-    (state: StateType) => state.system.currentFolder
-  );
-
-  const currentFolder: FolderType | undefined = folders.find(
-    (folder) => folder._id === currentFolderId
+  const currentFolder= useSelector(
+    (state: StateType) => state.folders.currentFolder
   );
 
   const currentColor = useSelector(
