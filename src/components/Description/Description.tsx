@@ -36,7 +36,7 @@ const Description = (): JSX.Element => {
 
   if (!currentFolder) {
     return (
-      <section className={classes.description}>
+      <section className={classes.Description}>
         <DescriptionPlug />
       </section>
     );
@@ -48,7 +48,7 @@ const Description = (): JSX.Element => {
 
   if (!currentTask) {
     return (
-      <section className={classes.description}>
+      <section className={classes.Description}>
         <DescriptionPlug />
       </section>
     );

@@ -6,7 +6,7 @@ import classes from './Logo.scss';
 
 const Logo = (): JSX.Element => (
   <div className={classes.Logo}>
-    <LogoIcon className={classes.icon} />
+    <LogoIcon />
     <h1>todor</h1>
   </div>
 );

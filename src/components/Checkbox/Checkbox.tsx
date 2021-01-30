@@ -17,11 +17,11 @@ const Checkbox = ({
   id,
   onChecked,
 }: CheckboxPropsType): JSX.Element => (
-  <label htmlFor={id} className={classes.checkbox}>
+  <label htmlFor={id} className={classes.Checkbox}>
     <input
       id={id}
       className={classNames({
-        [classes[`borderColor-${color}`]]: true,
+        [classes[`BorderColor-${color}`]]: true,
         [`bgColor-${color}`]: completed,
       })}
       type="checkbox"

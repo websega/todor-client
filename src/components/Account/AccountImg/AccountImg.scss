@@ -18,30 +18,30 @@
 
 .BorderColor {
   &-teal {
-    border: 2px solid #64d2ff;
+    border: 2px solid $color-teal;
   }
   &-red {
-    border: 2px solid #ff453a;
+    border: 2px solid $color-red;
   }
   &-yellow {
-    border: 2px solid #ffd60a;
+    border: 2px solid $color-yellow;
   }
   &-green {
-    border: 2px solid #32d74b;
+    border: 2px solid $color-green;
   }
   &-indigo {
-    border: 2px solid #5e5ce6;
+    border: 2px solid $color-indigo;
   }
   &-purple {
-    border: 2px solid #bf5af2;
+    border: 2px solid $color-purple;
   }
   &-pink {
-    border: 2px solid #ff375f;
+    border: 2px solid $color-pink;
   }
   &-orange {
-    border: 2px solid #ff9f0a;
+    border: 2px solid $color-orange;
   }
   &-default {
-    border: 2px solid #505f79;
+    border: 2px solid $color-default;
   }
 }

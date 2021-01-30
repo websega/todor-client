@@ -23,7 +23,7 @@ const DescriptionHeader = ({
   currentFolderColor,
   onChecked,
 }: TaskPropsType): JSX.Element => (
-  <div className={classes.header}>
+  <div className={classes.Header}>
     <TaskBody
       title={title}
       inputId={inputId}

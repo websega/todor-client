@@ -5,7 +5,7 @@ import classes from './TaskInfoTitle.scss';
 type TaskInfoTitlePropsType = { title: string };
 
 const TaskInfoTitle = ({ title }: TaskInfoTitlePropsType): JSX.Element => (
-  <div className={classes.title}>
+  <div className={classes.Title}>
     <h2 className="crop-text">{title}</h2>
   </div>
 );

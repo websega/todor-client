@@ -4,7 +4,7 @@ import classes from './DescriptionTextArea.scss';
 
 const DescriptionTextArea = (): JSX.Element=> (
   <textarea
-    className={classes.textInput}
+    className={classes.TextInput}
     placeholder="Напишите описание к задаче..."
   />
 );

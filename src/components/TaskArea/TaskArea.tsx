@@ -7,7 +7,7 @@ import TasksList from '../TasksList';
 import classes from './TaskArea.scss';
 
 const TaskArea = (): JSX.Element => (
-  <section className={classes.tasksArea}>
+  <section className={classes.TasksArea}>
     <TaskInfoPanel />
     <TaskAddForm />
     <TasksList />

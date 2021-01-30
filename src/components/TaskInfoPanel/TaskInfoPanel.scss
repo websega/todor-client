@@ -14,30 +14,30 @@
 
 .borderBottomColor {
   &-teal {
-    border-bottom: 4px solid #64d2ff;
+    border-bottom: 4px solid $color-teal;
   }
   &-red {
-    border-bottom: 4px solid #ff453a;
+    border-bottom: 4px solid $color-red;
   }
   &-yellow {
-    border-bottom: 4px solid #ffd60a;
+    border-bottom: 4px solid $color-yellow;
   }
   &-green {
-    border-bottom: 4px solid #32d74b;
+    border-bottom: 4px solid $color-green;
   }
   &-indigo {
-    border-bottom: 4px solid #5e5ce6;
+    border-bottom: 4px solid $color-indigo;
   }
   &-purple {
-    border-bottom: 4px solid #bf5af2;
+    border-bottom: 4px solid $color-purple;
   }
   &-pink {
-    border-bottom: 4px solid #ff375f;
+    border-bottom: 4px solid $color-pink;
   }
   &-orange {
-    border-bottom: 4px solid #ff9f0a;
+    border-bottom: 4px solid $color-orange;
   }
   &-default {
-    border-bottom: 4px solid #505f79;
+    border-bottom: 4px solid $color-default;
   }
 }

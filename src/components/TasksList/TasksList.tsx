@@ -59,7 +59,7 @@ const TasksList = (): JSX.Element => {
   };
 
   return (
-    <div className={classes.tasksContainer}>
+    <div className={classes.TasksContainer}>
       {currentFolder &&
         currentFolder.tasks.map((task) => {
           const { id, title, completed, important, date } = task;
