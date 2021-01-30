@@ -15,6 +15,7 @@ type TaskPropsType = {
   currentFolderColor: string;
   onClick: (e: React.MouseEvent) => void;
   onChecked: () => void;
+  active?: boolean;
 };
 
 const Task = ({
@@ -26,9 +27,10 @@ const Task = ({
   currentFolderColor,
   onClick,
   onChecked,
+  active,
 }: TaskPropsType): JSX.Element => (
   <div
-    className={classNames(classes.task)}
+    className={classNames(classes.Task, { [classes.Active]: active })}
     role="button"
     tabIndex={0}
     onClick={onClick}

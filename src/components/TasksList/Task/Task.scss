@@ -1,4 +1,4 @@
-.task {
+.Task {
   @include display(flex, space-between, center);
 
   width: 100%;
@@ -22,6 +22,6 @@
   }
 }
 
-.active {
+.Active {
   background-color: rgba($color: $active-color, $alpha: 0.5);
 }

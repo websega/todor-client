@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -23,12 +23,15 @@ type StateType = {
 };
 
 const FoldersList = (): JSX.Element => {
+  const dispatch = useDispatch();
+
   const folders = useSelector((state: StateType) => state.foldersList.folders);
+
   const userId = useSelector((state: StateType) => state.user.currentUser.id);
+
   const currentFolderId = useSelector(
     (state: StateType) => state.system.currentFolder
   );
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (userId) {
@@ -36,10 +39,19 @@ const FoldersList = (): JSX.Element => {
     }
   }, [dispatch, userId]);
 
-  const folderClickHandler = (id: string, color: string) => {
-    dispatch(setCurrentFolder(id));
-    dispatch(setCurrentColor(color));
-  };
+  const folderClickHandler = useCallback(
+    (id: string, color: string) => {
+      dispatch(setCurrentFolder(id));
+      dispatch(setCurrentColor(color));
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (folders.length) {
+      folderClickHandler(folders[0]._id, folders[0].colorId);
+    }
+  }, [folderClickHandler, folders]);
 
   return (
     <nav className={classes.FolderList}>

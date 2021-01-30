@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
@@ -24,6 +24,9 @@ const TasksList = (): JSX.Element => {
 
   const currentFolderId = useSelector(
     (state: StateType) => state.system.currentFolder
+  );
+  const currentTaskId = useSelector(
+    (state: StateType) => state.system.currentTask
   );
 
   const currentFolder: FolderType | undefined = folders.find(
@@ -71,6 +74,7 @@ const TasksList = (): JSX.Element => {
               completed={completed}
               important={important}
               date={date}
+              active={currentTaskId === id}
               currentFolderColor={currentFolder.colorId}
               onClick={(e) => taskClickHandler(e, id)}
               onChecked={() => checkboxClickHandler(id)}
