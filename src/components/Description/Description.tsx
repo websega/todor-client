@@ -73,7 +73,7 @@ const Description = (): JSX.Element => {
   };
 
   return (
-    <section className={classes.description}>
+    <section className={classes.Description}>
       <DescriptionHeader
         title={currentTask.title}
         inputId={currentTask.id}
