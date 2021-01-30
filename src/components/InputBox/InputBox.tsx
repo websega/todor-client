@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import classes from './InputBox.scss';
 
-type InputBoxProps = {
+type InputBoxPropsType = {
   value: string;
   name: string;
   type: string;
@@ -23,7 +23,7 @@ const InputBox = React.memo(
     hasError,
     name,
     hasFocus,
-  }: InputBoxProps): JSX.Element => {
+  }: InputBoxPropsType): JSX.Element => {
     const textInputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {

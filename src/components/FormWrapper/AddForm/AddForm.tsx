@@ -5,7 +5,7 @@ import { FormikErrors } from 'formik';
 import InputBox from '../../InputBox';
 import FormErrorMessage from '../../FormErrorMessage';
 
-type AddFormProps = {
+type AddFormPropsType = {
   modalType: string;
   errors: FormikErrors<{
     taskTitle: 'string';
@@ -25,7 +25,7 @@ const AddForm = ({
   values,
   onChange,
   serverError,
-}: AddFormProps): JSX.Element => {
+}: AddFormPropsType): JSX.Element => {
   const name = modalType === 'task' ? 'taskTitle' : 'folderName';
 
   const value = modalType === 'task' ? values.taskTitle : values.folderName;

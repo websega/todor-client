@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import classes from './ColorItem.scss';
 
-type ColorItemProps = {
+type ColorItemPropsType = {
   name: string;
   isActive: boolean;
   onClick: () => void;
@@ -14,7 +14,7 @@ const ColorItem = ({
   name,
   onClick,
   isActive,
-}: ColorItemProps): JSX.Element => (
+}: ColorItemPropsType): JSX.Element => (
   <button
     type="button"
     className={classNames({

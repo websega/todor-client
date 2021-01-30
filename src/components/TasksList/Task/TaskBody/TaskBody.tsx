@@ -10,7 +10,7 @@ import IconButton from '../../../IconButton';
 
 import classes from './TaskBody.scss';
 
-type TaskPropsType = {
+type TaskBodyPropsType = {
   title: string;
   inputId: string;
   completed: boolean;
@@ -28,7 +28,7 @@ const TaskBody = ({
   date,
   currentFolderColor,
   onChecked,
-}: TaskPropsType): JSX.Element => (
+}: TaskBodyPropsType): JSX.Element => (
   <>
     <div className={classes.left}>
       <Checkbox

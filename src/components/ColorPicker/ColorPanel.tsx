@@ -28,7 +28,7 @@ const colors: ColorsType[] = [
   createColor('default', '#505f79'),
 ];
 
-type ColorPickerTypes = {
+type ColorPickerPropsType = {
   onColorItem: (id: string) => void;
   activeColorId: string;
 };
@@ -36,7 +36,7 @@ type ColorPickerTypes = {
 const ColorPicker = ({
   onColorItem,
   activeColorId,
-}: ColorPickerTypes): JSX.Element => (
+}: ColorPickerPropsType): JSX.Element => (
   <div className={classes.Сolors}>
     {colors.map((color) => {
       const { id, name } = color;

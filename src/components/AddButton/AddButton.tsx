@@ -7,9 +7,9 @@ import { openModal } from '../../redux/actions/system/system';
 
 import classes from './AddButton.scss';
 
-type AddButtonProps = { label: string; modalType: string };
+type AddButtonPropsType = { label: string; modalType: string };
 
-const AddButton = ({ label, modalType }: AddButtonProps): JSX.Element => {
+const AddButton = ({ label, modalType }: AddButtonPropsType): JSX.Element => {
   const dispatch = useDispatch();
 
   return (

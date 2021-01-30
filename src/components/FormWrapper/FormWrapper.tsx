@@ -29,7 +29,7 @@ import classes from './FormWrapper.scss';
 import ColorPicker from '../ColorPicker';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
-type FormProps = { modalType: string };
+type FormWrapperPropsType = { modalType: string };
 
 type StateType = {
   user: InitialUserStateType;
@@ -47,7 +47,7 @@ const buttonNames: ButtonNamesType = {
   task: 'Добавить',
 };
 
-const FormWrapper = ({ modalType }: FormProps): JSX.Element => {
+const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
   const serverError = useSelector((state: StateType) => state.user.errorMsg);
   const userId = useSelector((state: StateType) => state.user.currentUser.id);
   const currentFolderId = useSelector(

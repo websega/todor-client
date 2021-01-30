@@ -2,13 +2,13 @@ import React from 'react';
 
 import classes from './ButtonModal.scss';
 
-type ButtonModalProps = {
+type ButtonModalPropsType = {
   name: string;
   disabled: boolean;
 };
 
 const ButtonModal = React.memo(
-  ({ name, disabled }: ButtonModalProps): JSX.Element => (
+  ({ name, disabled }: ButtonModalPropsType): JSX.Element => (
     <button className={classes.Button} type="submit" disabled={disabled}>
       {name}
     </button>

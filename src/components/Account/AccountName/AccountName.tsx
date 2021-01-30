@@ -2,11 +2,11 @@ import React from 'react';
 
 import classes from './AccountName.scss';
 
-interface AccountNameProps {
+type AccountNamePropsType = {
   name: string;
-}
+};
 
-const AccountName = ({ name }: AccountNameProps): JSX.Element => (
+const AccountName = ({ name }: AccountNamePropsType): JSX.Element => (
   <span className={classes.Name}>{name}</span>
 );
 

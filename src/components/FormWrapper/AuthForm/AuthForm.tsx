@@ -5,7 +5,7 @@ import { FormikErrors } from 'formik';
 import InputBox from '../../InputBox';
 import FormErrorMessage from '../../FormErrorMessage';
 
-type AuthFormProps = {
+type AuthFormPropsType = {
   modalType: string;
   errors: FormikErrors<{
     username: string;
@@ -27,7 +27,7 @@ const AuthForm = ({
   values,
   onChange,
   serverError,
-}: AuthFormProps): JSX.Element => {
+}: AuthFormPropsType): JSX.Element => {
   const hasUsernameError = !!errors.username || !!serverError;
   const hasPasswordError = !!errors.password || !!serverError;
   const hasEmailError = !!errors.email || !!serverError;

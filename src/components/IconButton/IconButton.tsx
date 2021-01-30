@@ -6,7 +6,7 @@ import Icon from '../Icon';
 
 import classes from './IconButton.scss';
 
-type IconButtonProps = {
+type IconButtonPropsType = {
   icon: JSX.Element;
   iconType?: string;
   onClick: () => void;
@@ -20,7 +20,7 @@ const IconButton = ({
   onClick,
   inverted = false,
   important,
-}: IconButtonProps): JSX.Element => (
+}: IconButtonPropsType): JSX.Element => (
   <button
     className={classNames({
       [classes.Button]: true,

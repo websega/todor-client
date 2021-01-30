@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import classes from './Icon.scss';
 
-type IconProps = {
+type IconPropsType = {
   icon: JSX.Element;
   type?: string;
   important?: boolean;
@@ -14,7 +14,7 @@ const Icon = ({
   icon,
   type = 'default',
   important,
-}: IconProps): JSX.Element => {
+}: IconPropsType): JSX.Element => {
   const cls = classNames({
     [classes.Icon]: true,
     [classes.SortIcon]: type === 'sort',
