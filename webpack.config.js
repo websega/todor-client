@@ -117,7 +117,6 @@ const getPlugins = () => {
       patterns: [
         {
           from: path.resolve(__dirname, 'src/assets/favicon/'),
-          to: path.resolve(__dirname, 'dist/assets/favicon/'),
         },
       ],
     }),
