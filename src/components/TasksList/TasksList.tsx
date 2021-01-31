@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
-import { FolderType } from '../../redux/actions/folder/types';
 import { setCurrentTask } from '../../redux/actions/system/system';
 import { completedTask } from '../../redux/actions/user/async';
 
@@ -24,6 +23,7 @@ const TasksList = (): JSX.Element => {
   const currentFolder = useSelector(
     (state: StateType) => state.folders.currentFolder
   );
+  
   const currentTaskId = useSelector(
     (state: StateType) => state.system.currentTask
   );

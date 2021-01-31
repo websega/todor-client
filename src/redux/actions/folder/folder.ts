@@ -3,17 +3,27 @@ import {
   FolderType,
   SET_CURRENT_FOLDER,
   LOAD_FOLDERS,
+  SET_COMPLETED_TASK,
+  SET_FOLDER,
+  TaskType,
   SET_TASK,
-  ADD_FOLDER
 } from './types';
 
-export const setTask = (
+export const setCompletedTask = (
   taskId: string,
   folderId: string,
   completed: boolean
 ): ActionFolderTypes => ({
-  type: SET_TASK,
+  type: SET_COMPLETED_TASK,
   payload: { taskId, folderId, completed },
+});
+
+export const setTask = (
+  task: TaskType,
+  folderId: string
+): ActionFolderTypes => ({
+  type: SET_TASK,
+  payload: { task, folderId },
 });
 
 export const setCurrentFolder = (folder: FolderType): ActionFolderTypes => ({
@@ -21,8 +31,8 @@ export const setCurrentFolder = (folder: FolderType): ActionFolderTypes => ({
   payload: folder,
 });
 
-export const addFolder = (folder: FolderType): ActionFolderTypes => ({
-  type: ADD_FOLDER,
+export const setFolder = (folder: FolderType): ActionFolderTypes => ({
+  type: SET_FOLDER,
   payload: folder,
 });
 

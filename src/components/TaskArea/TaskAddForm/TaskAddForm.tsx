@@ -23,9 +23,9 @@ type StateType = {
 };
 
 const TaskAddForm = (): JSX.Element => {
-  const [taskTitle, setTaskTitle] = useState<string>('');
-
   const dispatch = useDispatch();
+
+  const [taskTitle, setTaskTitle] = useState<string>('');
 
   const currentFolder = useSelector(
     (state: StateType) => state.folders.currentFolder

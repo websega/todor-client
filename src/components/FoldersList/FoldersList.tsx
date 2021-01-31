@@ -28,7 +28,6 @@ const FoldersList = (): JSX.Element => {
   const location = useLocation();
 
   const folders = useSelector((state: StateType) => state.folders.folders);
-  console.log('🚀 ~ file: FoldersList.tsx ~ line 31 ~ folders', folders);
 
   const userId = useSelector((state: StateType) => state.user.currentUser.id);
 
@@ -64,7 +63,7 @@ const FoldersList = (): JSX.Element => {
 
   return (
     <nav className={classes.FolderList}>
-      {folders.length &&
+      {folders.length > 0 &&
         folders.map((folder) => {
           const { _id, colorId, name, tasks } = folder;
 

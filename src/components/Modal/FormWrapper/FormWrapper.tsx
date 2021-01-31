@@ -11,7 +11,7 @@ import {
 import {
   registration,
   login,
-  fetchFolder,
+  addFolder,
   addTask,
 } from '../../../redux/actions/user/async';
 
@@ -80,7 +80,7 @@ const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
           dispatch(login(email, password));
           break;
         case 'folder':
-          dispatch(fetchFolder(userId, folderName, colorId));
+          dispatch(addFolder(userId, folderName, colorId));
           break;
         case 'task':
           if (currentFolder) {

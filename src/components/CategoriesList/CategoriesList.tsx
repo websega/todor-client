@@ -18,14 +18,14 @@ type CategoriesType = {
 
 const categories: CategoriesType[] = [
   {
+    id: 'inbox',
+    name: 'Все',
+    icon: <InboxIcon />,
+  },
+  {
     id: 'today',
     name: 'Сегодня',
     icon: <TodayIcon />,
-  },
-  {
-    id: 'inbox',
-    name: 'Предстоящие',
-    icon: <InboxIcon />,
   },
   {
     id: 'important',

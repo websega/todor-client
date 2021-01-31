@@ -9,7 +9,12 @@ import { RootStateType } from '../../reducers';
 
 import { setAuthError, setUser } from './user';
 import { closeModal } from '../system/system';
-import { loadFolders, addFolder, setTask } from '../folder/folder';
+import {
+  loadFolders,
+  setFolder,
+  setTask,
+  setCompletedTask,
+} from '../folder/folder';
 
 import createId from '../../../utils/createId';
 import createDate from '../../../utils/createDate';
@@ -94,31 +99,15 @@ export const addTask = (
   folderId: string
 ): ThunkType => async (dispatch) => {
   try {
-    const {
-      id,
-      title,
-      description,
-      date,
-      completed,
-      important,
-      deleted,
-    } = createTask(taskTitle);
+    const newTask = createTask(taskTitle);
 
-    const response = await axios.post(
-      `http://localhost:5000/api/folder/add-task/${folderId}`,
-      {
-        id,
-        title,
-        description,
-        date,
-        completed,
-        important,
-        deleted,
-      }
+    await axios.post(
+      `http://localhost:5000/api/folder/add-task/?folderId=${folderId}`,
+      { ...newTask }
     );
 
-    // dispatch(setTask(response.data.folder));
-    // dispatch(closeModal());
+    dispatch(setTask(newTask, folderId));
+    dispatch(closeModal());
   } catch (error) {
     console.log(error);
   }
@@ -135,7 +124,7 @@ export const completedTask = (
       { completed }
     );
 
-    dispatch(setTask(taskId, folderId, completed));
+    dispatch(setCompletedTask(taskId, folderId, completed));
     dispatch(closeModal());
   } catch (error) {
     console.log(error);
@@ -154,7 +143,7 @@ export const fetchFolders = (userId: string): ThunkType => async (dispatch) => {
   }
 };
 
-export const fetchFolder = (
+export const addFolder = (
   userId: string,
   name: string,
   colorId: string
@@ -170,7 +159,7 @@ export const fetchFolder = (
     );
     // eslint-disable-next-line no-alert
     alert(response.data.message);
-    dispatch(addFolder(response.data.folder));
+    dispatch(setFolder(response.data.folder));
     dispatch(closeModal());
   } catch (error) {
     console.log(error);

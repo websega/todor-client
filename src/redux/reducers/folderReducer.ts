@@ -3,7 +3,9 @@ import {
   FolderType,
   SET_CURRENT_FOLDER,
   LOAD_FOLDERS,
+  SET_COMPLETED_TASK,
   SET_TASK,
+  SET_FOLDER,
 } from '../actions/folder/types';
 
 const initialState = {
@@ -21,7 +23,7 @@ const folderReducer = (
   action: ActionFolderTypes
 ): InitialFolderStateType => {
   switch (action.type) {
-    case SET_TASK: {
+    case SET_COMPLETED_TASK: {
       const newFolders = state.folders.map((folder) => {
         if (folder._id === action.payload.folderId) {
           const newTasks = folder.tasks.map((task) => {
@@ -44,10 +46,33 @@ const folderReducer = (
       };
     }
 
+    case SET_TASK: {
+      const newFolders = state.folders.map((folder) => {
+        if (folder._id === action.payload.folderId) {
+          const newTasks = [...folder.tasks, action.payload.task];
+          
+          return { ...folder, tasks: newTasks };
+        }
+
+        return folder;
+      });
+
+      return {
+        ...state,
+        folders: newFolders,
+      };
+    }
+
     case LOAD_FOLDERS:
       return {
         ...state,
-        folders: [...state.folders, ...action.payload],
+        folders: [...action.payload],
+      };
+
+    case SET_FOLDER:
+      return {
+        ...state,
+        folders: [...state.folders, action.payload],
       };
 
     case SET_CURRENT_FOLDER:
