@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ReactDOM from 'react-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { auth } from '../../redux/actions/user/async';
 
@@ -18,10 +19,16 @@ const dropdownRoot = document.getElementById('dropdown-root') as HTMLElement;
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(auth());
-  }, [dispatch]);
+
+    if (location.pathname === '/') {
+      history.push('/inbox');
+    }
+  }, [dispatch, history, location.pathname]);
 
   return (
     <div className={classes.App}>

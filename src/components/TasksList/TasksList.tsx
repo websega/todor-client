@@ -11,6 +11,7 @@ import { completedTask } from '../../redux/actions/user/async';
 import Task from './Task';
 
 import classes from './TasksList.scss';
+import createDate from '../../utils/createDate';
 
 type StateType = {
   folders: InitialFolderStateType;
@@ -20,12 +21,18 @@ type StateType = {
 const TasksList = (): JSX.Element => {
   const dispatch = useDispatch();
 
+  const folders = useSelector((state: StateType) => state.folders.folders);
+
   const currentFolder = useSelector(
     (state: StateType) => state.folders.currentFolder
   );
-  
+
   const currentTaskId = useSelector(
     (state: StateType) => state.system.currentTask
+  );
+
+  const currentCategory = useSelector(
+    (state: StateType) => state.system.currentCategory
   );
 
   const taskClickHandler = (e: React.MouseEvent, id: string) => {
@@ -46,6 +53,88 @@ const TasksList = (): JSX.Element => {
 
   return (
     <div className={classes.TasksContainer}>
+      {folders &&
+        folders.map((folder) =>
+          folder.tasks.map((task) => {
+            const { id, title, completed, important, deleted, date } = task;
+            return (
+              <>
+                <Route exact path="/inbox">
+                  <Task
+                    key={id}
+                    inputId={id}
+                    title={title}
+                    completed={completed}
+                    important={important}
+                    date={date}
+                    active={currentTaskId === id}
+                    currentFolderColor={folder.colorId}
+                    onClick={(e) => taskClickHandler(e, id)}
+                    onComplete={checkboxClickHandler}
+                  />
+                </Route>
+                <Route exact path={`/${currentCategory}`}>
+                  {completed && currentCategory === 'completed' && (
+                    <Task
+                      key={id}
+                      inputId={id}
+                      title={title}
+                      completed={completed}
+                      important={important}
+                      date={date}
+                      active={currentTaskId === id}
+                      currentFolderColor={folder.colorId}
+                      onClick={(e) => taskClickHandler(e, id)}
+                      onComplete={checkboxClickHandler}
+                    />
+                  )}
+                  {important && currentCategory === 'important' && (
+                    <Task
+                      key={id}
+                      inputId={id}
+                      title={title}
+                      completed={completed}
+                      important={important}
+                      date={date}
+                      active={currentTaskId === id}
+                      currentFolderColor={folder.colorId}
+                      onClick={(e) => taskClickHandler(e, id)}
+                      onComplete={checkboxClickHandler}
+                    />
+                  )}
+                  {deleted && currentCategory === 'deleted' && (
+                    <Task
+                      key={id}
+                      inputId={id}
+                      title={title}
+                      completed={completed}
+                      important={important}
+                      date={date}
+                      active={currentTaskId === id}
+                      currentFolderColor={folder.colorId}
+                      onClick={(e) => taskClickHandler(e, id)}
+                      onComplete={checkboxClickHandler}
+                    />
+                  )}
+                  {date === createDate() && currentCategory === 'today' && (
+                    <Task
+                      key={id}
+                      inputId={id}
+                      title={title}
+                      completed={completed}
+                      important={important}
+                      date={date}
+                      active={currentTaskId === id}
+                      currentFolderColor={folder.colorId}
+                      onClick={(e) => taskClickHandler(e, id)}
+                      onComplete={checkboxClickHandler}
+                    />
+                  )}
+                </Route>
+              </>
+            );
+          })
+        )}
       <Route exact path="/folder/:id">
         {currentFolder &&
           currentFolder.tasks.map((task) => {

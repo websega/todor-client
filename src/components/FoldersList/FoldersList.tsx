@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { setCurrentFolder } from '../../redux/actions/folder/folder';
+
 import { FolderType } from '../../redux/actions/folder/types';
-
+import { setCurrentFolder } from '../../redux/actions/folder/folder';
 import { setCurrentColor } from '../../redux/actions/system/system';
-
 import { fetchFolders } from '../../redux/actions/user/async';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
@@ -29,6 +28,10 @@ const FoldersList = (): JSX.Element => {
 
   const folders = useSelector((state: StateType) => state.folders.folders);
 
+  const currentCategory = useSelector(
+    (state: StateType) => state.system.currentCategory
+  );
+
   const userId = useSelector((state: StateType) => state.user.currentUser.id);
 
   const currentFolder = useSelector(
@@ -50,6 +53,10 @@ const FoldersList = (): JSX.Element => {
 
   useEffect(() => {
     const folderId = location.pathname.split('folder/')[1];
+    console.log(
+      '🚀 ~ file: FoldersList.tsx ~ line 56 ~ useEffect ~ folderId',
+      folderId
+    );
 
     if (folders.length) {
       const activeFolder = folders.find((folder) => folderId === folder._id);
