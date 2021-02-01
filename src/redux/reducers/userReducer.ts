@@ -31,6 +31,7 @@ export const userReducer = (
         errorMsg: '',
         hasError: false,
       };
+
     case LOGOUT:
       localStorage.removeItem('token');
       return {
@@ -38,6 +39,7 @@ export const userReducer = (
         currentUser: initialState.currentUser,
         isAuth: false,
       };
+      
     case AUTH_ERROR:
       return {
         ...state,

@@ -5,6 +5,8 @@ export const LOAD_FOLDERS = 'LOAD_FOLDERS';
 
 export const SET_CURRENT_FOLDER = 'SET_CURRENT_FOLDER';
 
+export const CLEAR_FOLDERS = 'CLEAR_FOLDERS';
+
 export type TaskType = {
   id: string;
   title: string;
@@ -46,9 +48,14 @@ type ActionCurrentFolderType = {
   payload: FolderType;
 };
 
+type ActionCleartFoldersType = {
+  type: typeof CLEAR_FOLDERS;
+};
+
 export type ActionFolderTypes =
   | ActionSetCompletedTaskType
   | ActionSetTaskType
   | ActionSetFolderType
   | ActionFetchFoldersType
-  | ActionCurrentFolderType;
+  | ActionCurrentFolderType
+  | ActionCleartFoldersType;

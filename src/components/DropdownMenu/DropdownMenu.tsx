@@ -8,7 +8,11 @@ import { InitialUserStateType } from '../../redux/reducers/userReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import { logout } from '../../redux/actions/user/user';
-import { openModal, toggleMenu } from '../../redux/actions/system/system';
+import {
+  clear,
+  openModal,
+  toggleMenu,
+} from '../../redux/actions/system/system';
 
 import Icon from '../Icon';
 
@@ -17,6 +21,7 @@ import SignOutIcon from '../../assets/images/icons/sign_out.svg';
 import RegIcon from '../../assets/images/icons/assignment.svg';
 
 import classes from './DropdownMenu.scss';
+import { clearFolders } from '../../redux/actions/folder/folder';
 
 type StateType = {
   user: InitialUserStateType;
@@ -45,6 +50,8 @@ const DropdownMenu = (): JSX.Element => {
               className={classes.MenuItem}
               onClick={() => {
                 dispatch(logout());
+                dispatch(clear());
+                dispatch(clearFolders());
                 dispatch(toggleMenu());
               }}
               role="menuitem"

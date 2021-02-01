@@ -6,6 +6,7 @@ import {
   SET_COMPLETED_TASK,
   SET_TASK,
   SET_FOLDER,
+  CLEAR_FOLDERS,
 } from '../actions/folder/types';
 
 const initialState = {
@@ -50,7 +51,7 @@ const folderReducer = (
       const newFolders = state.folders.map((folder) => {
         if (folder._id === action.payload.folderId) {
           const newTasks = [...folder.tasks, action.payload.task];
-          
+
           return { ...folder, tasks: newTasks };
         }
 
@@ -80,6 +81,9 @@ const folderReducer = (
         ...state,
         currentFolder: action.payload,
       };
+
+    case CLEAR_FOLDERS:
+      return initialState;
 
     default:
       return state;

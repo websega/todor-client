@@ -7,6 +7,7 @@ import {
   SET_FOLDER,
   TaskType,
   SET_TASK,
+  CLEAR_FOLDERS,
 } from './types';
 
 export const setCompletedTask = (
@@ -39,4 +40,8 @@ export const setFolder = (folder: FolderType): ActionFolderTypes => ({
 export const loadFolders = (folders: FolderType[]): ActionFolderTypes => ({
   type: LOAD_FOLDERS,
   payload: folders,
+});
+
+export const clearFolders = (): ActionFolderTypes => ({
+  type: CLEAR_FOLDERS,
 });

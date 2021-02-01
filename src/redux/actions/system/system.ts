@@ -7,6 +7,7 @@ import {
   SET_DEFAULT_MODAL_TYPE,
   TOGGLE_MENU,
   SET_CURRENT_COLOR,
+  CLEAR,
 } from './types';
 
 export const openModal = (modalType: string): ActionSystemTypes => ({
@@ -39,4 +40,8 @@ export const setCurrentTask = (taskId: string): ActionSystemTypes => ({
 export const setCurrentColor = (color: string): ActionSystemTypes => ({
   type: SET_CURRENT_COLOR,
   payload: color,
+});
+
+export const clear = (): ActionSystemTypes => ({
+  type: CLEAR,
 });
