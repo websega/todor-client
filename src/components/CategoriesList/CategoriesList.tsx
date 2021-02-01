@@ -23,7 +23,7 @@ type CategoriesType = {
 
 const categories: CategoriesType[] = [
   {
-    id: 'inbox',
+    id: 'all',
     name: 'Все',
     icon: <InboxIcon />,
   },
@@ -61,11 +61,11 @@ const CategoriesList = (): JSX.Element => {
   );
 
   const itemClickHandler = (id: string) => {
-    history.push(`/${id}`);
+    history.push(`${id}`);
   };
 
   useEffect(() => {
-    const categoryId = location.pathname.split('/')[1];
+    const categoryId = location.pathname.split('/')[2];
 
     if (categoryId) {
       dispatch(setCurrentCategory(categoryId));

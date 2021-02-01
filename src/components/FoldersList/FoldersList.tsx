@@ -28,10 +28,6 @@ const FoldersList = (): JSX.Element => {
 
   const folders = useSelector((state: StateType) => state.folders.folders);
 
-  const currentCategory = useSelector(
-    (state: StateType) => state.system.currentCategory
-  );
-
   const userId = useSelector((state: StateType) => state.user.currentUser.id);
 
   const currentFolder = useSelector(
@@ -46,17 +42,13 @@ const FoldersList = (): JSX.Element => {
 
   const folderClickHandler = useCallback(
     (folder: FolderType) => {
-      history.push(`/folder/${folder._id}`);
+      history.push(`/${folder._id}/all`);
     },
     [history]
   );
 
   useEffect(() => {
-    const folderId = location.pathname.split('folder/')[1];
-    console.log(
-      '🚀 ~ file: FoldersList.tsx ~ line 56 ~ useEffect ~ folderId',
-      folderId
-    );
+    const folderId = location.pathname.split('/')[1];
 
     if (folders.length) {
       const activeFolder = folders.find((folder) => folderId === folder._id);
