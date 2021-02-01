@@ -72,22 +72,22 @@ const TasksList = (): JSX.Element => {
             />
           );
 
-          if (match.url === `/all/${currentFolder._id}`) {
+          if (match.url === `/${currentFolder._id}/all`) {
             return element;
           }
 
           if (
-            match.url === `/today/${currentFolder._id}` &&
+            match.url === `/${currentFolder._id}/today` &&
             createdTime === createDate()
           ) {
             return element;
           }
 
-          if (match.url === `/completed/${currentFolder._id}` && completed) {
+          if (match.url === `/${currentFolder._id}/completed` && completed) {
             return element;
           }
 
-          if (match.url === `/important/${currentFolder._id}` && important) {
+          if (match.url === `/${currentFolder._id}/important` && important) {
             return element;
           }
 
