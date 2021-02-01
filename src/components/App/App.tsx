@@ -5,6 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import { auth } from '../../redux/actions/user/async';
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
+import { InitialUserStateType } from '../../redux/reducers/userReducer';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -20,6 +21,7 @@ const dropdownRoot = document.getElementById('dropdown-root') as HTMLElement;
 
 type StateType = {
   folders: InitialFolderStateType;
+  user: InitialUserStateType;
 };
 
 const App = (): JSX.Element => {
@@ -28,6 +30,7 @@ const App = (): JSX.Element => {
   const history = useHistory();
 
   const folders = useSelector((state: StateType) => state.folders.folders);
+  const isAuth = useSelector((state: StateType) => state.user.isAuth);
 
   useEffect(() => {
     dispatch(auth());
@@ -37,7 +40,11 @@ const App = (): JSX.Element => {
     if (location.pathname === '/' && folders.length > 0) {
       history.push(`/${folders[0]._id}/all`);
     }
-  }, [folders, history, location.pathname]);
+
+    if (!isAuth) {
+      history.push('/');
+    }
+  }, [folders, history, isAuth, location.pathname]);
 
   return (
     <div className={classes.App}>
