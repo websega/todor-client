@@ -7,7 +7,6 @@ import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import { setCurrentTask } from '../../redux/actions/system/system';
 import { completedTask, importantTask } from '../../redux/actions/user/async';
-import { setImportantTask } from '../../redux/actions/folder/folder';
 
 import Task from './Task';
 

@@ -13,7 +13,6 @@ import TaskInfoTitle from './TaskInfoTitle';
 import IconButton from '../../IconButton';
 
 import classes from './TaskInfoPanel.scss';
-import { FolderType } from '../../../redux/actions/folder/types';
 
 type StateType = {
   folders: InitialFolderStateType;
