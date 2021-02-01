@@ -20,7 +20,7 @@ import { setAuthError } from '../../../redux/actions/user/user';
 import { InitialUserStateType } from '../../../redux/reducers/userReducer';
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 
-import getElementLabel from '../../../helpers/getElementLabel';
+import getObjectKey from '../../../helpers/getObjectKey';
 
 import AuthForm from './AuthForm';
 import AddForm from './AddForm';
@@ -126,7 +126,7 @@ const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
       )}
 
       <ButtonModal
-        name={getElementLabel(buttonNames, modalType)}
+        name={getObjectKey(buttonNames, modalType)}
         disabled={!isValid}
       />
     </form>

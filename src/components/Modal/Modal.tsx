@@ -13,7 +13,7 @@ import {
 import HeaderModal from './HeaderModal';
 import FormWrapper from './FormWrapper';
 
-import getElementLabel from '../../helpers/getElementLabel';
+import getObjectKey from '../../helpers/getObjectKey';
 
 import classes from './Modal.scss';
 
@@ -107,7 +107,7 @@ const Modal = (): JSX.Element => {
             })}
           >
             <HeaderModal
-              title={getElementLabel(headerTitles, modalType)}
+              title={getObjectKey(headerTitles, modalType)}
               onClose={onClose}
             />
             <FormWrapper modalType={modalType} />

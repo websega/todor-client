@@ -81,6 +81,7 @@ const CategoriesList = (): JSX.Element => {
           return (
             <CategoryItem
               key={id}
+              categoryId={id}
               icon={icon}
               name={name}
               active={currentCategory === id}
