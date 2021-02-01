@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
@@ -12,7 +12,6 @@ import Task from './Task';
 
 import classes from './TasksList.scss';
 import createDate from '../../utils/createDate';
-import getElementLabel from '../../helpers/getElementLabel';
 
 type StateType = {
   folders: InitialFolderStateType;
@@ -21,7 +20,7 @@ type StateType = {
 
 const TasksList = (): JSX.Element => {
   const dispatch = useDispatch();
-  const match = useRouteMatch('/:currentFolder/:currentCategory');
+  const match = useRouteMatch('/:currentCategory/:currentFolder');
 
   const currentFolder = useSelector(
     (state: StateType) => state.folders.currentFolder
@@ -50,7 +49,14 @@ const TasksList = (): JSX.Element => {
       {currentFolder &&
         match &&
         currentFolder.tasks.map((task) => {
-          const { id, title, completed, important, deleted, date } = task;
+          const {
+            id,
+            title,
+            completed,
+            important,
+            deleted,
+            createdTime,
+          } = task;
           const element = (
             <Task
               key={id}
@@ -58,7 +64,7 @@ const TasksList = (): JSX.Element => {
               title={title}
               completed={completed}
               important={important}
-              date={date}
+              date={createdTime}
               active={currentTaskId === id}
               currentFolderColor={currentFolder.colorId}
               onClick={(e) => taskClickHandler(e, id)}
@@ -66,28 +72,26 @@ const TasksList = (): JSX.Element => {
             />
           );
 
-          if (match.url === `/${currentFolder._id}/all`) {
+          if (match.url === `/all/${currentFolder._id}`) {
             return element;
           }
 
           if (
-            match.url === `/${currentFolder._id}/completed` &&
-            completed
+            match.url === `/today/${currentFolder._id}` &&
+            createdTime === createDate()
           ) {
             return element;
           }
 
-          if (
-            match.url === `/${currentFolder._id}/important` &&
-            important
-          ) {
+          if (match.url === `/completed/${currentFolder._id}` && completed) {
             return element;
           }
 
-          if (
-            match.url === `/${currentFolder._id}/deleted` &&
-            deleted
-          ) {
+          if (match.url === `/important/${currentFolder._id}` && important) {
+            return element;
+          }
+
+          if (match.url === `/deleted/${currentFolder._id}` && deleted) {
             return element;
           }
 

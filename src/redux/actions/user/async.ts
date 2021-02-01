@@ -88,7 +88,7 @@ const createTask = (title: string): TaskType => ({
   id: createId(),
   title,
   description: '',
-  date: createDate(),
+  createdTime: createDate(),
   completed: false,
   important: false,
   deleted: false,
