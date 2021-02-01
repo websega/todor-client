@@ -30,7 +30,7 @@
   @include display(flex, flex-start, center);
 }
 
-.active {
+.Active {
   color: $hover-color;
 
   & svg {

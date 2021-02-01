@@ -61,7 +61,7 @@ const Description = (): JSX.Element => {
         inputId={currentTask.id}
         completed={currentTask.completed}
         important={currentTask.important}
-        date={currentTask.date}
+        date={currentTask.createdTime}
         currentFolderColor={currentFolder.colorId}
         onComplete={checkboxClickHandler}
       />

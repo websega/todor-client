@@ -2,7 +2,7 @@ import {
   ActionSystemTypes,
   CLOSE_MODAL,
   OPEN_MODAL,
-  // SET_CURRENT_FOLDER,
+  SET_CURRENT_CATEGORY,
   SET_CURRENT_TASK,
   SET_DEFAULT_MODAL_TYPE,
   TOGGLE_MENU,
@@ -26,10 +26,10 @@ export const toggleMenu = (): ActionSystemTypes => ({
   type: TOGGLE_MENU,
 });
 
-// export const setCurrentFolder = (folder: FolderType): ActionSystemTypes => ({
-//   type: SET_CURRENT_FOLDER,
-//   payload: folder,
-// });
+export const setCurrentCategory = (categoryId: string): ActionSystemTypes => ({
+  type: SET_CURRENT_CATEGORY,
+  payload: categoryId,
+});
 
 export const setCurrentTask = (taskId: string): ActionSystemTypes => ({
   type: SET_CURRENT_TASK,

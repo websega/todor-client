@@ -4,6 +4,7 @@ export const SET_DEFAULT_MODAL_TYPE = 'SET_DEFAULT_MODAL_TYPE';
 
 export const SET_CURRENT_TASK = 'SET_CURRENT_TASK';
 export const SET_CURRENT_COLOR = 'SET_CURRENT_COLOR';
+export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY';
 
 export const TOGGLE_MENU = 'TOGGLE_MENU';
 
@@ -23,10 +24,16 @@ type ActionCurrentColorType = {
   payload: string;
 };
 
+type ActionCurrentCategoryType = {
+  type: typeof SET_CURRENT_CATEGORY;
+  payload: string;
+};
+
 export type ActionSystemTypes =
   | ActionOpenModalType
   | ActionCloseModalType
   | ActionSetDefaultType
   | ActionDropdownMenuType
   | ActionCurrentTaskType
-  | ActionCurrentColorType;
+  | ActionCurrentColorType
+  | ActionCurrentCategoryType;
