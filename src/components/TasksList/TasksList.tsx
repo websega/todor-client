@@ -7,11 +7,13 @@ import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import { setCurrentTask } from '../../redux/actions/system/system';
 import { completedTask } from '../../redux/actions/user/async';
+import { setImportantTask } from '../../redux/actions/folder/folder';
 
 import Task from './Task';
 
-import classes from './TasksList.scss';
 import createDate from '../../utils/createDate';
+
+import classes from './TasksList.scss';
 
 type StateType = {
   folders: InitialFolderStateType;
@@ -44,6 +46,12 @@ const TasksList = (): JSX.Element => {
     }
   };
 
+  const importantClickHandler = (id: string) => {
+    if (currentFolder) {
+      dispatch(setImportantTask(id, currentFolder._id));
+    }
+  };
+
   return (
     <div className={classes.TasksContainer}>
       {currentFolder &&
@@ -69,6 +77,7 @@ const TasksList = (): JSX.Element => {
               currentFolderColor={currentFolder.colorId}
               onClick={(e) => taskClickHandler(e, id)}
               onComplete={checkboxClickHandler}
+              onImportant={()=>importantClickHandler(id)}
             />
           );
 

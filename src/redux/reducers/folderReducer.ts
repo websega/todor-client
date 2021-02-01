@@ -7,6 +7,7 @@ import {
   SET_TASK,
   SET_FOLDER,
   CLEAR_FOLDERS,
+  SET_IMPORTANT_TASK,
 } from '../actions/folder/types';
 
 const initialState = {
@@ -30,6 +31,28 @@ const folderReducer = (
           const newTasks = folder.tasks.map((task) => {
             if (task.id === action.payload.taskId) {
               return { ...task, completed: action.payload.completed };
+            }
+
+            return task;
+          });
+
+          return { ...folder, tasks: newTasks };
+        }
+
+        return folder;
+      });
+
+      return {
+        ...state,
+        folders: newFolders,
+      };
+    }
+    case SET_IMPORTANT_TASK: {
+      const newFolders = state.folders.map((folder) => {
+        if (folder._id === action.payload.folderId) {
+          const newTasks = folder.tasks.map((task) => {
+            if (task.id === action.payload.taskId) {
+              return { ...task, important: !task.important };
             }
 
             return task;

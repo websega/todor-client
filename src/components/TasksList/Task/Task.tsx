@@ -15,6 +15,7 @@ type TaskPropsType = {
   currentFolderColor: string;
   onClick: (e: React.MouseEvent) => void;
   onComplete: (id: string, completed: boolean) => void;
+  onImportant: () => void;
   active?: boolean;
 };
 
@@ -27,6 +28,7 @@ const Task = ({
   currentFolderColor,
   onClick,
   onComplete,
+  onImportant,
   active,
 }: TaskPropsType): JSX.Element => (
   <div
@@ -44,6 +46,7 @@ const Task = ({
       date={date}
       currentFolderColor={currentFolderColor}
       onComplete={onComplete}
+      onImportant={onImportant}
     />
   </div>
 );

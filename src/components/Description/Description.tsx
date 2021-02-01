@@ -12,6 +12,7 @@ import DescriptionPlug from './DescriptionPlug';
 import DescriptionTextArea from './DescriptionTextArea';
 
 import classes from './Description.scss';
+import { setImportantTask } from '../../redux/actions/folder/folder';
 
 type StateType = {
   folders: InitialFolderStateType;
@@ -54,6 +55,12 @@ const Description = (): JSX.Element => {
     }
   };
 
+  const importantClickHandler = (id: string) => {
+    if (currentFolder) {
+      dispatch(setImportantTask(id, currentFolder._id));
+    }
+  };
+
   return (
     <section className={classes.Description}>
       <DescriptionHeader
@@ -64,6 +71,7 @@ const Description = (): JSX.Element => {
         date={currentTask.createdTime}
         currentFolderColor={currentFolder.colorId}
         onComplete={checkboxClickHandler}
+        onImportant={() => importantClickHandler(currentTask.id)}
       />
       <DescriptionTextArea />
     </section>

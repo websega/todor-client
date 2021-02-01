@@ -18,6 +18,7 @@ type TaskBodyPropsType = {
   date: string;
   currentFolderColor: string;
   onComplete: (id: string, completed: boolean) => void;
+  onImportant: () => void;
 };
 
 const TaskBody = ({
@@ -28,6 +29,7 @@ const TaskBody = ({
   date,
   currentFolderColor,
   onComplete,
+  onImportant,
 }: TaskBodyPropsType): JSX.Element => (
   <>
     <div className={classes.left}>
@@ -49,7 +51,7 @@ const TaskBody = ({
         icon={<StarIcon />}
         important={important}
         iconType="important"
-        onClick={() => console.log('click important')}
+        onClick={onImportant}
       />
       <IconButton
         icon={<DotsIcon />}
