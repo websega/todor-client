@@ -14,6 +14,7 @@ import {
   setFolder,
   setTask,
   setCompletedTask,
+  setImportantTask,
 } from '../folder/folder';
 
 import createId from '../../../utils/createId';
@@ -125,7 +126,21 @@ export const completedTask = (
     );
 
     dispatch(setCompletedTask(taskId, folderId, completed));
-    dispatch(closeModal());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const importantTask = (
+  taskId: string,
+  folderId: string
+): ThunkType => async (dispatch) => {
+  try {
+    await axios.patch(
+      `http://localhost:5000/api/folder/important-task/?taskId=${taskId}&folderId=${folderId}`
+    );
+
+    dispatch(setImportantTask(taskId, folderId));
   } catch (error) {
     console.log(error);
   }

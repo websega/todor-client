@@ -6,7 +6,7 @@ import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import { setCurrentTask } from '../../redux/actions/system/system';
-import { completedTask } from '../../redux/actions/user/async';
+import { completedTask, importantTask } from '../../redux/actions/user/async';
 import { setImportantTask } from '../../redux/actions/folder/folder';
 
 import Task from './Task';
@@ -48,7 +48,7 @@ const TasksList = (): JSX.Element => {
 
   const importantClickHandler = (id: string) => {
     if (currentFolder) {
-      dispatch(setImportantTask(id, currentFolder._id));
+      dispatch(importantTask(id, currentFolder._id));
     }
   };
 
