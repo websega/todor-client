@@ -31,10 +31,10 @@ const FolderItem = ({
     tabIndex={0}
     onClick={onClick}
   >
-    <span className={classes.Left}>
+    <div className={classes.Left}>
       <span className={classNames(classes.Badge, `bgColor-${color}`)} />
-      <span>{name}</span>
-    </span>
+      <span className={classes.Text}>{name}</span>
+    </div>
 
     <Count numberOfTask={numberOfTask} color={color} />
   </button>

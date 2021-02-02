@@ -3,6 +3,7 @@
   max-width: rem(400);
 
   & h3 {
+    @include crop-text();
     @include font-sans(null, $main-text-color, normal, normal, 1.3);
     letter-spacing: 0.15px;
   }

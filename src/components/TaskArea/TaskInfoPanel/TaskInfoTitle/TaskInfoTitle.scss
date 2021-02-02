@@ -3,6 +3,7 @@
 
   & h2 {
     @include font-sans(rem(24), $main-text-color, normal, normal, 1.3);
+    @include crop-text();
     letter-spacing: 0.15px;
   }
 }
