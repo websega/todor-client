@@ -22,9 +22,17 @@ const Icon = ({
     [classes.Close]: type === 'close',
     [classes.SignIcon]: type === 'sign',
     [classes.RegIcon]: type === 'reg',
+    [classes.DelIcon]: type === 'del',
     [classes.MainIcon]:
-      type === 'category' || type === 'important' || type === 'default',
-    'mr-r-21': type === 'sign' || type === 'reg' || type === 'category',
+      type === 'category' ||
+      type === 'important' ||
+      type === 'default' ||
+      type === 'del',
+    'mr-r-21':
+      type === 'sign' ||
+      type === 'reg' ||
+      type === 'category' ||
+      type === 'del',
     [classes.Important]: important,
   });
 

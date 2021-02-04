@@ -1,11 +1,14 @@
 .left {
+  position: relative;
+
   @include display(flex, flex-start, center);
+
   max-width: 87%;
 }
 
 .right {
   @include display(flex, space-between, center);
-  min-width: rem(76);
+  min-width: rem(70);
 }
 
 .taskInfo {

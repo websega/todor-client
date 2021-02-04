@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
 
-import { toggleMenu } from '../../redux/actions/system/system';
+import { openDropdownMenu } from '../../redux/actions/system/system';
 
 import AccountImg from './AccountImg';
 import AccountName from './AccountName';
@@ -23,7 +23,7 @@ const Account = React.memo(
   (): JSX.Element => {
     const dispatch = useDispatch();
 
-    const isOpen = useSelector((state: StateType) => state.system.isMenuOpen);
+    const isOpen = useSelector((state: StateType) => state.system.isOpenDropdownMenu);
 
     const username = useSelector(
       (state: StateType) => state.user.currentUser.username
@@ -44,7 +44,7 @@ const Account = React.memo(
           icon={<ArrowIcon />}
           inverted={isOpen}
           onClick={() => {
-            dispatch(toggleMenu());
+            dispatch(openDropdownMenu());
           }}
         />
       </div>

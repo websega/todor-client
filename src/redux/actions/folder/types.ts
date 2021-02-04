@@ -1,6 +1,7 @@
 export const SET_TASK = 'SET_TASK';
 export const SET_COMPLETED_TASK = 'SET_COMPLETED_TASK';
 export const SET_IMPORTANT_TASK = 'SET_IMPORTANT_TASK';
+export const SET_DELETED_TASK = 'SET_DELETED_TASK';
 
 export const SET_FOLDER = 'SET_FOLDER';
 export const LOAD_FOLDERS = 'LOAD_FOLDERS';
@@ -35,7 +36,12 @@ type ActionSetCompletedTaskType = {
 
 type ActionSetImportantTaskType = {
   type: typeof SET_IMPORTANT_TASK;
-  payload: { taskId: string; folderId: string; };
+  payload: { taskId: string; folderId: string };
+};
+
+type ActionSetDeletedTaskType = {
+  type: typeof SET_DELETED_TASK;
+  payload: { taskId: string; folderId: string };
 };
 
 type ActionSetTaskType = {
@@ -66,4 +72,5 @@ export type ActionFolderTypes =
   | ActionFetchFoldersType
   | ActionCurrentFolderType
   | ActionCleartFoldersType
-  | ActionSetImportantTaskType;
+  | ActionSetImportantTaskType
+  | ActionSetDeletedTaskType;

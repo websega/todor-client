@@ -45,12 +45,18 @@
   }
 }
 
+.DelIcon {
+  & svg {
+    color: $warning-color;
+  }
+}
+
 .RegIcon {
   & svg {
     width: rem(21);
     height: rem(22);
 
-    & > path{
+    & > path {
       transform: translateX(-3px);
     }
   }

@@ -5,9 +5,11 @@ import {
   SET_CURRENT_CATEGORY,
   SET_CURRENT_TASK,
   SET_DEFAULT_MODAL_TYPE,
-  TOGGLE_MENU,
+  OPEN_DROPDOWN_MENU,
   SET_CURRENT_COLOR,
+  SET_POSITION_CONTEXT_MENU,
   CLEAR,
+  PositionType,
 } from './types';
 
 export const openModal = (modalType: string): ActionSystemTypes => ({
@@ -23,8 +25,15 @@ export const setDefaultModalType = (): ActionSystemTypes => ({
   type: SET_DEFAULT_MODAL_TYPE,
 });
 
-export const toggleMenu = (): ActionSystemTypes => ({
-  type: TOGGLE_MENU,
+export const openDropdownMenu = (): ActionSystemTypes => ({
+  type: OPEN_DROPDOWN_MENU,
+});
+
+export const setPositionContextMenu = (
+  position: PositionType
+): ActionSystemTypes => ({
+  type: SET_POSITION_CONTEXT_MENU,
+  payload: position,
 });
 
 export const setCurrentCategory = (categoryId: string): ActionSystemTypes => ({

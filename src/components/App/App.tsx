@@ -11,13 +11,20 @@ import Header from '../Header';
 import Sidebar from '../Sidebar';
 import TaskArea from '../TaskArea';
 import Description from '../Description';
+
 import Modal from '../Modal';
 import DropdownMenu from '../DropdownMenu';
+// import ContextMenu from '../ContextMenu';
 
 import classes from './App.scss';
 
 const modalRoot = document.getElementById('modal-root') as HTMLElement;
-const dropdownRoot = document.getElementById('dropdown-root') as HTMLElement;
+const dropdownMenuRoot = document.getElementById(
+  'dropdown-root'
+) as HTMLElement;
+// const contextMenuRoot = document.getElementById(
+//   'contextmenu-root'
+// ) as HTMLElement;
 
 type StateType = {
   folders: InitialFolderStateType;
@@ -54,7 +61,8 @@ const App = (): JSX.Element => {
       <Description />
 
       {ReactDOM.createPortal(<Modal />, modalRoot)}
-      {ReactDOM.createPortal(<DropdownMenu />, dropdownRoot)}
+      {ReactDOM.createPortal(<DropdownMenu />, dropdownMenuRoot)}
+      {/* {ReactDOM.createPortal(<ContextMenu />, contextMenuRoot)} */}
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TaskType } from '../../redux/actions/folder/types';
-import { completedTask } from '../../redux/actions/user/async';
+import { completedTask, deletedTask } from '../../redux/actions/user/async';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
@@ -49,15 +49,21 @@ const Description = (): JSX.Element => {
     );
   }
 
-  const checkboxClickHandler = (id: string, completed: boolean) => {
+  const taskCheckboxHandler = (id: string, completed: boolean) => {
     if (currentFolder) {
       dispatch(completedTask(id, currentFolder._id, completed));
     }
   };
 
-  const importantClickHandler = (id: string) => {
+  const taskImportantHandler = (id: string) => {
     if (currentFolder) {
       dispatch(setImportantTask(id, currentFolder._id));
+    }
+  };
+
+  const taskDeleteHandler = (id: string) => {
+    if (currentFolder) {
+      dispatch(deletedTask(id, currentFolder._id));
     }
   };
 
@@ -70,8 +76,9 @@ const Description = (): JSX.Element => {
         important={currentTask.important}
         date={currentTask.createdTime}
         currentFolderColor={currentFolder.colorId}
-        onComplete={checkboxClickHandler}
-        onImportant={() => importantClickHandler(currentTask.id)}
+        onComplete={taskCheckboxHandler}
+        onImportant={() => taskImportantHandler(currentTask.id)}
+        onDelete={() => taskDeleteHandler(currentTask.id)}
       />
       <DescriptionTextArea />
     </section>

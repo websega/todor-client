@@ -6,7 +6,11 @@ import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import { setCurrentTask } from '../../redux/actions/system/system';
-import { completedTask, importantTask } from '../../redux/actions/user/async';
+import {
+  completedTask,
+  deletedTask,
+  importantTask,
+} from '../../redux/actions/user/async';
 
 import Task from './Task';
 
@@ -39,15 +43,21 @@ const TasksList = (): JSX.Element => {
     dispatch(setCurrentTask(id));
   };
 
-  const checkboxClickHandler = (id: string, completed: boolean) => {
+  const taskCheckboxHandler = (id: string, completed: boolean) => {
     if (currentFolder) {
       dispatch(completedTask(id, currentFolder._id, completed));
     }
   };
 
-  const importantClickHandler = (id: string) => {
+  const taskImportantHandler = (id: string) => {
     if (currentFolder) {
       dispatch(importantTask(id, currentFolder._id));
+    }
+  };
+
+  const taskDeleteHandler = (id: string) => {
+    if (currentFolder) {
+      dispatch(deletedTask(id, currentFolder._id));
     }
   };
 
@@ -75,27 +85,37 @@ const TasksList = (): JSX.Element => {
               active={currentTaskId === id}
               currentFolderColor={currentFolder.colorId}
               onClick={(e) => taskClickHandler(e, id)}
-              onComplete={checkboxClickHandler}
-              onImportant={()=>importantClickHandler(id)}
+              onComplete={taskCheckboxHandler}
+              onImportant={() => taskImportantHandler(id)}
+              onDelete={() => taskDeleteHandler(id)}
             />
           );
 
-          if (match.url === `/${currentFolder._id}/all`) {
+          if (match.url === `/${currentFolder._id}/all` && !deleted) {
             return element;
           }
 
           if (
             match.url === `/${currentFolder._id}/today` &&
-            createdTime === createDate()
+            createdTime === createDate() &&
+            !deleted
           ) {
             return element;
           }
 
-          if (match.url === `/${currentFolder._id}/completed` && completed) {
+          if (
+            match.url === `/${currentFolder._id}/completed` &&
+            completed &&
+            !deleted
+          ) {
             return element;
           }
 
-          if (match.url === `/${currentFolder._id}/important` && important) {
+          if (
+            match.url === `/${currentFolder._id}/important` &&
+            important &&
+            !deleted
+          ) {
             return element;
           }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DotsIcon from '../../../../assets/images/icons/more_dots.svg';
+import TrashIcon from '../../../../assets/images/icons/delete.svg';
 import StarIcon from '../../../../assets/images/icons/star.svg';
 
 import Checkbox from '../../../Checkbox';
@@ -19,6 +19,7 @@ type TaskBodyPropsType = {
   currentFolderColor: string;
   onComplete: (id: string, completed: boolean) => void;
   onImportant: () => void;
+  onDelete: () => void;
 };
 
 const TaskBody = ({
@@ -30,6 +31,7 @@ const TaskBody = ({
   currentFolderColor,
   onComplete,
   onImportant,
+  onDelete,
 }: TaskBodyPropsType): JSX.Element => (
   <>
     <div className={classes.left}>
@@ -53,11 +55,7 @@ const TaskBody = ({
         iconType="important"
         onClick={onImportant}
       />
-      <IconButton
-        icon={<DotsIcon />}
-        iconType="dots"
-        onClick={() => console.log('click context menu')}
-      />
+      <IconButton icon={<TrashIcon />} iconType="dots" onClick={onDelete} />
     </div>
   </>
 );

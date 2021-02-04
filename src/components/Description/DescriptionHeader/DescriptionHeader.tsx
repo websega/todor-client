@@ -13,6 +13,7 @@ type TaskPropsType = {
   currentFolderColor: string;
   onComplete: (id: string, completed: boolean) => void;
   onImportant: () => void;
+  onDelete: () => void;
 };
 
 const DescriptionHeader = ({
@@ -24,6 +25,7 @@ const DescriptionHeader = ({
   currentFolderColor,
   onComplete,
   onImportant,
+  onDelete,
 }: TaskPropsType): JSX.Element => (
   <div className={classes.Header}>
     <TaskBody
@@ -35,6 +37,7 @@ const DescriptionHeader = ({
       currentFolderColor={currentFolderColor}
       onComplete={onComplete}
       onImportant={onImportant}
+      onDelete={onDelete}
     />
   </div>
 );

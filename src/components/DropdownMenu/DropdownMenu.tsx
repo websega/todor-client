@@ -11,7 +11,7 @@ import { logout } from '../../redux/actions/user/user';
 import {
   clear,
   openModal,
-  toggleMenu,
+  openDropdownMenu,
 } from '../../redux/actions/system/system';
 
 import Icon from '../Icon';
@@ -32,12 +32,14 @@ const DURATION = 490;
 
 const DropdownMenu = (): JSX.Element => {
   const isAuth = useSelector((state: StateType) => state.user.isAuth);
-  const isOpenMenu = useSelector((state: StateType) => state.system.isMenuOpen);
+  const isOpen = useSelector(
+    (state: StateType) => state.system.isOpenDropdownMenu
+  );
   const dispatch = useDispatch();
 
   return (
     <Transition
-      in={isOpenMenu}
+      in={isOpen}
       appear
       timeout={DURATION}
       mountOnEnter
@@ -52,7 +54,7 @@ const DropdownMenu = (): JSX.Element => {
                 dispatch(logout());
                 dispatch(clear());
                 dispatch(clearFolders());
-                dispatch(toggleMenu());
+                dispatch(openDropdownMenu());
               }}
               role="menuitem"
               aria-hidden="true"
@@ -67,7 +69,7 @@ const DropdownMenu = (): JSX.Element => {
                 className={classes.MenuItem}
                 onClick={() => {
                   dispatch(openModal('registration'));
-                  dispatch(toggleMenu());
+                  dispatch(openDropdownMenu());
                 }}
                 role="menuitem"
                 aria-hidden="true"
@@ -79,7 +81,7 @@ const DropdownMenu = (): JSX.Element => {
                 className={classes.MenuItem}
                 onClick={() => {
                   dispatch(openModal('login'));
-                  dispatch(toggleMenu());
+                  dispatch(openDropdownMenu());
                 }}
                 role="menuitem"
                 aria-hidden="true"
