@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import classNames from 'classnames';
 
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
+import { InitialUserStateType } from '../../../redux/reducers/userReducer';
 
 import Count from '../../Count';
 import Icon from '../../Icon';
@@ -21,6 +22,7 @@ type CategoryItemPropsType = {
 
 type StateType = {
   folders: InitialFolderStateType;
+  user: InitialUserStateType;
 };
 
 const CategoryItem = ({
@@ -34,10 +36,12 @@ const CategoryItem = ({
     (state: StateType) => state.folders.currentFolder
   );
 
+  const isAuth = useSelector((state: StateType) => state.user.isAuth);
+
   const [numberOfTask, setNumberOfTask] = useState<number>(0);
 
   useEffect(() => {
-    if (currentFolder) {
+    if (currentFolder && isAuth) {
       let num = 0;
 
       if (categoryId === 'all') {
@@ -66,8 +70,10 @@ const CategoryItem = ({
       ).length;
 
       setNumberOfTask(num);
+    } else {
+      setNumberOfTask(0);
     }
-  }, [categoryId, currentFolder]);
+  }, [categoryId, currentFolder, isAuth]);
 
   return (
     <li
