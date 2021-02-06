@@ -14,7 +14,6 @@ import Description from '../Description';
 
 import Modal from '../Modal';
 import DropdownMenu from '../DropdownMenu';
-// import ContextMenu from '../ContextMenu';
 
 import classes from './App.scss';
 
@@ -22,9 +21,6 @@ const modalRoot = document.getElementById('modal-root') as HTMLElement;
 const dropdownMenuRoot = document.getElementById(
   'dropdown-root'
 ) as HTMLElement;
-// const contextMenuRoot = document.getElementById(
-//   'contextmenu-root'
-// ) as HTMLElement;
 
 type StateType = {
   folders: InitialFolderStateType;
