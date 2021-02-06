@@ -44,18 +44,26 @@ const CategoryItem = ({
         num = currentFolder.tasks.length;
       }
 
-      num = currentFolder.tasks.filter((task) => {
-        if (
-          (categoryId === 'today' && task.createdTime === createDate()) ||
-          (categoryId === 'completed' && task.completed) ||
-          (categoryId === 'important' && task.important) ||
-          (categoryId === 'deleted' && task.deleted)
-        ) {
-          return true;
-        }
+      num = currentFolder.tasks.filter(
+        ({ completed, deleted, createdTime, important }) => {
+          if (
+            (categoryId === 'all' && !completed && !deleted) ||
+            (categoryId === 'today' &&
+              createdTime === createDate() &&
+              !deleted) ||
+            (categoryId === 'completed' && completed && !deleted) ||
+            (categoryId === 'important' &&
+              important &&
+              !completed &&
+              !deleted) ||
+            (categoryId === 'deleted' && deleted)
+          ) {
+            return true;
+          }
 
-        return false;
-      }).length;
+          return false;
+        }
+      ).length;
 
       setNumberOfTask(num);
     }

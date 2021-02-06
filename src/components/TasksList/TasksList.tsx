@@ -91,7 +91,11 @@ const TasksList = (): JSX.Element => {
             />
           );
 
-          if (match.url === `/${currentFolder._id}/all` && !deleted) {
+          if (
+            match.url === `/${currentFolder._id}/all` &&
+            !completed &&
+            !deleted
+          ) {
             return element;
           }
 
@@ -114,6 +118,7 @@ const TasksList = (): JSX.Element => {
           if (
             match.url === `/${currentFolder._id}/important` &&
             important &&
+            !completed &&
             !deleted
           ) {
             return element;
