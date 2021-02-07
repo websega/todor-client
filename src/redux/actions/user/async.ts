@@ -17,6 +17,7 @@ import {
   setImportantTask,
   setDeletedTask,
   deleteFolder,
+  deleteTasks,
 } from '../folder/folder';
 
 import createId from '../../../utils/createId';
@@ -158,6 +159,20 @@ export const deletedTask = (
     );
 
     dispatch(setDeletedTask(taskId, folderId));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const clearDeletedTask = (folderId: string): ThunkType => async (
+  dispatch
+) => {
+  try {
+    await axios.patch(
+      `http://localhost:5000/api/folder/clear-deleted-tasks/?folderId=${folderId}`
+    );
+
+    dispatch(deleteTasks(folderId));
   } catch (error) {
     console.log(error);
   }

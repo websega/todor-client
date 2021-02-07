@@ -9,7 +9,8 @@ import {
   DELETE_FOLDER,
   SET_IMPORTANT_TASK,
   SET_DELETED_TASK,
-  CLEAR_FOLDERS
+  CLEAR_FOLDERS,
+  DELETE_TASKS,
 } from '../actions/folder/types';
 
 const initialState = {
@@ -113,6 +114,23 @@ const folderReducer = (
       };
     }
 
+    case DELETE_TASKS: {
+      const newFolders = state.folders.map((folder) => {
+        if (folder._id === action.payload) {
+          const newTasks = folder.tasks.filter((task) => !task.deleted);
+
+          return { ...folder, tasks: newTasks };
+        }
+
+        return folder;
+      });
+
+      return {
+        ...state,
+        folders: newFolders,
+      };
+    }
+
     case LOAD_FOLDERS:
       return {
         ...state,
@@ -139,7 +157,7 @@ const folderReducer = (
       return {
         ...state,
         folders: newFolders,
-        currentFolder: null
+        currentFolder: null,
       };
     }
 

@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import classNames from 'classnames';
 
-import { destroyFolder } from '../../../redux/actions/user/async';
+import {
+  clearDeletedTask,
+  destroyFolder,
+} from '../../../redux/actions/user/async';
 import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 
@@ -23,6 +26,7 @@ type StateType = {
 
 const TaskInfoPanel = (): JSX.Element => {
   const dispatch = useDispatch();
+
   const currentFolder = useSelector(
     (state: StateType) => state.folders.currentFolder
   );
@@ -37,6 +41,10 @@ const TaskInfoPanel = (): JSX.Element => {
 
   const deleteFolderHandler = (id: string) => {
     dispatch(destroyFolder(id));
+  };
+
+  const clearDeletedTaskHandler = (id: string) => {
+    dispatch(clearDeletedTask(id));
   };
 
   return (
@@ -66,7 +74,7 @@ const TaskInfoPanel = (): JSX.Element => {
               <IconButton
                 icon={<CleanIcon />}
                 iconType="clean"
-                onClick={() => console.log('clear deleted')}
+                onClick={() => clearDeletedTaskHandler(currentFolder._id)}
               />
             )}
           </div>

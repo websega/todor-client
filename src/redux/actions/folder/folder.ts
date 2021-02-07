@@ -7,6 +7,7 @@ import {
   SET_FOLDER,
   TaskType,
   SET_TASK,
+  DELETE_TASKS,
   DELETE_FOLDER,
   SET_IMPORTANT_TASK,
   SET_DELETED_TASK,
@@ -44,6 +45,13 @@ export const setTask = (
 ): ActionFolderTypes => ({
   type: SET_TASK,
   payload: { task, folderId },
+});
+
+export const deleteTasks = (
+  folderId: string
+): ActionFolderTypes => ({
+  type: DELETE_TASKS,
+  payload: folderId,
 });
 
 export const setCurrentFolder = (folder: FolderType): ActionFolderTypes => ({
