@@ -40,6 +40,7 @@ const TaskAddForm = (): JSX.Element => {
 
     if (currentFolder) {
       dispatch(addTask(taskTitle, currentFolder._id));
+      setTaskTitle('');
     }
   };
 
