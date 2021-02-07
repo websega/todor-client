@@ -20,10 +20,10 @@
   }
 }
 
-.DotsIcon {
+.CleanIcon {
   & svg {
-    min-width: rem($dots-icon-sz);
-    min-height: rem($dots-icon-sz);
+    min-width: rem($clean-icon-sz);
+    min-height: rem($clean-icon-sz);
   }
 }
 
@@ -32,6 +32,8 @@
 }
 
 .Close {
+  margin-right: 0;
+  
   & svg {
     min-width: rem(15);
     min-height: rem(15);

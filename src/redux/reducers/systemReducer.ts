@@ -8,7 +8,6 @@ import {
   SET_CURRENT_COLOR,
   SET_CURRENT_CATEGORY,
   CLEAR,
-  SET_POSITION_CONTEXT_MENU,
 } from '../actions/system/types';
 
 const initialState = {

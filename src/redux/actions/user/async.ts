@@ -8,7 +8,7 @@ import { ActionSystemTypes } from '../system/types';
 import { RootStateType } from '../../reducers';
 
 import { setAuthError, setUser } from './user';
-import { closeModal } from '../system/system';
+import { closeModal, setCurrentColor } from '../system/system';
 import {
   loadFolders,
   setFolder,
@@ -16,6 +16,7 @@ import {
   setCompletedTask,
   setImportantTask,
   setDeletedTask,
+  deleteFolder,
 } from '../folder/folder';
 
 import createId from '../../../utils/createId';
@@ -194,6 +195,23 @@ export const addFolder = (
     alert(response.data.message);
     dispatch(setFolder(response.data.folder));
     dispatch(closeModal());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const destroyFolder = (folderId: string): ThunkType => async (
+  dispatch
+) => {
+  try {
+    const response = await axios.patch(
+      `http://localhost:5000/api/folder/delete-folder/?folderId=${folderId}`
+    );
+
+    // eslint-disable-next-line no-alert
+    alert(response.data.message);
+    dispatch(deleteFolder(folderId));
+    dispatch(setCurrentColor('teal'));
   } catch (error) {
     console.log(error);
   }

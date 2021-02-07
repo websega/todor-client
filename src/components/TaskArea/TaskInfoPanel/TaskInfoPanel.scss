@@ -1,18 +1,18 @@
-.info {
+.Info {
   @include display(flex, space-between, center);
   width: 100%;
   height: rem(100);
+
   background-color: #fff;
   padding-left: rem(45);
   padding-right: rem(28);
 }
 
-.right {
-  @include display(flex, space-between, center);
-  min-width: 13%;
+.Right {
+  @include display(flex, center, center);
 }
 
-.borderBottomColor {
+.BorderBottomColor {
   &-teal {
     border-bottom: 4px solid $color-teal;
   }

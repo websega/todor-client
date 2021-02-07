@@ -15,10 +15,9 @@ const Icon = ({
   type = 'default',
   important,
 }: IconPropsType): JSX.Element => {
-  const cls = classNames({
-    [classes.Icon]: true,
+  const cls = classNames('mr-r-21', classes.Icon, {
     [classes.SortIcon]: type === 'sort',
-    [classes.DotsIcon]: type === 'dots',
+    [classes.CleanIcon]: type === 'clean',
     [classes.Close]: type === 'close',
     [classes.SignIcon]: type === 'sign',
     [classes.RegIcon]: type === 'reg',
@@ -27,11 +26,6 @@ const Icon = ({
       type === 'category' ||
       type === 'important' ||
       type === 'default' ||
-      type === 'del',
-    'mr-r-21':
-      type === 'sign' ||
-      type === 'reg' ||
-      type === 'category' ||
       type === 'del',
     [classes.Important]: important,
   });

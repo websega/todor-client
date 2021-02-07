@@ -55,7 +55,7 @@ const TaskBody = ({
         iconType="important"
         onClick={onImportant}
       />
-      <IconButton icon={<TrashIcon />} iconType="dots" onClick={onDelete} />
+      <IconButton icon={<TrashIcon />} iconType="clean" onClick={onDelete} />
     </div>
   </>
 );

@@ -6,9 +6,10 @@ import {
   SET_COMPLETED_TASK,
   SET_TASK,
   SET_FOLDER,
-  CLEAR_FOLDERS,
+  DELETE_FOLDER,
   SET_IMPORTANT_TASK,
   SET_DELETED_TASK,
+  CLEAR_FOLDERS
 } from '../actions/folder/types';
 
 const initialState = {
@@ -129,6 +130,18 @@ const folderReducer = (
         ...state,
         currentFolder: action.payload,
       };
+
+    case DELETE_FOLDER: {
+      const newFolders = state.folders.filter(
+        (folder) => folder._id !== action.payload
+      );
+
+      return {
+        ...state,
+        folders: newFolders,
+        currentFolder: null
+      };
+    }
 
     case CLEAR_FOLDERS:
       return initialState;
