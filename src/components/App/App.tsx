@@ -44,6 +44,10 @@ const App = (): JSX.Element => {
       history.push(`/${folders[0]._id}/all`);
     }
 
+    if (location.pathname !== '/' && folders.length > 0) {
+      history.push(`/${folders[0]._id}/all`);
+    }
+
     if (!isAuth || folders.length === 0) {
       history.push('/');
     }
