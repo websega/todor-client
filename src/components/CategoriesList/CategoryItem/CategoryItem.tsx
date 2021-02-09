@@ -54,6 +54,7 @@ const CategoryItem = ({
             (categoryId === 'all' && !completed && !deleted) ||
             (categoryId === 'today' &&
               createdTime === createDate() &&
+              !completed &&
               !deleted) ||
             (categoryId === 'completed' && completed && !deleted) ||
             (categoryId === 'important' &&

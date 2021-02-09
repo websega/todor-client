@@ -102,6 +102,7 @@ const TasksList = (): JSX.Element => {
           if (
             match.url === `/${currentFolder._id}/today` &&
             createdTime === createDate() &&
+            !completed &&
             !deleted
           ) {
             return element;
