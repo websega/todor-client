@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import classNames from 'classnames';
 
@@ -18,6 +19,8 @@ import TaskInfoTitle from './TaskInfoTitle';
 import IconButton from '../../IconButton';
 
 import classes from './TaskInfoPanel.scss';
+import { setCurrentFolder } from '../../../redux/actions/folder/folder';
+import { setCurrentColor } from '../../../redux/actions/system/system';
 
 type StateType = {
   folders: InitialFolderStateType;
@@ -25,7 +28,13 @@ type StateType = {
 };
 
 const TaskInfoPanel = (): JSX.Element => {
+  console.log('render');
+
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
+
+  const folders = useSelector((state: StateType) => state.folders.folders);
 
   const currentFolder = useSelector(
     (state: StateType) => state.folders.currentFolder
@@ -41,6 +50,17 @@ const TaskInfoPanel = (): JSX.Element => {
 
   const deleteFolderHandler = (id: string) => {
     dispatch(destroyFolder(id));
+    
+    if (folders.length) {
+      history.push(`/${folders[0]._id}/all`);
+      const folderId = folders[0]._id;
+      const activeFolder = folders.find((folder) => folderId === folder._id);
+
+      if (activeFolder) {
+        dispatch(setCurrentFolder(activeFolder));
+        dispatch(setCurrentColor(activeFolder.colorId));
+      }
+    }
   };
 
   const clearDeletedTaskHandler = (id: string) => {
