@@ -11,6 +11,7 @@ import {
   SET_DELETED_TASK,
   CLEAR_FOLDERS,
   DELETE_TASKS,
+  SET_TASK_DESCRIPTION,
 } from '../actions/folder/types';
 
 const initialState = {
@@ -101,6 +102,29 @@ const folderReducer = (
       const newFolders = state.folders.map((folder) => {
         if (folder._id === action.payload.folderId) {
           const newTasks = [...folder.tasks, action.payload.task];
+
+          return { ...folder, tasks: newTasks };
+        }
+
+        return folder;
+      });
+
+      return {
+        ...state,
+        folders: newFolders,
+      };
+    }
+
+    case SET_TASK_DESCRIPTION: {
+      const newFolders = state.folders.map((folder) => {
+        if (folder._id === action.payload.folderId) {
+          const newTasks = folder.tasks.map((task) => {
+            if (task.id === action.payload.taskId) {
+              return { ...task, description: action.payload.descriptionText };
+            }
+
+            return task;
+          });
 
           return { ...folder, tasks: newTasks };
         }

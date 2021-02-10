@@ -18,6 +18,7 @@ import {
   setDeletedTask,
   deleteFolder,
   deleteTasks,
+  setTaskDescription,
 } from '../folder/folder';
 
 import createId from '../../../utils/createId';
@@ -112,6 +113,25 @@ export const addTask = (
 
     dispatch(setTask(newTask, folderId));
     dispatch(closeModal());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addTaskDescription = (
+  taskId: string,
+  folderId: string,
+  descriptionText: string
+): ThunkType => async (dispatch) => {
+  try {
+    await axios.post(
+      `http://localhost:5000/api/folder/add-task-description/?taskId=${taskId}&folderId=${folderId}`,
+      {
+        descriptionText,
+      }
+    );
+
+    dispatch(setTaskDescription(taskId, folderId, descriptionText));
   } catch (error) {
     console.log(error);
   }

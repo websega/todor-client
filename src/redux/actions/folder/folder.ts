@@ -12,6 +12,7 @@ import {
   SET_IMPORTANT_TASK,
   SET_DELETED_TASK,
   CLEAR_FOLDERS,
+  SET_TASK_DESCRIPTION,
 } from './types';
 
 export const setCompletedTask = (
@@ -47,9 +48,16 @@ export const setTask = (
   payload: { task, folderId },
 });
 
-export const deleteTasks = (
-  folderId: string
+export const setTaskDescription = (
+  taskId: string,
+  folderId: string,
+  descriptionText: string
 ): ActionFolderTypes => ({
+  type: SET_TASK_DESCRIPTION,
+  payload: { taskId, folderId, descriptionText },
+});
+
+export const deleteTasks = (folderId: string): ActionFolderTypes => ({
   type: DELETE_TASKS,
   payload: folderId,
 });

@@ -80,7 +80,7 @@ const Description = (): JSX.Element => {
         onImportant={() => taskImportantHandler(currentTask.id)}
         onDelete={() => taskDeleteHandler(currentTask.id)}
       />
-      <DescriptionTextArea />
+      <DescriptionTextArea description={currentTask.description}/>
     </section>
   );
 };

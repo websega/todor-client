@@ -17,7 +17,6 @@ import InputBox from '../../InputBox';
 import classes from './TaskAddForm.scss';
 
 type StateType = {
-  foldersList: InitialFolderStateType;
   system: InitialSystemStateType;
   folders: InitialFolderStateType;
 };

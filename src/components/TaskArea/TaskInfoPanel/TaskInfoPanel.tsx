@@ -28,10 +28,8 @@ type StateType = {
 };
 
 const TaskInfoPanel = (): JSX.Element => {
-  console.log('render');
-
   const dispatch = useDispatch();
-  const location = useLocation();
+  
   const history = useHistory();
 
   const folders = useSelector((state: StateType) => state.folders.folders);
@@ -50,7 +48,7 @@ const TaskInfoPanel = (): JSX.Element => {
 
   const deleteFolderHandler = (id: string) => {
     dispatch(destroyFolder(id));
-    
+
     if (folders.length) {
       history.push(`/${folders[0]._id}/all`);
       const folderId = folders[0]._id;
