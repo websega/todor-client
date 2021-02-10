@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { toggleTaskProperty } from '../../redux/actions/user/async';
+import { toggleTaskProperty } from '../../redux/actions/async';
 import { TaskType } from '../../redux/actions/folder/types';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';

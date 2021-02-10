@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addTaskDescription } from '../../../redux/actions/user/async';
+import { addTaskDescription } from '../../../redux/actions/async';
 
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';

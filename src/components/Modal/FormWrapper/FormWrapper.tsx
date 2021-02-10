@@ -13,7 +13,7 @@ import {
   login,
   addFolder,
   addTask,
-} from '../../../redux/actions/user/async';
+} from '../../../redux/actions/async';
 
 import { setAuthError } from '../../../redux/actions/user/user';
 

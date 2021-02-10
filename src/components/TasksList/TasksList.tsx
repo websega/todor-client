@@ -6,7 +6,7 @@ import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import { setCurrentTask } from '../../redux/actions/system/system';
-import { toggleTaskProperty } from '../../redux/actions/user/async';
+import { toggleTaskProperty } from '../../redux/actions/async';
 
 import Task from './Task';
 

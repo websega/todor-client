@@ -2,13 +2,13 @@ import axios from 'axios';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { ActionUserTypes } from './types';
-import { ActionFolderTypes, TaskType } from '../folder/types';
-import { ActionSystemTypes } from '../system/types';
-import { RootStateType } from '../../reducers';
+import { ActionUserTypes } from './user/types';
+import { ActionFolderTypes, TaskType } from './folder/types';
+import { ActionSystemTypes } from './system/types';
+import { RootStateType } from '../reducers';
 
-import { setAuthError, setUser } from './user';
-import { closeModal, setCurrentColor } from '../system/system';
+import { setAuthError, setUser } from './user/user';
+import { closeModal, setCurrentColor } from './system/system';
 import {
   loadFolders,
   setFolder,
@@ -17,10 +17,10 @@ import {
   deleteTasks,
   setTaskDescription,
   setTaskProperty,
-} from '../folder/folder';
+} from './folder/folder';
 
-import createId from '../../../utils/createId';
-import createDate from '../../../utils/createDate';
+import createId from '../../utils/createId';
+import createDate from '../../utils/createDate';
 
 type ThunkType = ThunkAction<
   Promise<void>,

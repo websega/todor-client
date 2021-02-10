@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 
-import { addTask } from '../../../redux/actions/user/async';
+import { addTask } from '../../../redux/actions/async';
 
 import CalendarIcon from '../../../assets/images/icons/calendar.svg';
 
