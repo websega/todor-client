@@ -1,9 +1,7 @@
 export const SET_TASK = 'SET_TASK';
 export const SET_TASK_DESCRIPTION = 'SET_TASK_DESCRIPTION';
 
-export const SET_COMPLETED_TASK = 'SET_COMPLETED_TASK';
-export const SET_IMPORTANT_TASK = 'SET_IMPORTANT_TASK';
-export const SET_DELETED_TASK = 'SET_DELETED_TASK';
+export const TOGGLE_TASK_PROPERTY = 'TOGGLE_TASK_PROPERTY';
 
 export const DELETE_TASKS = 'DELETE_TASKS';
 
@@ -34,19 +32,9 @@ export type FolderType = {
   _v?: number;
 };
 
-type ActionSetCompletedTaskType = {
-  type: typeof SET_COMPLETED_TASK;
-  payload: { taskId: string; folderId: string; completed: boolean };
-};
-
-type ActionSetImportantTaskType = {
-  type: typeof SET_IMPORTANT_TASK;
-  payload: { taskId: string; folderId: string };
-};
-
-type ActionSetDeletedTaskType = {
-  type: typeof SET_DELETED_TASK;
-  payload: { taskId: string; folderId: string };
+type ActionSetTaskPropertyType = {
+  type: typeof TOGGLE_TASK_PROPERTY;
+  payload: { taskId: string; folderId: string; propName: keyof TaskType };
 };
 
 type ActionDeleteTasksType = {
@@ -86,14 +74,12 @@ type ActionClearFoldersType = {
 };
 
 export type ActionFolderTypes =
-  | ActionSetCompletedTaskType
   | ActionSetTaskType
   | ActionSetFolderType
   | ActionFetchFoldersType
   | ActionCurrentFolderType
   | ActionDeleteFolderType
-  | ActionSetImportantTaskType
-  | ActionSetDeletedTaskType
   | ActionClearFoldersType
   | ActionDeleteTasksType
-  | ActionSetTaskDescriptionType;
+  | ActionSetTaskDescriptionType
+  | ActionSetTaskPropertyType;

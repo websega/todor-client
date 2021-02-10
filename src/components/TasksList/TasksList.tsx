@@ -6,17 +6,14 @@ import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import { setCurrentTask } from '../../redux/actions/system/system';
-import {
-  completedTask,
-  deletedTask,
-  importantTask,
-} from '../../redux/actions/user/async';
+import { toggleTaskProperty } from '../../redux/actions/user/async';
 
 import Task from './Task';
 
 import createDate from '../../utils/createDate';
 
 import classes from './TasksList.scss';
+import { TaskType } from '../../redux/actions/folder/types';
 
 type StateType = {
   folders: InitialFolderStateType;
@@ -43,21 +40,12 @@ const TasksList = (): JSX.Element => {
     dispatch(setCurrentTask(id));
   };
 
-  const taskCheckboxHandler = (id: string, completed: boolean) => {
+  const taskTogglePropertyHandler = (
+    taskId: string,
+    propName: keyof TaskType
+  ) => {
     if (currentFolder) {
-      dispatch(completedTask(id, currentFolder._id, completed));
-    }
-  };
-
-  const taskImportantHandler = (id: string) => {
-    if (currentFolder) {
-      dispatch(importantTask(id, currentFolder._id));
-    }
-  };
-
-  const taskDeleteHandler = (id: string) => {
-    if (currentFolder) {
-      dispatch(deletedTask(id, currentFolder._id));
+      dispatch(toggleTaskProperty(taskId, currentFolder._id, propName));
     }
   };
 
@@ -85,9 +73,9 @@ const TasksList = (): JSX.Element => {
               active={currentTaskId === id}
               currentFolderColor={currentFolder.colorId}
               onClick={(e) => taskClickHandler(e, id)}
-              onComplete={taskCheckboxHandler}
-              onImportant={() => taskImportantHandler(id)}
-              onDelete={() => taskDeleteHandler(id)}
+              onComplete={taskTogglePropertyHandler}
+              onImportant={() => taskTogglePropertyHandler(id, 'important')}
+              onDelete={() => taskTogglePropertyHandler(id, 'deleted')}
             />
           );
 

@@ -1,6 +1,7 @@
 import React from 'react';
-
 import classNames from 'classnames';
+
+import { TaskType } from '../../../redux/actions/folder/types';
 
 import TaskBody from './TaskBody';
 
@@ -14,7 +15,7 @@ type TaskPropsType = {
   date: string;
   currentFolderColor: string;
   onClick: (e: React.MouseEvent) => void;
-  onComplete: (id: string, completed: boolean) => void;
+  onComplete: (id: string, propName: keyof TaskType) => void;
   onImportant: () => void;
   onDelete: () => void;
   active?: boolean;

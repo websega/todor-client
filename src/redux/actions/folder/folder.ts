@@ -3,41 +3,23 @@ import {
   FolderType,
   SET_CURRENT_FOLDER,
   LOAD_FOLDERS,
-  SET_COMPLETED_TASK,
   SET_FOLDER,
   TaskType,
   SET_TASK,
   DELETE_TASKS,
   DELETE_FOLDER,
-  SET_IMPORTANT_TASK,
-  SET_DELETED_TASK,
   CLEAR_FOLDERS,
   SET_TASK_DESCRIPTION,
+  TOGGLE_TASK_PROPERTY,
 } from './types';
 
-export const setCompletedTask = (
+export const setTaskProperty = (
   taskId: string,
   folderId: string,
-  completed: boolean
+  propName: keyof TaskType
 ): ActionFolderTypes => ({
-  type: SET_COMPLETED_TASK,
-  payload: { taskId, folderId, completed },
-});
-
-export const setImportantTask = (
-  taskId: string,
-  folderId: string
-): ActionFolderTypes => ({
-  type: SET_IMPORTANT_TASK,
-  payload: { taskId, folderId },
-});
-
-export const setDeletedTask = (
-  taskId: string,
-  folderId: string
-): ActionFolderTypes => ({
-  type: SET_DELETED_TASK,
-  payload: { taskId, folderId },
+  type: TOGGLE_TASK_PROPERTY,
+  payload: { taskId, folderId, propName },
 });
 
 export const setTask = (

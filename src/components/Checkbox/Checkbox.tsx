@@ -1,6 +1,7 @@
 import React from 'react';
-
 import classNames from 'classnames';
+
+import { TaskType } from '../../redux/actions/folder/types';
 
 import classes from './Checkbox.scss';
 
@@ -8,7 +9,7 @@ type CheckboxPropsType = {
   completed: boolean;
   color: string;
   id: string;
-  onComplete: (id: string, completed: boolean) => void;
+  onComplete: (id: string, propName: keyof TaskType) => void;
 };
 
 const Checkbox = ({
@@ -17,8 +18,8 @@ const Checkbox = ({
   id,
   onComplete,
 }: CheckboxPropsType): JSX.Element => {
-  const checkBoxClickHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onComplete(id, e.currentTarget.checked);
+  const checkBoxClickHandler = () => {
+    onComplete(id, 'completed');
   };
 
   return (

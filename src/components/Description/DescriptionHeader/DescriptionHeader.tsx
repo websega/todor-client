@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { TaskType } from '../../../redux/actions/folder/types';
+
 import TaskBody from '../../TasksList/Task/TaskBody';
 
 import classes from './DescriptionHeader.scss';
@@ -11,7 +13,7 @@ type TaskPropsType = {
   important: boolean;
   date: string;
   currentFolderColor: string;
-  onComplete: (id: string, completed: boolean) => void;
+  onComplete: (id: string, propName: keyof TaskType) => void;
   onImportant: () => void;
   onDelete: () => void;
 };
