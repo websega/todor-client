@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import {
   clearDeletedTask,
   destroyFolder,
-} from '../../../redux/actions/user/async';
+} from '../../../redux/actions/async';
 import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 
@@ -29,7 +29,7 @@ type StateType = {
 
 const TaskInfoPanel = (): JSX.Element => {
   const dispatch = useDispatch();
-  
+
   const history = useHistory();
 
   const folders = useSelector((state: StateType) => state.folders.folders);

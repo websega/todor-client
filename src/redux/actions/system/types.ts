@@ -19,7 +19,6 @@ type ActionSetDefaultType = { type: typeof SET_DEFAULT_MODAL_TYPE };
 
 type ActionDropdownMenuType = { type: typeof OPEN_DROPDOWN_MENU };
 
-
 type ActionSetContextMenuType = {
   type: typeof SET_POSITION_CONTEXT_MENU;
   payload: PositionType;

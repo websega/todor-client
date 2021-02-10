@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import { auth } from '../../redux/actions/user/async';
+import { auth } from '../../redux/actions/async';
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
 
@@ -58,7 +58,6 @@ const App = (): JSX.Element => {
 
       {ReactDOM.createPortal(<Modal />, modalRoot)}
       {ReactDOM.createPortal(<DropdownMenu />, dropdownMenuRoot)}
-      {/* {ReactDOM.createPortal(<ContextMenu />, contextMenuRoot)} */}
     </div>
   );
 };

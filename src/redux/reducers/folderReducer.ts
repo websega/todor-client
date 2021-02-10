@@ -3,15 +3,14 @@ import {
   FolderType,
   SET_CURRENT_FOLDER,
   LOAD_FOLDERS,
-  SET_COMPLETED_TASK,
   SET_TASK,
   SET_FOLDER,
   DELETE_FOLDER,
-  SET_IMPORTANT_TASK,
-  SET_DELETED_TASK,
   CLEAR_FOLDERS,
   DELETE_TASKS,
   SET_TASK_DESCRIPTION,
+  TaskType,
+  TOGGLE_TASK_PROPERTY,
 } from '../actions/folder/types';
 
 const initialState = {
@@ -24,90 +23,46 @@ export type InitialFolderStateType = {
   currentFolder: FolderType | null;
 };
 
+const toggleTaskProperty = (
+  state: InitialFolderStateType,
+  folderId: string,
+  taskId: string,
+  propName: keyof TaskType
+) =>
+  state.folders.map((folder) => {
+    if (folder._id === folderId) {
+      const newTasks = folder.tasks.map((task) =>
+        task.id === taskId ? { ...task, [propName]: !task[propName] } : task
+      );
+
+      return { ...folder, tasks: newTasks };
+    }
+
+    return folder;
+  });
+
 const folderReducer = (
   state: InitialFolderStateType = initialState,
   action: ActionFolderTypes
 ): InitialFolderStateType => {
   switch (action.type) {
-    case SET_COMPLETED_TASK: {
-      const newFolders = state.folders.map((folder) => {
-        if (folder._id === action.payload.folderId) {
-          const newTasks = folder.tasks.map((task) => {
-            if (task.id === action.payload.taskId) {
-              return { ...task, completed: action.payload.completed };
-            }
-
-            return task;
-          });
-
-          return { ...folder, tasks: newTasks };
-        }
-
-        return folder;
-      });
+    case TOGGLE_TASK_PROPERTY: {
+      const { folderId, taskId, propName } = action.payload;
 
       return {
         ...state,
-        folders: newFolders,
-      };
-    }
-
-    case SET_IMPORTANT_TASK: {
-      const newFolders = state.folders.map((folder) => {
-        if (folder._id === action.payload.folderId) {
-          const newTasks = folder.tasks.map((task) => {
-            if (task.id === action.payload.taskId) {
-              return { ...task, important: !task.important };
-            }
-
-            return task;
-          });
-
-          return { ...folder, tasks: newTasks };
-        }
-
-        return folder;
-      });
-
-      return {
-        ...state,
-        folders: newFolders,
-      };
-    }
-
-    case SET_DELETED_TASK: {
-      const newFolders = state.folders.map((folder) => {
-        if (folder._id === action.payload.folderId) {
-          const newTasks = folder.tasks.map((task) => {
-            if (task.id === action.payload.taskId) {
-              return { ...task, deleted: !task.deleted };
-            }
-
-            return task;
-          });
-
-          return { ...folder, tasks: newTasks };
-        }
-
-        return folder;
-      });
-
-      return {
-        ...state,
-        folders: newFolders,
+        folders: toggleTaskProperty(state, folderId, taskId, propName),
       };
     }
 
     case SET_TASK: {
-      const newFolders = state.folders.map((folder) => {
-        if (folder._id === action.payload.folderId) {
-          const newTasks = [...folder.tasks, action.payload.task];
+      const { folderId, task } = action.payload;
 
-          return { ...folder, tasks: newTasks };
-        }
-
-        return folder;
-      });
+      const newFolders = state.folders.map((folder) =>
+        folder._id === folderId
+          ? { ...folder, tasks: [...folder.tasks, task] }
+          : folder
+      );
 
       return {
         ...state,
@@ -116,15 +71,15 @@ const folderReducer = (
     }
 
     case SET_TASK_DESCRIPTION: {
-      const newFolders = state.folders.map((folder) => {
-        if (folder._id === action.payload.folderId) {
-          const newTasks = folder.tasks.map((task) => {
-            if (task.id === action.payload.taskId) {
-              return { ...task, description: action.payload.descriptionText };
-            }
+      const { folderId, taskId, descriptionText } = action.payload;
 
-            return task;
-          });
+      const newFolders = state.folders.map((folder) => {
+        if (folder._id === folderId) {
+          const newTasks = folder.tasks.map((task) =>
+            task.id === taskId
+              ? { ...task, description: descriptionText }
+              : task
+          );
 
           return { ...folder, tasks: newTasks };
         }

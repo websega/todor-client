@@ -5,7 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { FolderType } from '../../redux/actions/folder/types';
 import { setCurrentFolder } from '../../redux/actions/folder/folder';
 import { setCurrentColor } from '../../redux/actions/system/system';
-import { fetchFolders } from '../../redux/actions/user/async';
+import { fetchFolders } from '../../redux/actions/async';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';

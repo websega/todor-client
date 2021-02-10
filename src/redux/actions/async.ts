@@ -2,27 +2,25 @@ import axios from 'axios';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { ActionUserTypes } from './types';
-import { ActionFolderTypes, TaskType } from '../folder/types';
-import { ActionSystemTypes } from '../system/types';
-import { RootStateType } from '../../reducers';
+import { ActionUserTypes } from './user/types';
+import { ActionFolderTypes, TaskType } from './folder/types';
+import { ActionSystemTypes } from './system/types';
+import { RootStateType } from '../reducers';
 
-import { setAuthError, setUser } from './user';
-import { closeModal, setCurrentColor } from '../system/system';
+import { setAuthError, setUser } from './user/user';
+import { closeModal, setCurrentColor } from './system/system';
 import {
   loadFolders,
   setFolder,
   setTask,
-  setCompletedTask,
-  setImportantTask,
-  setDeletedTask,
   deleteFolder,
   deleteTasks,
   setTaskDescription,
-} from '../folder/folder';
+  setTaskProperty,
+} from './folder/folder';
 
-import createId from '../../../utils/createId';
-import createDate from '../../../utils/createDate';
+import createId from '../../utils/createId';
+import createDate from '../../utils/createDate';
 
 type ThunkType = ThunkAction<
   Promise<void>,
@@ -137,48 +135,17 @@ export const addTaskDescription = (
   }
 };
 
-export const completedTask = (
+export const toggleTaskProperty = (
   taskId: string,
   folderId: string,
-  completed: boolean
+  propName: keyof TaskType
 ): ThunkType => async (dispatch) => {
   try {
     await axios.patch(
-      `http://localhost:5000/api/folder/completed-task/?taskId=${taskId}&folderId=${folderId}`,
-      { completed }
+      `http://localhost:5000/api/folder/task-property/?taskId=${taskId}&folderId=${folderId}&propName=${propName}`
     );
 
-    dispatch(setCompletedTask(taskId, folderId, completed));
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const importantTask = (
-  taskId: string,
-  folderId: string
-): ThunkType => async (dispatch) => {
-  try {
-    await axios.patch(
-      `http://localhost:5000/api/folder/important-task/?taskId=${taskId}&folderId=${folderId}`
-    );
-
-    dispatch(setImportantTask(taskId, folderId));
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const deletedTask = (
-  taskId: string,
-  folderId: string
-): ThunkType => async (dispatch) => {
-  try {
-    await axios.patch(
-      `http://localhost:5000/api/folder/delete-task/?taskId=${taskId}&folderId=${folderId}`
-    );
-
-    dispatch(setDeletedTask(taskId, folderId));
+    dispatch(setTaskProperty(taskId, folderId, propName));
   } catch (error) {
     console.log(error);
   }

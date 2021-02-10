@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { toggleTaskProperty } from '../../redux/actions/async';
 import { TaskType } from '../../redux/actions/folder/types';
-import { completedTask, deletedTask } from '../../redux/actions/user/async';
 
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
@@ -12,7 +12,6 @@ import DescriptionPlug from './DescriptionPlug';
 import DescriptionTextArea from './DescriptionTextArea';
 
 import classes from './Description.scss';
-import { setImportantTask } from '../../redux/actions/folder/folder';
 
 type StateType = {
   folders: InitialFolderStateType;
@@ -49,21 +48,12 @@ const Description = (): JSX.Element => {
     );
   }
 
-  const taskCheckboxHandler = (id: string, completed: boolean) => {
+  const taskTogglePropertyHandler = (
+    taskId: string,
+    propName: keyof TaskType
+  ) => {
     if (currentFolder) {
-      dispatch(completedTask(id, currentFolder._id, completed));
-    }
-  };
-
-  const taskImportantHandler = (id: string) => {
-    if (currentFolder) {
-      dispatch(setImportantTask(id, currentFolder._id));
-    }
-  };
-
-  const taskDeleteHandler = (id: string) => {
-    if (currentFolder) {
-      dispatch(deletedTask(id, currentFolder._id));
+      dispatch(toggleTaskProperty(taskId, currentFolder._id, propName));
     }
   };
 
@@ -76,11 +66,13 @@ const Description = (): JSX.Element => {
         important={currentTask.important}
         date={currentTask.createdTime}
         currentFolderColor={currentFolder.colorId}
-        onComplete={taskCheckboxHandler}
-        onImportant={() => taskImportantHandler(currentTask.id)}
-        onDelete={() => taskDeleteHandler(currentTask.id)}
+        onComplete={taskTogglePropertyHandler}
+        onImportant={() =>
+          taskTogglePropertyHandler(currentTask.id, 'important')
+        }
+        onDelete={() => taskTogglePropertyHandler(currentTask.id, 'deleted')}
       />
-      <DescriptionTextArea description={currentTask.description}/>
+      <DescriptionTextArea description={currentTask.description} />
     </section>
   );
 };
