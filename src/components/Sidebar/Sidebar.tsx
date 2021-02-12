@@ -1,15 +1,15 @@
 import React from 'react';
 
-import ToggleSidebar from '../ToggleNav';
 import FoldersList from '../FoldersList';
 import AddButton from '../AddButton';
 import CategoriesList from '../CategoriesList';
 
 import classes from './Sidebar.scss';
+import NavHeader from '../NavHeader';
 
 const Sidebar = (): JSX.Element => (
   <aside className={classes.Sidebar}>
-    <ToggleSidebar />
+    <NavHeader />
     <CategoriesList />
     <FoldersList />
     <AddButton modalType="folder" label="Добавить папку" />

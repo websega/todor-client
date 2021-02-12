@@ -1,6 +1,5 @@
 .Logo {
   @include display(flex, flex-start, center);
-  margin-right: rem(205);
 
   & h1 {
     @include font-sans(rem(22), $main-text-color, normal, normal, 1);

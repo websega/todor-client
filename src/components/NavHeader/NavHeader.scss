@@ -1,0 +1,5 @@
+.NavHeader {
+  @include display(flex, space-between, center);
+  margin-bottom: rem(118);
+  padding-left: 45px;
+}

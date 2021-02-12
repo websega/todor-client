@@ -1,7 +1,7 @@
 .App {
   display: grid;
   grid-template:
-    'header header header' 70px
+    'nav header header' 70px
     'nav tasks description' calc(100vh - 70px)
     / 308px 34.169% auto;
 }

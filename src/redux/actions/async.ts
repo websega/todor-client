@@ -112,7 +112,7 @@ export const addTask = (
     dispatch(setTask(newTask, folderId));
     dispatch(closeModal());
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -131,7 +131,7 @@ export const addTaskDescription = (
 
     dispatch(setTaskDescription(taskId, folderId, descriptionText));
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -147,7 +147,7 @@ export const toggleTaskProperty = (
 
     dispatch(setTaskProperty(taskId, folderId, propName));
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -161,7 +161,7 @@ export const clearDeletedTask = (folderId: string): ThunkType => async (
 
     dispatch(deleteTasks(folderId));
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -175,7 +175,7 @@ export const fetchFolders = (userId: string): ThunkType => async (dispatch) => {
 
     dispatch(loadFolders(response.data.folders));
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -198,7 +198,7 @@ export const addFolder = (
     dispatch(setFolder(response.data.folder));
     dispatch(closeModal());
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -215,6 +215,6 @@ export const destroyFolder = (folderId: string): ThunkType => async (
     dispatch(deleteFolder(folderId));
     dispatch(setCurrentColor('teal'));
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
