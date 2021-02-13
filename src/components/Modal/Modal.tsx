@@ -36,6 +36,7 @@ const Modal = (): JSX.Element => {
   const isModalOpen = useSelector(
     (state: StateType) => state.system.isModalOpen
   );
+
   const modalType = useSelector((state: StateType) => state.system.modalType);
   const dispatch = useDispatch();
 
@@ -96,11 +97,11 @@ const Modal = (): JSX.Element => {
           onClick={onOverlayClick}
         >
           <div
-            className={classNames({
-              [classes.Wrapper]: modalType === 'task' || modalType === 'folder',
-              [classes.Modal]: true,
-              [classes[`m-${state}`]]: true,
-            })}
+            className={classNames(
+              classes.Wrapper,
+              classes.Modal,
+              classes[`m-${state}`]
+            )}
           >
             <HeaderModal
               title={getObjectKey(headerTitles, modalType)}
