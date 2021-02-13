@@ -38,6 +38,7 @@ type StateType = {
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const folders = useSelector((state: StateType) => state.folders.folders);
   const isAuth = useSelector((state: StateType) => state.user.isAuth);
@@ -47,10 +48,14 @@ const App = (): JSX.Element => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isAuth && folders.length) {
+    if (isAuth && folders.length && location.pathname === '/') {
       history.push(`/${folders[0]._id}/all`);
     }
-  }, [history, isAuth, folders]);
+    
+    if (isAuth && !folders.length) {
+      history.push('/');
+    }
+  }, [history, isAuth, folders, location.pathname]);
 
   return (
     <div className={classes.App}>
