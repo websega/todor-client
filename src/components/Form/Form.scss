@@ -1,0 +1,20 @@
+.Form {
+  @include display(flex, center, space-between);
+  flex-direction: column;
+}
+
+.Modal {
+  padding: 0 23px;
+}
+
+.Link {
+  @include font-sans(rem(11), $main-text-color, normal, normal, rem(24));
+  letter-spacing: 0.15px;
+
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    color: $hover-color;
+  }
+}

@@ -2,8 +2,9 @@
   @include font-sans(rem(14), #ffffff, normal, normal, rem(24));
   letter-spacing: 0.15px;
 
+  width: 100%;
   min-width: rem(140);
-  height: rem(42);
+  height: rem(44);
 
   background-color: #2684ff;
   border: none;
@@ -11,6 +12,8 @@
   padding: 0 rem(36);
 
   transition: background-color 0.2s linear;
+
+  margin-bottom: rem(13);
 
   &:hover {
     cursor: pointer;

@@ -2,11 +2,11 @@ import React from 'react';
 
 import { FormikErrors } from 'formik';
 
-import InputBox from '../../../InputBox';
-import FormErrorMessage from '../../../FormErrorMessage';
+import InputBox from '../../InputBox';
+import FormErrorMessage from '../../FormErrorMessage';
 
 type AddFormPropsType = {
-  modalType: string;
+  formType: string;
   errors: FormikErrors<{
     taskTitle: 'string';
     folderName: 'string';
@@ -20,21 +20,21 @@ type AddFormPropsType = {
 };
 
 const AddForm = ({
-  modalType,
+  formType,
   errors,
   values,
   onChange,
   serverError,
 }: AddFormPropsType): JSX.Element => {
-  const name = modalType === 'task' ? 'taskTitle' : 'folderName';
+  const name = formType === 'task' ? 'taskTitle' : 'folderName';
 
-  const value = modalType === 'task' ? values.taskTitle : values.folderName;
+  const value = formType === 'task' ? values.taskTitle : values.folderName;
 
   const placeholder =
-    modalType === 'task' ? 'Добавьте задачу' : 'Добавьте папку';
+    formType === 'task' ? 'Добавьте задачу' : 'Добавьте папку';
 
   const hasError = !!errors.taskTitle || !!errors.folderName || !!serverError;
-
+  
   const errorMsg = errors.taskTitle || errors.folderName || serverError;
 
   return (

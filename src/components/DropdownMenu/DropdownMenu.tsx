@@ -8,17 +8,11 @@ import { InitialUserStateType } from '../../redux/reducers/userReducer';
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import { logout } from '../../redux/actions/user/user';
-import {
-  clear,
-  openModal,
-  openDropdownMenu,
-} from '../../redux/actions/system/system';
+import { clear, openDropdownMenu } from '../../redux/actions/system/system';
 
 import Icon from '../Icon';
 
-import SignInIcon from '../../assets/images/icons/sign_in.svg';
 import SignOutIcon from '../../assets/images/icons/sign_out.svg';
-import RegIcon from '../../assets/images/icons/assignment.svg';
 
 import classes from './DropdownMenu.scss';
 import { clearFolders } from '../../redux/actions/folder/folder';
@@ -31,7 +25,6 @@ type StateType = {
 const DURATION = 490;
 
 const DropdownMenu = (): JSX.Element => {
-  const isAuth = useSelector((state: StateType) => state.user.isAuth);
   const isOpen = useSelector(
     (state: StateType) => state.system.isOpenDropdownMenu
   );
@@ -47,50 +40,20 @@ const DropdownMenu = (): JSX.Element => {
     >
       {(state) => (
         <ul className={classNames(classes.Menu, classes[`${state}`])}>
-          {isAuth && (
-            <li
-              className={classes.MenuItem}
-              onClick={() => {
-                dispatch(logout());
-                dispatch(clear());
-                dispatch(clearFolders());
-                dispatch(openDropdownMenu());
-              }}
-              role="menuitem"
-              aria-hidden="true"
-            >
-              <Icon icon={<SignOutIcon />} type="sign" />
-              <span className={classes.Text}>Выход</span>
-            </li>
-          )}
-          {!isAuth && (
-            <>
-              <li
-                className={classes.MenuItem}
-                onClick={() => {
-                  dispatch(openModal('registration'));
-                  dispatch(openDropdownMenu());
-                }}
-                role="menuitem"
-                aria-hidden="true"
-              >
-                <Icon icon={<RegIcon />} type="reg" />
-                <span className={classes.Text}>Зарегистрироваться</span>
-              </li>
-              <li
-                className={classes.MenuItem}
-                onClick={() => {
-                  dispatch(openModal('login'));
-                  dispatch(openDropdownMenu());
-                }}
-                role="menuitem"
-                aria-hidden="true"
-              >
-                <Icon icon={<SignInIcon />} type="sign" />
-                <span className={classes.Text}>Войти</span>
-              </li>
-            </>
-          )}
+          <li
+            className={classes.MenuItem}
+            onClick={() => {
+              dispatch(logout());
+              dispatch(clear());
+              dispatch(clearFolders());
+              dispatch(openDropdownMenu());
+            }}
+            role="menuitem"
+            aria-hidden="true"
+          >
+            <Icon icon={<SignOutIcon />} type="sign" />
+            <span className={classes.Text}>Выход</span>
+          </li>
         </ul>
       )}
     </Transition>

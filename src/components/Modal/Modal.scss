@@ -1,3 +1,7 @@
+.Wrapper {
+  width: rem(690);
+}
+
 .Modal {
   position: relative;
   background-color: #fff;
@@ -5,6 +9,7 @@
   border-radius: rem(13);
   min-height: rem(215);
   overflow: hidden;
+  padding-bottom: rem(10);
 
   z-index: z('modal');
 }
@@ -17,14 +22,6 @@
 .m-exiting {
   animation-duration: 0.7s;
   animation-name: bounceOut;
-}
-
-.Auth {
-  width: rem(400);
-}
-
-.Main {
-  width: rem(790);
 }
 
 .Overlay {

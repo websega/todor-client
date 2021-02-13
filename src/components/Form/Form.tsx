@@ -1,35 +1,38 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import { useFormik } from 'formik';
+
+import classNames from 'classnames';
 
 import {
   getValidationSchema,
   validationSchemas,
-} from '../../../yupSchema/yupSchema';
+} from '../../yupSchema/yupSchema';
 
 import {
   registration,
   login,
   addFolder,
   addTask,
-} from '../../../redux/actions/async';
+} from '../../redux/actions/async';
 
-import { setAuthError } from '../../../redux/actions/user/user';
+import { setAuthError } from '../../redux/actions/user/user';
 
-import { InitialUserStateType } from '../../../redux/reducers/userReducer';
-import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
+import { InitialUserStateType } from '../../redux/reducers/userReducer';
+import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 
-import getObjectKey from '../../../helpers/getObjectKey';
+import getObjectKey from '../../helpers/getObjectKey';
 
 import AuthForm from './AuthForm';
 import AddForm from './AddForm';
-import ButtonModal from '../ButtonModal';
-import ColorPicker from '../../ColorPicker';
+import FormButton from './FormButton';
+import ColorPicker from '../ColorPicker';
 
-import classes from './FormWrapper.scss';
+import classes from './Form.scss';
 
-type FormWrapperPropsType = { modalType: string };
+type FormPropsType = { formType: string };
 
 type StateType = {
   user: InitialUserStateType;
@@ -47,7 +50,7 @@ const buttonNames: ButtonNamesType = {
   task: 'Добавить',
 };
 
-const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
+const Form = ({ formType }: FormPropsType): JSX.Element => {
   const dispatch = useDispatch();
 
   const serverError = useSelector((state: StateType) => state.user.errorMsg);
@@ -69,10 +72,10 @@ const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
       taskTitle: '',
     },
 
-    validationSchema: getValidationSchema(validationSchemas, modalType),
+    validationSchema: getValidationSchema(validationSchemas, formType),
 
     onSubmit: ({ username, email, password, folderName, taskTitle }) => {
-      switch (modalType) {
+      switch (formType) {
         case 'registration':
           dispatch(registration(username, email, password));
           break;
@@ -100,10 +103,15 @@ const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
   }
 
   return (
-    <form className={classes.Form} onSubmit={handleSubmit}>
-      {(modalType === 'registration' || modalType === 'login') && (
+    <form
+      className={classNames(classes.Form, {
+        [classes.Modal]: formType === 'folder' || formType === 'task',
+      })}
+      onSubmit={handleSubmit}
+    >
+      {(formType === 'registration' || formType === 'login') && (
         <AuthForm
-          modalType={modalType}
+          formType={formType}
           errors={errors}
           serverError={serverError}
           values={values}
@@ -111,9 +119,9 @@ const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
         />
       )}
 
-      {(modalType === 'folder' || modalType === 'task') && (
+      {(formType === 'folder' || formType === 'task') && (
         <AddForm
-          modalType={modalType}
+          formType={formType}
           errors={errors}
           serverError={serverError}
           values={values}
@@ -121,16 +129,28 @@ const FormWrapper = ({ modalType }: FormWrapperPropsType): JSX.Element => {
         />
       )}
 
-      {modalType === 'folder' && (
+      {formType === 'folder' && (
         <ColorPicker onColorItem={setColorId} activeColorId={colorId} />
       )}
 
-      <ButtonModal
-        name={getObjectKey(buttonNames, modalType)}
+      <FormButton
+        name={getObjectKey(buttonNames, formType)}
         disabled={!isValid}
       />
+
+      {formType === 'login' && (
+        <NavLink to="/registration" className={classes.Link}>
+          <span>Нет аккаунта? Зарегистрируйтесь.</span>
+        </NavLink>
+      )}
+
+      {formType === 'registration' && (
+        <NavLink to="/login" className={classes.Link}>
+          <span>Есть аккаунт? Войдите.</span>
+        </NavLink>
+      )}
     </form>
   );
 };
 
-export default FormWrapper;
+export default Form;

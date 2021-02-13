@@ -7,7 +7,7 @@ import CloseIcon from '../../../assets/images/icons/close.svg';
 import classes from './HeaderModal.scss';
 
 type HeaderModalPropsType = {
-  title: string;
+  title?: string;
   onClose: () => void;
 };
 

@@ -11,7 +11,7 @@ import {
 } from '../../redux/actions/system/system';
 
 import HeaderModal from './HeaderModal';
-import FormWrapper from './FormWrapper';
+import Form from '../Form';
 
 import getObjectKey from '../../helpers/getObjectKey';
 
@@ -22,8 +22,6 @@ type TitlesType = {
 };
 
 const headerTitles: TitlesType = {
-  registration: 'Регистрация',
-  login: 'Вход',
   folder: 'Добавление папки',
   task: 'Добавление задачи',
 };
@@ -99,9 +97,7 @@ const Modal = (): JSX.Element => {
         >
           <div
             className={classNames({
-              [classes.Auth]:
-                modalType === 'registration' || modalType === 'login',
-              [classes.Main]: modalType === 'task' || modalType === 'folder',
+              [classes.Wrapper]: modalType === 'task' || modalType === 'folder',
               [classes.Modal]: true,
               [classes[`m-${state}`]]: true,
             })}
@@ -110,7 +106,8 @@ const Modal = (): JSX.Element => {
               title={getObjectKey(headerTitles, modalType)}
               onClose={onClose}
             />
-            <FormWrapper modalType={modalType} />
+
+            <Form formType={modalType} />
           </div>
         </div>
       )}

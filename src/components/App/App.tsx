@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
-import { useHistory, useLocation } from 'react-router-dom';
+import {
+  Redirect,
+  Route,
+  Switch,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 
 import { auth } from '../../redux/actions/async';
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
@@ -16,6 +22,8 @@ import Modal from '../Modal';
 import DropdownMenu from '../DropdownMenu';
 
 import classes from './App.scss';
+import Registration from '../Registration';
+import Login from '../Login';
 
 const modalRoot = document.getElementById('modal-root') as HTMLElement;
 const dropdownMenuRoot = document.getElementById(
@@ -39,22 +47,29 @@ const App = (): JSX.Element => {
     dispatch(auth());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (location.pathname === '/' && folders.length > 0) {
-      history.push(`/${folders[0]._id}/all`);
-    }
-
-    if (!isAuth || folders.length === 0) {
-      history.push('/');
-    }
-  }, [folders, history, isAuth, location.pathname]);
-
   return (
     <div className={classes.App}>
-      <Header />
-      <Sidebar />
-      <TaskArea />
-      <Description />
+      {!isAuth ? (
+        <Switch>
+          <Route exact path="/registration">
+            <Registration />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Redirect to="/login" />
+        </Switch>
+      ) : (
+        <Switch>
+          <Route exact path="/app">
+            <Header />
+            <Sidebar />
+            <TaskArea />
+            <Description />
+          </Route>
+          <Redirect to="/app" />
+        </Switch>
+      )}
 
       {ReactDOM.createPortal(<Modal />, modalRoot)}
       {ReactDOM.createPortal(<DropdownMenu />, dropdownMenuRoot)}

@@ -2,11 +2,11 @@ import React from 'react';
 
 import { FormikErrors } from 'formik';
 
-import InputBox from '../../../InputBox';
-import FormErrorMessage from '../../../FormErrorMessage';
+import InputBox from '../../InputBox';
+import FormErrorMessage from '../../FormErrorMessage';
 
 type AuthFormPropsType = {
-  modalType: string;
+  formType: string;
   errors: FormikErrors<{
     username: string;
     password: string;
@@ -22,7 +22,7 @@ type AuthFormPropsType = {
 };
 
 const AuthForm = ({
-  modalType,
+  formType,
   errors,
   values,
   onChange,
@@ -34,7 +34,7 @@ const AuthForm = ({
 
   return (
     <>
-      {modalType === 'registration' && (
+      {formType === 'registration' && (
         <>
           <InputBox
             value={values.username}
@@ -60,7 +60,7 @@ const AuthForm = ({
         onChange={onChange}
         placeholder="Электронная почта"
         hasError={hasEmailError}
-        hasFocus={modalType !== 'registration' }
+        hasFocus={formType !== 'registration' }
       />
 
       <FormErrorMessage

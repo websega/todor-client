@@ -1,0 +1,27 @@
+.Wrapper {
+  position: absolute;
+  @include center-pos();
+}
+
+.Title {
+  @include font-sans(rem(36), $main-text-color, normal, normal, rem(22));
+  margin-bottom: rem(32);
+  text-align: center;
+}
+
+.FormWrapper {
+  background-color: #fff;
+
+  padding: rem(49) rem(23) rem(10) rem(23);
+
+  border-radius: rem(13);
+  border: 1px solid $border-color;
+
+  min-height: rem(215);
+  width: rem(502);
+  overflow: hidden;
+
+  filter: drop-shadow(1px 1px 9px rgba(0, 0, 0, 0.25));
+
+  z-index: z('modal');
+}
