@@ -23,7 +23,9 @@ const Account = React.memo(
   (): JSX.Element => {
     const dispatch = useDispatch();
 
-    const isOpen = useSelector((state: StateType) => state.system.isOpenDropdownMenu);
+    const isOpen = useSelector(
+      (state: StateType) => state.system.isOpenDropdownMenu
+    );
 
     const username = useSelector(
       (state: StateType) => state.user.currentUser.username

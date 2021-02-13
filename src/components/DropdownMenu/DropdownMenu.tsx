@@ -9,13 +9,13 @@ import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import { logout } from '../../redux/actions/user/user';
 import { clear, openDropdownMenu } from '../../redux/actions/system/system';
+import { clearFolders } from '../../redux/actions/folder/folder';
 
 import Icon from '../Icon';
 
 import SignOutIcon from '../../assets/images/icons/sign_out.svg';
 
 import classes from './DropdownMenu.scss';
-import { clearFolders } from '../../redux/actions/folder/folder';
 
 type StateType = {
   user: InitialUserStateType;
@@ -43,10 +43,10 @@ const DropdownMenu = (): JSX.Element => {
           <li
             className={classes.MenuItem}
             onClick={() => {
+              dispatch(openDropdownMenu());
               dispatch(logout());
               dispatch(clear());
               dispatch(clearFolders());
-              dispatch(openDropdownMenu());
             }}
             role="menuitem"
             aria-hidden="true"
