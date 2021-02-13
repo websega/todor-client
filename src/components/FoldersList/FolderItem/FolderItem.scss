@@ -1,23 +1,14 @@
 .Item {
-  @include font-sans(rem(18), #505f79, normal, normal);
-  @include display(flex, space-between, center);
-
   position: relative;
+
   width: 100%;
   height: rem(50);
 
-  line-height: rem(50);
-
   padding-right: rem(10);
   padding-left: rem(91);
-
   margin-right: rem(9);
 
-  border: none;
   border-radius: 0 rem(50) rem(50) 0;
-
-  text-decoration: none;
-  background: none;
 
   transition: background-color 0.2s ease-in-out;
 
@@ -25,6 +16,17 @@
     cursor: pointer;
     background-color: $active-color;
   }
+}
+
+.Link {
+  @include display(flex, space-between, center);
+
+  @include font-sans(rem(18), #505f79, normal, normal);
+  line-height: rem(50);
+
+  border: none;
+  text-decoration: none;
+  background: none;
 }
 
 .Left {

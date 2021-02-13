@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import TodayIcon from '../../assets/images/icons/today.svg';
 import InboxIcon from '../../assets/images/icons/all_inbox.svg';
@@ -49,20 +47,9 @@ const categories: CategoriesType[] = [
   },
 ];
 
-type StateType = { system: InitialSystemStateType };
-
 const CategoriesList = (): JSX.Element => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const location = useLocation();
-
-  const currentCategory = useSelector(
-    (state: StateType) => state.system.currentCategory
-  );
-
-  const itemClickHandler = (id: string) => {
-    history.push(`${id}`);
-  };
 
   useEffect(() => {
     const categoryId = location.pathname.split('/')[2];
@@ -78,16 +65,7 @@ const CategoriesList = (): JSX.Element => {
         {categories.map((item) => {
           const { id, icon, name } = item;
 
-          return (
-            <CategoryItem
-              key={id}
-              categoryId={id}
-              icon={icon}
-              name={name}
-              active={currentCategory === id}
-              onClick={() => itemClickHandler(id)}
-            />
-          );
+          return <CategoryItem key={id} id={id} icon={icon} name={name} />;
         })}
       </ul>
     </nav>

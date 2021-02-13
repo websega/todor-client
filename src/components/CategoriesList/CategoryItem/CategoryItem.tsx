@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
-import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
 
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 import { InitialUserStateType } from '../../../redux/reducers/userReducer';
@@ -14,10 +13,8 @@ import createDate from '../../../utils/createDate';
 
 type CategoryItemPropsType = {
   name: string;
-  categoryId: string;
+  id: string;
   icon: JSX.Element;
-  active: boolean;
-  onClick: () => void;
 };
 
 type StateType = {
@@ -28,9 +25,7 @@ type StateType = {
 const CategoryItem = ({
   icon,
   name,
-  categoryId,
-  active,
-  onClick,
+  id,
 }: CategoryItemPropsType): JSX.Element => {
   const currentFolder = useSelector(
     (state: StateType) => state.folders.currentFolder
@@ -44,24 +39,21 @@ const CategoryItem = ({
     if (currentFolder && isAuth) {
       let num = 0;
 
-      if (categoryId === 'all') {
+      if (id === 'all') {
         num = currentFolder.tasks.length;
       }
 
       num = currentFolder.tasks.filter(
         ({ completed, deleted, createdTime, important }) => {
           if (
-            (categoryId === 'all' && !completed && !deleted) ||
-            (categoryId === 'today' &&
+            (id === 'all' && !completed && !deleted) ||
+            (id === 'today' &&
               createdTime === createDate() &&
               !completed &&
               !deleted) ||
-            (categoryId === 'completed' && completed && !deleted) ||
-            (categoryId === 'important' &&
-              important &&
-              !completed &&
-              !deleted) ||
-            (categoryId === 'deleted' && deleted)
+            (id === 'completed' && completed && !deleted) ||
+            (id === 'important' && important && !completed && !deleted) ||
+            (id === 'deleted' && deleted)
           ) {
             return true;
           }
@@ -74,15 +66,15 @@ const CategoryItem = ({
     } else {
       setNumberOfTask(0);
     }
-  }, [categoryId, currentFolder, isAuth]);
+  }, [id, currentFolder, isAuth]);
 
   return (
-    <li
-      className={classNames(classes.Item, { [classes.Active]: active })}
-      onClick={onClick}
-      aria-hidden="true"
-    >
-      <div role="button" tabIndex={0} className={classes.Btn}>
+    <li className={classes.Item} aria-hidden="true">
+      <NavLink
+        to={`${id}`}
+        className={classes.Link}
+        activeClassName={classes.Active}
+      >
         <div className={classes.Left}>
           <Icon icon={icon} type="category" />
           <span>{name}</span>
@@ -91,7 +83,7 @@ const CategoryItem = ({
         {numberOfTask > 0 ? (
           <Count numberOfTask={numberOfTask} color="default" />
         ) : null}
-      </div>
+      </NavLink>
     </li>
   );
 };

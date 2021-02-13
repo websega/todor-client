@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { FolderType } from '../../redux/actions/folder/types';
 import { setCurrentFolder } from '../../redux/actions/folder/folder';
 import { setCurrentColor } from '../../redux/actions/system/system';
 import { fetchFolders } from '../../redux/actions/async';
@@ -23,7 +22,6 @@ type StateType = {
 
 const FoldersList = (): JSX.Element => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const location = useLocation();
 
   const folders = useSelector((state: StateType) => state.folders.folders);
@@ -40,13 +38,6 @@ const FoldersList = (): JSX.Element => {
     }
   }, [dispatch, userId]);
 
-  const folderClickHandler = useCallback(
-    (folder: FolderType) => {
-      history.push(`/${folder._id}/all`);
-    },
-    [history]
-  );
-
   useEffect(() => {
     const folderId = location.pathname.split('/')[1];
 
@@ -61,7 +52,7 @@ const FoldersList = (): JSX.Element => {
   }, [dispatch, folders, location.pathname]);
 
   return (
-    <nav className={classes.FolderList}>
+    <ul className={classes.FolderList}>
       {folders.length > 0 &&
         folders.map((folder) => {
           const { _id, colorId, name, tasks } = folder;
@@ -69,15 +60,15 @@ const FoldersList = (): JSX.Element => {
           return (
             <FolderItem
               key={_id}
+              id={_id}
               color={colorId}
               name={name}
               numberOfTask={tasks.length}
               active={currentFolder ? currentFolder._id === _id : false}
-              onClick={() => folderClickHandler(folder)}
             />
           );
         })}
-    </nav>
+    </ul>
   );
 };
 

@@ -37,7 +37,6 @@ type StateType = {
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const history = useHistory();
 
   const folders = useSelector((state: StateType) => state.folders.folders);
@@ -46,6 +45,12 @@ const App = (): JSX.Element => {
   useEffect(() => {
     dispatch(auth());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (isAuth && folders.length) {
+      history.push(`/${folders[0]._id}/all`);
+    }
+  }, [history, isAuth, folders]);
 
   return (
     <div className={classes.App}>
@@ -60,15 +65,12 @@ const App = (): JSX.Element => {
           <Redirect to="/login" />
         </Switch>
       ) : (
-        <Switch>
-          <Route exact path="/app">
-            <Header />
-            <Sidebar />
-            <TaskArea />
-            <Description />
-          </Route>
-          <Redirect to="/app" />
-        </Switch>
+        <>
+          <Header />
+          <Sidebar />
+          <TaskArea />
+          <Description />
+        </>
       )}
 
       {ReactDOM.createPortal(<Modal />, modalRoot)}

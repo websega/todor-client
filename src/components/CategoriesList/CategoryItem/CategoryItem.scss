@@ -11,10 +11,15 @@
   }
 }
 
-.Btn {
+.Link {
   @include display(flex, space-between, center);
 
-  @include reset-btn();
+  @include font-sans(rem(18), #505f79, normal, normal);
+  line-height: rem(50);
+
+  border: none;
+  text-decoration: none;
+  background: none;
 
   &:hover {
     cursor: pointer;
