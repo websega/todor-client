@@ -63,7 +63,7 @@ const Form = ({ formType }: FormPropsType): JSX.Element => {
 
   const [colorId, setColorId] = useState<string>('teal');
 
-  const { errors, values, isValid, handleSubmit, handleChange } = useFormik({
+  const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
@@ -78,6 +78,7 @@ const Form = ({ formType }: FormPropsType): JSX.Element => {
       switch (formType) {
         case 'registration':
           dispatch(registration(username, email, password));
+          formik.resetForm();
           break;
         case 'login':
           dispatch(login(email, password));
@@ -89,7 +90,6 @@ const Form = ({ formType }: FormPropsType): JSX.Element => {
           if (currentFolder) {
             dispatch(addTask(taskTitle, currentFolder._id));
           }
-
           break;
 
         default:
@@ -98,7 +98,10 @@ const Form = ({ formType }: FormPropsType): JSX.Element => {
     },
   });
 
-  if (serverError && (errors.username || errors.password || errors.email)) {
+  if (
+    serverError &&
+    (formik.errors.username || formik.errors.password || formik.errors.email)
+  ) {
     dispatch(setAuthError(''));
   }
 
@@ -107,25 +110,25 @@ const Form = ({ formType }: FormPropsType): JSX.Element => {
       className={classNames(classes.Form, {
         [classes.Modal]: formType === 'folder' || formType === 'task',
       })}
-      onSubmit={handleSubmit}
+      onSubmit={formik.handleSubmit}
     >
       {(formType === 'registration' || formType === 'login') && (
         <AuthForm
           formType={formType}
-          errors={errors}
+          errors={formik.errors}
           serverError={serverError}
-          values={values}
-          onChange={handleChange}
+          values={formik.values}
+          onChange={formik.handleChange}
         />
       )}
 
       {(formType === 'folder' || formType === 'task') && (
         <AddForm
           formType={formType}
-          errors={errors}
+          errors={formik.errors}
           serverError={serverError}
-          values={values}
-          onChange={handleChange}
+          values={formik.values}
+          onChange={formik.handleChange}
         />
       )}
 
@@ -135,7 +138,7 @@ const Form = ({ formType }: FormPropsType): JSX.Element => {
 
       <FormButton
         name={getObjectKey(buttonNames, formType)}
-        disabled={!isValid}
+        disabled={!formik.isValid}
       />
 
       {formType === 'login' && (
