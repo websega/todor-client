@@ -15,25 +15,9 @@
   width: rem(562);
 
   & input {
-    // @include font-sans(rem(14), $main-text-color, normal, normal, 1.2);
-    // letter-spacing: 0.15px;
-
-    // width: 100%;
-    // height: rem(44);
-
     padding-left: rem(68);
     padding-right: rem(60);
-
-    // background: $main-bg-color;
-
-    // border: 1px solid $border-color;
     border-radius: rem(100);
-    margin-bottom: 0;
-
-    // &::placeholder {
-    //   @include font-sans(rem(14), $placeholder-text-color, normal, normal, 1.2);
-    //   letter-spacing: 0.4px;
-    // }
   }
 }
 
@@ -64,12 +48,4 @@
   &:hover {
     cursor: pointer;
   }
-}
-
-.CalendarBtn {
-  position: absolute;
-
-  top: 50%;
-  right: rem(29);
-  transform: translateY(-50%);
 }

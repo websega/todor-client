@@ -2,6 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteAvatar, uploadAvatar } from '../../redux/actions/async';
+import { clearFolders } from '../../redux/actions/folder/folder';
+import { clear } from '../../redux/actions/system/system';
+import { logout } from '../../redux/actions/user/user';
 
 import classes from './Profile.scss';
 
@@ -30,6 +33,16 @@ const Profile = (): JSX.Element => {
       </label>
       <button type="button" onClick={() => dispatch(deleteAvatar())}>
         Удалить аватар
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          dispatch(logout());
+          dispatch(clear());
+          dispatch(clearFolders());
+        }}
+      >
+        Выход
       </button>
       <Link to="/">Закрыть</Link>
     </div>

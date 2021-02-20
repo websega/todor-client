@@ -8,7 +8,6 @@ import { clearDeletedTask, destroyFolder } from '../../../redux/actions/async';
 import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 
-import SortIconAB from '../../../assets/images/icons/sort_a-z.svg';
 import CleanIcon from '../../../assets/images/icons/clean.svg';
 import DeleteFolderIcon from '../../../assets/images/icons/delete-folder.svg';
 
@@ -74,11 +73,6 @@ const TaskInfoPanel = (): JSX.Element => {
           <TaskInfoTitle title={currentFolder.name} />
 
           <div className={classes.Right}>
-            <IconButton
-              icon={<SortIconAB />}
-              iconType="sort"
-              onClick={() => console.log('click')}
-            />
             <IconButton
               icon={<DeleteFolderIcon />}
               iconType="clean"

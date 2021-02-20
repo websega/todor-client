@@ -1,5 +1,5 @@
 .Header {
-  @include display(flex, space-between, center);
+  @include display(flex, flex-end, center);
 
   padding-left: rem(41);
   padding-right: rem(22);
@@ -10,11 +10,4 @@
   grid-area: header;
 
   z-index: z('header')
-}
-
-.Left {
-  @include display(flex, flex-start, center);
-  width: rem(960);
-
-  padding-right: rem(22);
 }

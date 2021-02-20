@@ -9,8 +9,6 @@ import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 
 import { addTask } from '../../../redux/actions/async';
 
-import CalendarIcon from '../../../assets/images/icons/calendar.svg';
-
 import IconButton from '../../IconButton';
 import InputBox from '../../InputBox';
 
@@ -64,15 +62,6 @@ const TaskAddForm = (): JSX.Element => {
           placeholder="Добавьте задачу"
           onChange={handlerChange}
         />
-
-        <div className={classes.CalendarBtn}>
-          <IconButton
-            icon={<CalendarIcon />}
-            onClick={() => {
-              console.log('calendar');
-            }}
-          />
-        </div>
       </form>
     </div>
   );
