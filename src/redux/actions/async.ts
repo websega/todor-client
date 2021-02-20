@@ -21,6 +21,7 @@ import {
 
 import createId from '../../utils/createId';
 import createDate from '../../utils/createDate';
+import API_URL from '../../constants/constants';
 
 type ThunkType = ThunkAction<
   Promise<void>,
@@ -36,14 +37,11 @@ export const registration = (
   password: string
 ): ThunkType => async (dispatch) => {
   try {
-    const response = await axios.post(
-      'http://localhost:5000/api/auth/registration',
-      {
-        username,
-        email,
-        password,
-      }
-    );
+    const response = await axios.post(`${API_URL}api/auth/registration`, {
+      username,
+      email,
+      password,
+    });
     // eslint-disable-next-line no-alert
     alert(response.data.message);
     dispatch(closeModal());
@@ -57,7 +55,7 @@ export const login = (email: string, password: string): ThunkType => async (
   dispatch
 ) => {
   try {
-    const response = await axios.post('http://localhost:5000/api/auth/login', {
+    const response = await axios.post(`${API_URL}api/auth/login`, {
       email,
       password,
     });
@@ -73,7 +71,7 @@ export const login = (email: string, password: string): ThunkType => async (
 
 export const auth = (): ThunkType => async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:5000/api/auth/auth', {
+    const response = await axios.get(`${API_URL}api/auth/auth`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
 
@@ -92,13 +90,9 @@ export const uploadAvatar = (file: Blob): ThunkType => async (dispatch) => {
     const formData = new FormData();
     formData.append('file', file);
 
-    const response = await axios.post(
-      'http://localhost:5000/api/folder/avatar',
-      formData,
-      {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      }
-    );
+    const response = await axios.post(`${API_URL}api/folder/avatar`, formData, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    });
 
     dispatch(setUser(response.data));
   } catch (error) {
@@ -108,12 +102,9 @@ export const uploadAvatar = (file: Blob): ThunkType => async (dispatch) => {
 
 export const deleteAvatar = (): ThunkType => async (dispatch) => {
   try {
-    const response = await axios.delete(
-      'http://localhost:5000/api/folder/avatar-delete',
-      {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      }
-    );
+    const response = await axios.delete(`${API_URL}api/folder/avatar-delete`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    });
 
     dispatch(setUser(response.data));
   } catch (error) {
@@ -140,10 +131,9 @@ export const addTask = (
   try {
     const newTask = createTask(taskTitle);
 
-    await axios.post(
-      `http://localhost:5000/api/folder/add-task/?folderId=${folderId}`,
-      { ...newTask }
-    );
+    await axios.post(`${API_URL}api/folder/add-task/?folderId=${folderId}`, {
+      ...newTask,
+    });
 
     dispatch(setTask(newTask, folderId));
     dispatch(closeModal());
@@ -159,7 +149,7 @@ export const addTaskDescription = (
 ): ThunkType => async (dispatch) => {
   try {
     await axios.post(
-      `http://localhost:5000/api/folder/add-task-description/?taskId=${taskId}&folderId=${folderId}`,
+      `${API_URL}api/folder/add-task-description/?taskId=${taskId}&folderId=${folderId}`,
       {
         descriptionText,
       }
@@ -178,7 +168,7 @@ export const toggleTaskProperty = (
 ): ThunkType => async (dispatch) => {
   try {
     await axios.patch(
-      `http://localhost:5000/api/folder/task-property/?taskId=${taskId}&folderId=${folderId}&propName=${propName}`
+      `${API_URL}api/folder/task-property/?taskId=${taskId}&folderId=${folderId}&propName=${propName}`
     );
 
     dispatch(setTaskProperty(taskId, folderId, propName));
@@ -192,7 +182,7 @@ export const clearDeletedTask = (folderId: string): ThunkType => async (
 ) => {
   try {
     await axios.patch(
-      `http://localhost:5000/api/folder/clear-deleted-tasks/?folderId=${folderId}`
+      `${API_URL}api/folder/clear-deleted-tasks/?folderId=${folderId}`
     );
 
     dispatch(deleteTasks(folderId));
@@ -205,9 +195,7 @@ export const clearDeletedTask = (folderId: string): ThunkType => async (
 
 export const fetchFolders = (userId: string): ThunkType => async (dispatch) => {
   try {
-    const response = await axios.get(
-      `http://localhost:5000/api/folder/get-all/${userId}`
-    );
+    const response = await axios.get(`${API_URL}api/folder/get-all/${userId}`);
 
     dispatch(loadFolders(response.data.folders));
   } catch (error) {
@@ -221,14 +209,11 @@ export const addFolder = (
   colorId: string
 ): ThunkType => async (dispatch) => {
   try {
-    const response = await axios.post(
-      'http://localhost:5000/api/folder/add-folder',
-      {
-        userId,
-        name,
-        colorId,
-      }
-    );
+    const response = await axios.post(`${API_URL}api/folder/add-folder`, {
+      userId,
+      name,
+      colorId,
+    });
     // eslint-disable-next-line no-alert
     alert(response.data.message);
     dispatch(setFolder(response.data.folder));
@@ -243,7 +228,7 @@ export const destroyFolder = (folderId: string): ThunkType => async (
 ) => {
   try {
     const response = await axios.delete(
-      `http://localhost:5000/api/folder/delete-folder/?folderId=${folderId}`
+      `${API_URL}api/folder/delete-folder/?folderId=${folderId}`
     );
 
     // eslint-disable-next-line no-alert
