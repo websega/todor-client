@@ -19,16 +19,14 @@ import TaskArea from '../TaskArea';
 import Description from '../Description';
 
 import Modal from '../Modal';
-import DropdownMenu from '../DropdownMenu';
 
-import classes from './App.scss';
 import Registration from '../Registration';
 import Login from '../Login';
+import Profile from '../Profile';
+
+import classes from './App.scss';
 
 const modalRoot = document.getElementById('modal-root') as HTMLElement;
-const dropdownMenuRoot = document.getElementById(
-  'dropdown-root'
-) as HTMLElement;
 
 type StateType = {
   folders: InitialFolderStateType;
@@ -51,7 +49,7 @@ const App = (): JSX.Element => {
     if (isAuth && folders.length && location.pathname === '/') {
       history.push(`/${folders[0]._id}/all`);
     }
-    
+
     if (isAuth && !folders.length) {
       history.push('/');
     }
@@ -59,7 +57,7 @@ const App = (): JSX.Element => {
 
   return (
     <div className={classes.App}>
-      {!isAuth ? (
+      {!isAuth && (
         <Switch>
           <Route exact path="/registration">
             <Registration />
@@ -69,17 +67,22 @@ const App = (): JSX.Element => {
           </Route>
           <Redirect to="/login" />
         </Switch>
-      ) : (
-        <>
-          <Header />
-          <Sidebar />
-          <TaskArea />
-          <Description />
-        </>
+      )}
+      {isAuth && (
+        <Switch>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+          <Route>
+            <Header />
+            <Sidebar />
+            <TaskArea />
+            <Description />
+          </Route>
+        </Switch>
       )}
 
       {ReactDOM.createPortal(<Modal />, modalRoot)}
-      {ReactDOM.createPortal(<DropdownMenu />, dropdownMenuRoot)}
     </div>
   );
 };

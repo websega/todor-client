@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import classNames from 'classnames';
 
-import {
-  clearDeletedTask,
-  destroyFolder,
-} from '../../../redux/actions/async';
+import { clearDeletedTask, destroyFolder } from '../../../redux/actions/async';
 import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 

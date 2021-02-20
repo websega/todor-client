@@ -16,9 +16,3 @@
     transition: $transition-hover-color, transform 0.2s linear;
   }
 }
-
-.Inverted {
-  & svg {
-    transform: rotate(180deg);
-  }
-}

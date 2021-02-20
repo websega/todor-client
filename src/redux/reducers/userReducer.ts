@@ -10,6 +10,7 @@ const initialState = {
     id: '',
     email: '',
     username: 'Гость',
+    avatar: '',
   },
   isAuth: false,
   errorMsg: '',
@@ -39,7 +40,7 @@ export const userReducer = (
         currentUser: initialState.currentUser,
         isAuth: false,
       };
-      
+
     case AUTH_ERROR:
       return {
         ...state,

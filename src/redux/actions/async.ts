@@ -85,6 +85,42 @@ export const auth = (): ThunkType => async (dispatch) => {
   }
 };
 
+// ===================================================================
+
+export const uploadAvatar = (file: Blob): ThunkType => async (dispatch) => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await axios.post(
+      'http://localhost:5000/api/folder/avatar',
+      formData,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      }
+    );
+
+    dispatch(setUser(response.data));
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const deleteAvatar = (): ThunkType => async (dispatch) => {
+  try {
+    const response = await axios.delete(
+      'http://localhost:5000/api/folder/avatar-delete',
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      }
+    );
+
+    dispatch(setUser(response.data));
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 // ================================================================
 
 const createTask = (title: string): TaskType => ({
@@ -206,7 +242,7 @@ export const destroyFolder = (folderId: string): ThunkType => async (
   dispatch
 ) => {
   try {
-    const response = await axios.patch(
+    const response = await axios.delete(
       `http://localhost:5000/api/folder/delete-folder/?folderId=${folderId}`
     );
 

@@ -3,7 +3,6 @@ import {
   CLOSE_MODAL,
   OPEN_MODAL,
   SET_DEFAULT_MODAL_TYPE,
-  OPEN_DROPDOWN_MENU,
   SET_CURRENT_TASK,
   SET_CURRENT_COLOR,
   SET_CURRENT_CATEGORY,
@@ -12,7 +11,6 @@ import {
 
 const initialState = {
   isModalOpen: false,
-  isOpenDropdownMenu: false,
   modalType: '',
   currentTask: '',
   currentColor: 'teal',
@@ -43,12 +41,6 @@ export const systemReducer = (
       return {
         ...state,
         modalType: '',
-      };
-
-    case OPEN_DROPDOWN_MENU:
-      return {
-        ...state,
-        isOpenDropdownMenu: !state.isOpenDropdownMenu,
       };
 
     case SET_CURRENT_TASK:

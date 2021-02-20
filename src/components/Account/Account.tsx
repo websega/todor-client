@@ -1,16 +1,15 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
 
-import { openDropdownMenu } from '../../redux/actions/system/system';
-
-import AccountImg from './AccountImg';
-import AccountName from './AccountName';
+import Avatar from './Avatar';
+import Name from './Name';
 import IconButton from '../IconButton';
 
-import ArrowIcon from '../../assets/images/icons/arrow_down.svg';
+import SettingsIcon from '../../assets/images/icons/settings.svg';
 
 import classes from './Account.scss';
 
@@ -21,14 +20,8 @@ type StateType = {
 
 const Account = React.memo(
   (): JSX.Element => {
-    const dispatch = useDispatch();
-
-    const isOpen = useSelector(
-      (state: StateType) => state.system.isOpenDropdownMenu
-    );
-
-    const username = useSelector(
-      (state: StateType) => state.user.currentUser.username
+    const currentUser = useSelector(
+      (state: StateType) => state.user.currentUser
     );
 
     const currentColor = useSelector(
@@ -38,17 +31,13 @@ const Account = React.memo(
     return (
       <div className={classes.Account}>
         <div className={classes.User}>
-          <AccountImg color={currentColor} />
-          <AccountName name={username} />
+          <Avatar color={currentColor} avatarURL={currentUser.avatar} />
+          <Name name={currentUser.username} />
         </div>
 
-        <IconButton
-          icon={<ArrowIcon />}
-          inverted={isOpen}
-          onClick={() => {
-            dispatch(openDropdownMenu());
-          }}
-        />
+        <Link to="/profile">
+          <IconButton icon={<SettingsIcon />} />
+        </Link>
       </div>
     );
   }
