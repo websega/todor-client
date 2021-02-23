@@ -9,7 +9,6 @@ import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 
 import { addTask } from '../../../redux/actions/async';
 
-import IconButton from '../../IconButton';
 import InputBox from '../../InputBox';
 
 import classes from './TaskAddForm.scss';

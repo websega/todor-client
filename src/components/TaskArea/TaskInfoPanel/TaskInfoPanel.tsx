@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -42,8 +42,12 @@ const TaskInfoPanel = (): JSX.Element => {
     (state: StateType) => state.system.currentCategory
   );
 
-  const deleteFolderHandler = (id: string) => {
-    dispatch(destroyFolder(id));
+  const deleteFolderHandler = useCallback(() => {
+    if (!currentFolder) {
+      return;
+    }
+
+    dispatch(destroyFolder(currentFolder._id));
 
     if (folders.length) {
       history.push(`/${folders[0]._id}/all`);
@@ -55,11 +59,15 @@ const TaskInfoPanel = (): JSX.Element => {
         dispatch(setCurrentColor(activeFolder.colorId));
       }
     }
-  };
+  }, [currentFolder, dispatch, folders, history]);
 
-  const clearDeletedTaskHandler = (id: string) => {
-    dispatch(clearDeletedTask(id));
-  };
+  const clearDeletedTaskHandler = useCallback(() => {
+    if (!currentFolder) {
+      return;
+    }
+
+    dispatch(clearDeletedTask(currentFolder._id));
+  }, [currentFolder, dispatch]);
 
   return (
     <>
@@ -76,14 +84,14 @@ const TaskInfoPanel = (): JSX.Element => {
             <IconButton
               icon={<DeleteFolderIcon />}
               iconType="clean"
-              onClick={() => deleteFolderHandler(currentFolder._id)}
+              onClick={deleteFolderHandler}
             />
 
             {currentCategory === 'deleted' && (
               <IconButton
                 icon={<CleanIcon />}
                 iconType="clean"
-                onClick={() => clearDeletedTaskHandler(currentFolder._id)}
+                onClick={clearDeletedTaskHandler}
               />
             )}
           </div>

@@ -15,22 +15,26 @@ type FolderItemPropsType = {
   active: boolean;
 };
 
-const FolderItem = ({
-  color,
-  id,
-  name,
-  numberOfTask,
-  active,
-}: FolderItemPropsType): JSX.Element => (
-  <li className={classNames(classes.Item, { [classes.Active]: active })}>
-    <Link className={classes.Link} to={{ pathname: `/${id}/all` }}>
-      <div className={classes.Left}>
-        <span className={classNames(classes.Badge, `bgColor-${color}`)} />
-        <span className={classes.Text}>{name}</span>
-      </div>
-      <Count numberOfTask={numberOfTask} color={color} />
-    </Link>
-  </li>
+const FolderItem = React.memo(
+  ({
+    color,
+    id,
+    name,
+    numberOfTask,
+    active,
+  }: FolderItemPropsType): JSX.Element => (
+    <li className={classNames(classes.Item, { [classes.Active]: active })}>
+      <Link className={classes.Link} to={{ pathname: `/${id}/all` }}>
+        <div className={classes.Left}>
+          <span className={classNames(classes.Badge, `bgColor-${color}`)} />
+          <span className={classes.Text}>{name}</span>
+        </div>
+        <Count numberOfTask={numberOfTask} color={color} />
+      </Link>
+    </li>
+  )
 );
+
+FolderItem.displayName = 'FolderItem';
 
 export default FolderItem;

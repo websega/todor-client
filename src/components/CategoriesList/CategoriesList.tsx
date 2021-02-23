@@ -71,5 +71,4 @@ const CategoriesList = (): JSX.Element => {
     </nav>
   );
 };
-
 export default CategoriesList;

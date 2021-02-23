@@ -4,10 +4,14 @@ import Account from '../Account';
 
 import classes from './Header.scss';
 
-const Header = (): JSX.Element => (
-  <div className={classes.Header}>
-    <Account />
-  </div>
+const Header = React.memo(
+  (): JSX.Element => (
+    <div className={classes.Header}>
+      <Account />
+    </div>
+  )
 );
+
+Header.displayName = 'Header';
 
 export default Header;

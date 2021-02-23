@@ -6,12 +6,16 @@ import TasksList from '../TasksList';
 
 import classes from './TaskArea.scss';
 
-const TaskArea = (): JSX.Element => (
-  <section className={classes.TasksArea}>
-    <TaskInfoPanel />
-    <TaskAddForm />
-    <TasksList />
-  </section>
+const TaskArea = React.memo(
+  (): JSX.Element => (
+    <section className={classes.TasksArea}>
+      <TaskInfoPanel />
+      <TaskAddForm />
+      <TasksList />
+    </section>
+  )
 );
+
+TaskArea.displayName = 'TaskArea';
 
 export default TaskArea;

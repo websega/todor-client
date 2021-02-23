@@ -22,70 +22,70 @@ type StateType = {
   user: InitialUserStateType;
 };
 
-const CategoryItem = ({
-  icon,
-  name,
-  id,
-}: CategoryItemPropsType): JSX.Element => {
-  const currentFolder = useSelector(
-    (state: StateType) => state.folders.currentFolder
-  );
+const CategoryItem = React.memo(
+  ({ icon, name, id }: CategoryItemPropsType): JSX.Element => {
+    const currentFolder = useSelector(
+      (state: StateType) => state.folders.currentFolder
+    );
 
-  const isAuth = useSelector((state: StateType) => state.user.isAuth);
+    const isAuth = useSelector((state: StateType) => state.user.isAuth);
 
-  const [numberOfTask, setNumberOfTask] = useState<number>(0);
+    const [numberOfTask, setNumberOfTask] = useState<number>(0);
 
-  useEffect(() => {
-    if (currentFolder && isAuth) {
-      let num = 0;
+    useEffect(() => {
+      if (currentFolder && isAuth) {
+        let num = 0;
 
-      if (id === 'all') {
-        num = currentFolder.tasks.length;
-      }
-
-      num = currentFolder.tasks.filter(
-        ({ completed, deleted, createdTime, important }) => {
-          if (
-            (id === 'all' && !completed && !deleted) ||
-            (id === 'today' &&
-              createdTime === createDate() &&
-              !completed &&
-              !deleted) ||
-            (id === 'completed' && completed && !deleted) ||
-            (id === 'important' && important && !completed && !deleted) ||
-            (id === 'deleted' && deleted)
-          ) {
-            return true;
-          }
-
-          return false;
+        if (id === 'all') {
+          num = currentFolder.tasks.length;
         }
-      ).length;
 
-      setNumberOfTask(num);
-    } else {
-      setNumberOfTask(0);
-    }
-  }, [id, currentFolder, isAuth]);
+        num = currentFolder.tasks.filter(
+          ({ completed, deleted, createdTime, important }) => {
+            if (
+              (id === 'all' && !completed && !deleted) ||
+              (id === 'today' &&
+                createdTime === createDate() &&
+                !completed &&
+                !deleted) ||
+              (id === 'completed' && completed && !deleted) ||
+              (id === 'important' && important && !completed && !deleted) ||
+              (id === 'deleted' && deleted)
+            ) {
+              return true;
+            }
 
-  return (
-    <li className={classes.Item} aria-hidden="true">
-      <NavLink
-        to={`${id}`}
-        className={classes.Link}
-        activeClassName={classes.Active}
-      >
-        <div className={classes.Left}>
-          <Icon icon={icon} type="category" />
-          <span>{name}</span>
-        </div>
+            return false;
+          }
+        ).length;
 
-        {numberOfTask > 0 ? (
-          <Count numberOfTask={numberOfTask} color="default" />
-        ) : null}
-      </NavLink>
-    </li>
-  );
-};
+        setNumberOfTask(num);
+      } else {
+        setNumberOfTask(0);
+      }
+    }, [id, currentFolder, isAuth]);
+
+    return (
+      <li className={classes.Item} aria-hidden="true">
+        <NavLink
+          to={`${id}`}
+          className={classes.Link}
+          activeClassName={classes.Active}
+        >
+          <div className={classes.Left}>
+            <Icon icon={icon} type="category" />
+            <span>{name}</span>
+          </div>
+
+          {numberOfTask > 0 ? (
+            <Count numberOfTask={numberOfTask} color="default" />
+          ) : null}
+        </NavLink>
+      </li>
+    );
+  }
+);
+
+CategoryItem.displayName = 'CategoryItem';
 
 export default CategoryItem;

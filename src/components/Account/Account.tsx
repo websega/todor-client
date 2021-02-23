@@ -18,30 +18,26 @@ type StateType = {
   user: InitialUserStateType;
 };
 
-const Account = React.memo(
-  (): JSX.Element => {
-    const currentUser = useSelector(
-      (state: StateType) => state.user.currentUser
-    );
+const Account = (): JSX.Element => {
+  const currentUser = useSelector((state: StateType) => state.user.currentUser);
 
-    const currentColor = useSelector(
-      (state: StateType) => state.system.currentColor
-    );
+  const currentColor = useSelector(
+    (state: StateType) => state.system.currentColor
+  );
 
-    return (
-      <div className={classes.Account}>
-        <div className={classes.User}>
-          <Avatar color={currentColor} avatarURL={currentUser.avatar} />
-          <Name name={currentUser.username} />
-        </div>
-
-        <Link to="/profile">
-          <IconButton icon={<SettingsIcon />} />
-        </Link>
+  return (
+    <div className={classes.Account}>
+      <div className={classes.User}>
+        <Avatar color={currentColor} avatarURL={currentUser.avatar} />
+        <Name name={currentUser.username} />
       </div>
-    );
-  }
-);
+
+      <Link to="/profile">
+        <IconButton icon={<SettingsIcon />} />
+      </Link>
+    </div>
+  );
+};
 
 Account.displayName = 'Account';
 

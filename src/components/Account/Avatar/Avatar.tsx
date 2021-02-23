@@ -10,15 +10,19 @@ import classes from './Avatar.scss';
 
 type AvatarImgPropsType = { color: string; avatarURL: string | null };
 
-const Avatar = ({ color, avatarURL }: AvatarImgPropsType): JSX.Element => (
-  <picture
-    className={classNames(classes.Picture, classes[`BorderColor-${color}`])}
-  >
-    <img
-      src={avatarURL ? `${API_URL}${avatarURL}` : DefaultAvatar}
-      alt="account"
-    />
-  </picture>
+const Avatar = React.memo(
+  ({ color, avatarURL }: AvatarImgPropsType): JSX.Element => (
+    <picture
+      className={classNames(classes.Picture, classes[`BorderColor-${color}`])}
+    >
+      <img
+        src={avatarURL ? `${API_URL}${avatarURL}` : DefaultAvatar}
+        alt="account"
+      />
+    </picture>
+  )
 );
+
+Avatar.displayName = 'Avatar';
 
 export default Avatar;
