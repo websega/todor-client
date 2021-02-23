@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { toggleTaskProperty } from '../../redux/actions/async';
@@ -66,7 +66,9 @@ const Description = (): JSX.Element => {
         important={currentTask.important}
         date={currentTask.createdTime}
         currentFolderColor={currentFolder.colorId}
-        onComplete={taskTogglePropertyHandler}
+        onComplete={() =>
+          taskTogglePropertyHandler(currentTask.id, 'completed')
+        }
         onImportant={() =>
           taskTogglePropertyHandler(currentTask.id, 'important')
         }

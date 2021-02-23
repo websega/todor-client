@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 
@@ -32,22 +32,25 @@ const TasksList = (): JSX.Element => {
     (state: StateType) => state.system.currentTask
   );
 
-  const taskClickHandler = (e: React.MouseEvent, id: string) => {
-    if (e.currentTarget.nodeName !== 'DIV') {
-      return;
-    }
+  const taskClickHandler = useCallback(
+    (e: React.MouseEvent, id: string) => {
+      if (e.currentTarget.nodeName !== 'DIV') {
+        return;
+      }
 
-    dispatch(setCurrentTask(id));
-  };
+      dispatch(setCurrentTask(id));
+    },
+    [dispatch]
+  );
 
-  const taskTogglePropertyHandler = (
-    taskId: string,
-    propName: keyof TaskType
-  ) => {
-    if (currentFolder) {
-      dispatch(toggleTaskProperty(taskId, currentFolder._id, propName));
-    }
-  };
+  const taskTogglePropertyHandler = useCallback(
+    (taskId: string, propName: keyof TaskType) => {
+      if (currentFolder) {
+        dispatch(toggleTaskProperty(taskId, currentFolder._id, propName));
+      }
+    },
+    [currentFolder, dispatch]
+  );
 
   return (
     <div className={classes.TasksContainer}>
@@ -73,7 +76,7 @@ const TasksList = (): JSX.Element => {
               active={currentTaskId === id}
               currentFolderColor={currentFolder.colorId}
               onClick={(e) => taskClickHandler(e, id)}
-              onComplete={taskTogglePropertyHandler}
+              onComplete={() => taskTogglePropertyHandler(id, 'completed')}
               onImportant={() => taskTogglePropertyHandler(id, 'important')}
               onDelete={() => taskTogglePropertyHandler(id, 'deleted')}
             />
