@@ -7,6 +7,7 @@ import {
   SET_CURRENT_COLOR,
   SET_CURRENT_CATEGORY,
   CLEAR,
+  TOGGLE_SIDE_BAR,
 } from '../actions/system/types';
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   currentTask: '',
   currentColor: 'teal',
   currentCategory: '',
+  isMinifiedSidebar: false,
 };
 
 export type InitialSystemStateType = typeof initialState;
@@ -59,6 +61,12 @@ export const systemReducer = (
       return {
         ...state,
         currentCategory: action.payload,
+      };
+
+    case TOGGLE_SIDE_BAR:
+      return {
+        ...state,
+        isMinifiedSidebar: !state.isMinifiedSidebar,
       };
 
     case CLEAR:

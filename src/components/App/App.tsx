@@ -9,9 +9,12 @@ import {
   useLocation,
 } from 'react-router-dom';
 
+import classNames from 'classnames';
+
 import { auth } from '../../redux/actions/async';
 import { InitialFolderStateType } from '../../redux/reducers/folderReducer';
 import { InitialUserStateType } from '../../redux/reducers/userReducer';
+import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -31,6 +34,7 @@ const modalRoot = document.getElementById('modal-root') as HTMLElement;
 type StateType = {
   folders: InitialFolderStateType;
   user: InitialUserStateType;
+  system: InitialSystemStateType;
 };
 
 const App = (): JSX.Element => {
@@ -40,6 +44,9 @@ const App = (): JSX.Element => {
 
   const folders = useSelector((state: StateType) => state.folders.folders);
   const isAuth = useSelector((state: StateType) => state.user.isAuth);
+  const isMinifiedSidebar = useSelector(
+    (state: StateType) => state.system.isMinifiedSidebar
+  );
 
   useEffect(() => {
     dispatch(auth());
@@ -56,7 +63,13 @@ const App = (): JSX.Element => {
   }, [history, isAuth, folders, location.pathname]);
 
   return (
-    <div className={classes.App}>
+    <div
+      className={classNames({
+        [classes.App]: true,
+        [classes.VisibleSidebar]: !isMinifiedSidebar,
+        [classes.HideSidebar]: isMinifiedSidebar,
+      })}
+    >
       {!isAuth && (
         <Switch>
           <Route exact path="/registration">

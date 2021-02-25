@@ -9,6 +9,7 @@ import {
   SET_POSITION_CONTEXT_MENU,
   CLEAR,
   PositionType,
+  TOGGLE_SIDE_BAR,
 } from './types';
 
 export const openModal = (modalType: string): ActionSystemTypes => ({
@@ -48,4 +49,8 @@ export const setCurrentColor = (color: string): ActionSystemTypes => ({
 
 export const clear = (): ActionSystemTypes => ({
   type: CLEAR,
+});
+
+export const toggleSidebar = (): ActionSystemTypes => ({
+  type: TOGGLE_SIDE_BAR,
 });

@@ -5,6 +5,7 @@
   @include reset-btn();
 
   width: 100%;
+  height: 20px;
 
   &:hover {
     cursor: pointer;
@@ -43,6 +44,12 @@
   }
 }
 
+.TaskBtnHide {
+  &:before {
+    left: rem(25);
+  }
+}
+
 .FolderBtn {
   transition: $transition-hover-color;
   color: #c4c4c4;
@@ -66,5 +73,11 @@
     left: rem(47);
 
     transition: $transition-hover-color;
+  }
+}
+
+.FolderBtnHide {
+  &:before {
+    left: rem(19);
   }
 }

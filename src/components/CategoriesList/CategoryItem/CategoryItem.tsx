@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 import { InitialUserStateType } from '../../../redux/reducers/userReducer';
+import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
 
 import Count from '../../Count';
 import Icon from '../../Icon';
@@ -20,12 +21,17 @@ type CategoryItemPropsType = {
 type StateType = {
   folders: InitialFolderStateType;
   user: InitialUserStateType;
+  system: InitialSystemStateType;
 };
 
 const CategoryItem = React.memo(
   ({ icon, name, id }: CategoryItemPropsType): JSX.Element => {
     const currentFolder = useSelector(
       (state: StateType) => state.folders.currentFolder
+    );
+
+    const isMinifiedSidebar = useSelector(
+      (state: StateType) => state.system.isMinifiedSidebar
     );
 
     const isAuth = useSelector((state: StateType) => state.user.isAuth);
@@ -74,10 +80,10 @@ const CategoryItem = React.memo(
         >
           <div className={classes.Left}>
             <Icon icon={icon} type="category" />
-            <span>{name}</span>
+            {!isMinifiedSidebar && <span>{name}</span>}
           </div>
 
-          {numberOfTask > 0 ? (
+          {numberOfTask > 0 && !isMinifiedSidebar ? (
             <Count numberOfTask={numberOfTask} color="default" />
           ) : null}
         </NavLink>
