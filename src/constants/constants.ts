@@ -1,3 +1,6 @@
-const API_URL = 'http://localhost:5000/';
+const APP_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:5000/'
+    : 'https://todor-todo.herokuapp.com/';
 
-export default API_URL;
+export default APP_URL;
