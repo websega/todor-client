@@ -37,6 +37,15 @@ type StateType = {
   system: InitialSystemStateType;
 };
 
+const PublicHomePage = (): JSX.Element => (
+  <>
+    <Header />
+    <Sidebar />
+    <TaskArea />
+    <Description />
+  </>
+);
+
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -56,7 +65,6 @@ const App = (): JSX.Element => {
     if (isAuth && folders.length && location.pathname === '/') {
       history.push(`/${folders[0]._id}/all`);
     }
-
     if (isAuth && !folders.length && location.pathname !== '/profile') {
       history.push('/');
     }
@@ -70,28 +78,16 @@ const App = (): JSX.Element => {
         [classes.HideSidebar]: isMinifiedSidebar,
       })}
     >
-      {!isAuth && (
+      {isAuth ? (
         <Switch>
-          <Route exact path="/registration">
-            <Registration />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Redirect to="/login" />
+          <Route exact path="/profile" component={Profile} />
+          <Route path="/" component={PublicHomePage} />
         </Switch>
-      )}
-      {isAuth && (
+      ) : (
         <Switch>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-          <Route>
-            <Header />
-            <Sidebar />
-            <TaskArea />
-            <Description />
-          </Route>
+          <Route exact path="/registration" component={Registration} />
+          <Route exact path="/login" component={Login} />
+          <Redirect to="/login" />
         </Switch>
       )}
 
