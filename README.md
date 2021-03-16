@@ -1,6 +1,7 @@
 ## Todor -  app for your to-do list
 
-Приложение для составления списка дел.
+Приложение для составления списка дел. [Посмотреть приложение](https://todor-1d068.web.app)
+![alt-текст](https://imagizer.imageshack.com/img922/1271/TJJ1Hi.png "preview")
 
 [Репозиторий с сервером](https://github.com/websega/todor-server.git)
 
