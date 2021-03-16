@@ -6,10 +6,7 @@ import { useFormik } from 'formik';
 
 import classNames from 'classnames';
 
-import {
-  getValidationSchema,
-  validationSchemas,
-} from '../../yupSchema/yupSchema';
+import { getValidationSchema } from '../../yupSchema/yupSchema';
 
 import {
   registration,
@@ -72,7 +69,7 @@ const Form = ({ formType }: FormPropsType): JSX.Element => {
       taskTitle: '',
     },
 
-    validationSchema: getValidationSchema(validationSchemas, formType),
+    validationSchema: getValidationSchema(formType),
 
     onSubmit: ({ username, email, password, folderName, taskTitle }) => {
       switch (formType) {

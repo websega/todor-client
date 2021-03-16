@@ -53,24 +53,23 @@ type AddFolderSchemaType = typeof addFolderSchema;
 
 type AddTaskType = typeof addTaskSchema;
 
-type ValidationSchemasTypes =
+type SchemasTypes =
   | RegistrationSchemaType
   | LoginSchemaType
   | AddFolderSchemaType
   | AddTaskType;
 
-type ValidationSchemaType = {
-  [key: string]: ValidationSchemasTypes;
+type SchemaType = {
+  [key: string]: SchemasTypes;
 };
 
-export const validationSchemas: ValidationSchemaType = {
+const validationSchemas: SchemaType = {
   registration: registerationSchema,
   login: loginSchema,
   folder: addFolderSchema,
   task: addTaskSchema,
 };
 
-export const getValidationSchema = (
-  schemas: ValidationSchemaType,
-  type: string
-): ValidationSchemasTypes | null => schemas[type] || null;
+// eslint-disable-next-line import/prefer-default-export
+export const getValidationSchema = (type: string): SchemasTypes | null =>
+  validationSchemas[type] || null;

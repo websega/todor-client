@@ -34,7 +34,7 @@ const TaskAddForm = (): JSX.Element => {
   const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (currentFolder) {
+    if (currentFolder && taskTitle) {
       dispatch(addTask(taskTitle, currentFolder._id));
       setTaskTitle('');
     }
