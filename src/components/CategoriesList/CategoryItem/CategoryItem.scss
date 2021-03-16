@@ -1,4 +1,5 @@
 .Item {
+  @include display(flex, space-between, center);
   @include font-sans(rem(18), #505f79, normal, normal, rem(50));
   letter-spacing: 0.15px;
 
@@ -16,6 +17,7 @@
 
   @include font-sans(rem(18), #505f79, normal, normal);
   line-height: rem(50);
+  width: 100%;
 
   border: none;
   text-decoration: none;

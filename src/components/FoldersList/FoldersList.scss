@@ -1,5 +1,5 @@
 .FolderList {
-  position: relative;
+  width: 100%;
 
   padding: rem(11) 0;
   padding-right: rem(7);
@@ -11,4 +11,8 @@
   border-bottom: 1px solid $border-color;
 
   margin-bottom: rem(24);
+}
+
+.Hide {
+  padding-right: 0;
 }

@@ -8,6 +8,8 @@ export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY';
 
 export const SET_POSITION_CONTEXT_MENU = 'SET_POSITION_CONTEXT_MENU';
 
+export const TOGGLE_SIDE_BAR = 'TOGGLE_SIDE_BAR';
+
 export const CLEAR = 'CLEAR';
 
 export type PositionType = { x: number; y: number };
@@ -15,6 +17,8 @@ export type PositionType = { x: number; y: number };
 type ActionOpenModalType = { type: typeof OPEN_MODAL; payload: string };
 type ActionCloseModalType = { type: typeof CLOSE_MODAL };
 type ActionSetDefaultType = { type: typeof SET_DEFAULT_MODAL_TYPE };
+
+type ActionToggleSidebarType = { type: typeof TOGGLE_SIDE_BAR };
 
 type ActionSetContextMenuType = {
   type: typeof SET_POSITION_CONTEXT_MENU;
@@ -46,4 +50,5 @@ export type ActionSystemTypes =
   | ActionCurrentColorType
   | ActionCurrentCategoryType
   | ActionClearType
-  | ActionSetContextMenuType;
+  | ActionSetContextMenuType
+  | ActionToggleSidebarType;

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import classNames from 'classnames';
 
 import TodayIcon from '../../assets/images/icons/today.svg';
 import InboxIcon from '../../assets/images/icons/all_inbox.svg';
@@ -12,6 +14,7 @@ import CategoryItem from './CategoryItem';
 
 import classes from './CategoriesList.scss';
 import { setCurrentCategory } from '../../redux/actions/system/system';
+import { InitialSystemStateType } from '../../redux/reducers/systemReducer';
 
 type CategoriesType = {
   id: string;
@@ -47,9 +50,17 @@ const categories: CategoriesType[] = [
   },
 ];
 
+type StateType = {
+  system: InitialSystemStateType;
+};
+
 const CategoriesList = (): JSX.Element => {
   const dispatch = useDispatch();
   const location = useLocation();
+
+  const isMinifiedSidebar = useSelector(
+    (state: StateType) => state.system.isMinifiedSidebar
+  );
 
   useEffect(() => {
     const categoryId = location.pathname.split('/')[2];
@@ -61,7 +72,12 @@ const CategoriesList = (): JSX.Element => {
 
   return (
     <nav className={classes.CategoryList}>
-      <ul>
+      <ul
+        className={classNames({
+          [classes.List]: !isMinifiedSidebar,
+          [classes.ListHide]: isMinifiedSidebar,
+        })}
+      >
         {categories.map((item) => {
           const { id, icon, name } = item;
 

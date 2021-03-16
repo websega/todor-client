@@ -1,7 +1,17 @@
 .App {
   display: grid;
+}
+
+.VisibleSidebar {
   grid-template:
     'nav header header' 70px
     'nav tasks description' calc(100vh - 70px)
     / 308px 34.169% auto;
+}
+
+.HideSidebar {
+  grid-template:
+    'nav header header' 70px
+    'nav tasks description' calc(100vh - 70px)
+    / 66px 46.8% auto;
 }

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
+import classNames from 'classnames';
+
 import { setCurrentFolder } from '../../redux/actions/folder/folder';
 import { setCurrentColor } from '../../redux/actions/system/system';
 import { fetchFolders } from '../../redux/actions/async';
@@ -27,6 +29,9 @@ const FoldersList = (): JSX.Element => {
   const folders = useSelector((state: StateType) => state.folders.folders);
 
   const userId = useSelector((state: StateType) => state.user.currentUser.id);
+  const isMinifiedSidebar = useSelector(
+    (state: StateType) => state.system.isMinifiedSidebar
+  );
 
   const currentFolder = useSelector(
     (state: StateType) => state.folders.currentFolder
@@ -52,7 +57,11 @@ const FoldersList = (): JSX.Element => {
   }, [dispatch, folders, location.pathname]);
 
   return (
-    <ul className={classes.FolderList}>
+    <ul
+      className={classNames(classes.FolderList, {
+        [classes.Hide]: isMinifiedSidebar,
+      })}
+    >
       {folders.length > 0 &&
         folders.map((folder) => {
           const { _id, colorId, name, tasks } = folder;

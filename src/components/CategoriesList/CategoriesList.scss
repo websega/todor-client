@@ -1,10 +1,17 @@
 .CategoryList {
   margin-bottom: rem(93);
+}
 
-  & ul {
-    padding-right: rem(10);
-    padding-left: rem(45);
+.List {
+  padding-right: rem(10);
+  padding-left: rem(45);
 
-    margin-right: rem(13);
-  }
+  margin-right: rem(13);
+}
+
+.ListHide {
+  padding-right: rem(0);
+  padding-left: rem(16);
+
+  margin-right: rem(0);
 }
