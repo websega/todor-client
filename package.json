@@ -9,6 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "cross-env NODE_ENV=development webpack serve --mode development",
     "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json",
+    "deploy": "npm run build && firebase deploy",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix --color"
   },
