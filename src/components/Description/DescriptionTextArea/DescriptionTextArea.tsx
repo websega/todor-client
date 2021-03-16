@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addTaskDescription } from '../../../redux/actions/async';
@@ -15,6 +15,23 @@ type StateType = {
 
 type DescriptionTextAreaPropsType = { description: string };
 
+function useDebounce(callback: any, delay: number) {
+  const timer = useRef<any>();
+
+  return useCallback(
+    (...args) => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+
+      timer.current = setTimeout(() => {
+        callback(...args);
+      }, delay);
+    },
+    [callback, delay]
+  );
+}
+
 const DescriptionTextArea = ({
   description,
 }: DescriptionTextAreaPropsType): JSX.Element => {
@@ -25,6 +42,16 @@ const DescriptionTextArea = ({
   const currentFolder = useSelector(
     (state: StateType) => state.folders.currentFolder
   );
+
+  const sendDescription = () => {
+    if (currentFolder) {
+      dispatch(
+        addTaskDescription(currentTaskId, currentFolder._id, taskDescr)
+      );
+    }
+  };
+
+  const debounсe = useDebounce(sendDescription, 500);
 
   const currentTaskId = useSelector(
     (state: StateType) => state.system.currentTask
@@ -38,23 +65,14 @@ const DescriptionTextArea = ({
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setTaskDescr(e.currentTarget.value);
-
-    if (currentFolder) {
-      dispatch(
-        addTaskDescription(
-          currentTaskId,
-          currentFolder._id,
-          e.currentTarget.value
-        )
-      );
-    }
+    debounсe(e.currentTarget.value);
   };
 
   return (
     <textarea
       className={classes.TextInput}
       placeholder="Напишите описание к задаче..."
-      onInput={taskDescriptionHandler}
+      onChange={taskDescriptionHandler}
       value={taskDescr}
     />
   );

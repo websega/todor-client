@@ -75,6 +75,7 @@ const Description = React.memo(
           }
           onDelete={() => taskTogglePropertyHandler(currentTask.id, 'deleted')}
         />
+
         <DescriptionTextArea description={currentTask.description} />
       </section>
     );
