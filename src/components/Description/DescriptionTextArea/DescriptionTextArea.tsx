@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addTaskDescription } from '../../../redux/actions/async';
+import { TaskType } from '../../../redux/actions/folder/types';
 
 import { InitialFolderStateType } from '../../../redux/reducers/folderReducer';
 import { InitialSystemStateType } from '../../../redux/reducers/systemReducer';
@@ -13,28 +14,24 @@ type StateType = {
   folders: InitialFolderStateType;
 };
 
-type DescriptionTextAreaPropsType = { description: string };
-
-function useDebounce(callback: any, delay: number) {
+function useDebounce(callback: (value: string) => void, delay: number) {
   const timer = useRef<any>();
 
   return useCallback(
-    (...args) => {
+    (value) => {
       if (timer.current) {
         clearTimeout(timer.current);
       }
 
       timer.current = setTimeout(() => {
-        callback(...args);
+        callback(value);
       }, delay);
     },
     [callback, delay]
   );
 }
 
-const DescriptionTextArea = ({
-  description,
-}: DescriptionTextAreaPropsType): JSX.Element => {
+const DescriptionTextArea = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const [taskDescr, setTaskDescr] = useState<string>('');
@@ -43,10 +40,10 @@ const DescriptionTextArea = ({
     (state: StateType) => state.folders.currentFolder
   );
 
-  const sendDescription = () => {
+  const sendDescription = (description: string) => {
     if (currentFolder) {
       dispatch(
-        addTaskDescription(currentTaskId, currentFolder._id, taskDescr)
+        addTaskDescription(currentTaskId, currentFolder._id, description)
       );
     }
   };
@@ -58,8 +55,16 @@ const DescriptionTextArea = ({
   );
 
   useEffect(() => {
-    setTaskDescr(description);
-  }, [description]);
+    if (currentFolder) {
+      const currentTask: TaskType | undefined = currentFolder.tasks.find(
+        (task) => task.id === currentTaskId
+      );
+
+      if (currentTask) {
+        setTaskDescr(currentTask.description);
+      }
+    }
+  }, [currentFolder, currentTaskId]);
 
   const taskDescriptionHandler = (
     e: React.ChangeEvent<HTMLTextAreaElement>
